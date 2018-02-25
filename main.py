@@ -17,7 +17,7 @@ audio = sorted(video.audiostreams, key=lambda x: x.get_filesize())[0]
 
 
 
-audio_path = "audio."+audio.extension
+audio_path = ".data/audio."+audio.extension
 
 #audio.download(filepath=audio_path)
 
@@ -28,7 +28,7 @@ call(["youtube-dl", "--write-sub", "--sub-lang", "ru",
   video_url])
 
 
-subs_path = "./subs.ru.vtt"
+subs_path = "./data/subs.ru.vtt"
 
 
 
