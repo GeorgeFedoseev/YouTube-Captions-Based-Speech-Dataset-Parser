@@ -10,8 +10,18 @@ import re
 
 import subs_utils
 
+import shutil
+
+def remove_video_dir(video_id):
+    curr_dir_path = os.path.dirname(os.path.realpath(__file__))
+    video_data_path = os.path.join(curr_dir_path, "data/"+video_id+"/")
+
+    shutil.rmtree(video_data_path)
 
 def parse_video(yt_video_id):
+
+    print 'PARSE VIDEO '+yt_video_id
+
     curr_dir_path = os.path.dirname(os.path.realpath(__file__))
     video_data_path = os.path.join(curr_dir_path, "data/"+yt_video_id+"/")
 
@@ -21,20 +31,7 @@ def parse_video(yt_video_id):
         os.makedirs(video_data_path)
 
     video = pafy.new(yt_video_id)
-    print video.title
-
-
-
-
-
-    audio = sorted(video.audiostreams, key=lambda x: x.get_filesize())[0]
-
-
-
-    audio_path = os.path.join(video_data_path, "audio."+audio.extension) 
-
-    if not os.path.exists(audio_path):
-        audio.download(filepath=audio_path)
+    print "video title" + video.title
 
 
 
@@ -49,8 +46,22 @@ def parse_video(yt_video_id):
      "-o", subs_path_pre,
       yt_video_id])
 
-    
+    if not os.path.exists(subs_path):
+        remove_video_dir(yt_video_id)
+        raise Exception("subtitles_not_available")
 
+
+
+    # download audio
+    audio_lowest_size = sorted(video.audiostreams, key=lambda x: x.get_filesize())[0]
+    audio_path = os.path.join(video_data_path, "audio."+audio_lowest_size.extension) 
+
+    if not os.path.exists(audio_path):
+        audio_lowest_size.download(filepath=audio_path)
+
+    if not os.path.exists(audio_path):
+        remove_video_dir(yt_video_id)
+        raise Exception("audio_download_failed")
 
 
     # cut by subs
@@ -78,19 +89,19 @@ def parse_video(yt_video_id):
 
         
 
+        if not os.path.exists(audio_fragment_path):
+            call(["ffmpeg", "-y",
+             "-i", audio_path,
 
-        call(["ffmpeg", "-y",
-         "-i", audio_path,
+             "-ss", str(s.start),
+             "-to", str(s.end),
+             "-ac", "1",
+             "-ab", "16",
+             "-ar", "16000",
 
-         "-ss", str(s.start),
-         "-to", str(s.end),
-         "-ac", "1",
-         "-ab", "16",
-         "-ar", "16000",
-
-         
-         audio_fragment_path
-         ])
+             
+             audio_fragment_path
+             ])
 
 
         csv_f.write(audio_fragment_path+", "+cleared_text+"\n")
