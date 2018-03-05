@@ -12,6 +12,11 @@ import subs_utils
 
 import shutil
 
+import contextlib
+import wave
+
+import csv
+
 def remove_video_dir(video_id):
     curr_dir_path = os.path.dirname(os.path.realpath(__file__))
     video_data_path = os.path.join(curr_dir_path, "data/"+video_id+"/")
@@ -19,6 +24,8 @@ def remove_video_dir(video_id):
     shutil.rmtree(video_data_path)
 
 def parse_video(yt_video_id):
+
+    stats_total_speech_duration = 0
 
     print 'PARSE VIDEO '+yt_video_id
 
@@ -83,7 +90,8 @@ def parse_video(yt_video_id):
     for s in subs:
         cleared_text =  subs_utils.clear_subtitle_text(s.text)
         
-        
+        if cleared_text == "":
+            continue
 
         audio_fragment_path = os.path.join(parts_dir_path, yt_video_id+"-"+str(s.start.ordinal)+"-"+str(s.end.ordinal)+".wav")
 
@@ -103,8 +111,31 @@ def parse_video(yt_video_id):
              audio_fragment_path
              ])
 
+        fragment_duration = 0
+
+        with contextlib.closing(wave.open(audio_fragment_path,'r')) as f:
+            frames = f.getnframes()
+            rate = f.getframerate()
+            fragment_duration = frames / float(rate)
+
+        if fragment_duration < 1:
+            continue
+
+        stats_total_speech_duration += fragment_duration
 
         csv_f.write(audio_fragment_path+", "+cleared_text+"\n")
 
 
     csv_f.close()
+
+    # stats
+    write_stats(video_data_path, ["speech_duration"], [stats_total_speech_duration])
+
+
+
+def write_stats(video_folder, stats_header, stats):
+    stats_path = os.path.join(video_folder, "stats.csv")
+    csv_writer = csv.writer(open(stats_path, "w"))
+    csv_writer.writerow(stats_header)
+    csv_writer.writerow(stats)
+

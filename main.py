@@ -3,6 +3,7 @@ import os
 
 import video_parser
 
+import stats_util
 
 import csv
 from filelock import Timeout, FileLock
@@ -86,7 +87,8 @@ def video_parser_loop():
         video_id = get_video_to_process()
 
 
-setup()
-video_parser_loop()
+#setup()
+# ideo_parser_loop()
 
-# video_parser.parse_video("FNmZ3ldVlmc")
+stats_util.show_global_stats()
+
