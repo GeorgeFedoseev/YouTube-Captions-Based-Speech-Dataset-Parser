@@ -17,11 +17,19 @@ PROCESSED_CSV_FILE = os.path.join(curr_dir_path, "videos_processed.csv")
 FAILED_CSV_FILE = os.path.join(curr_dir_path, "videos_failed_to_process.csv")
 
 
+def setup():
+	if not os.path.exists(TO_PROCESS_CSV_FILE):
+		open(TO_PROCESS_CSV_FILE, 'a').close()
+	if not os.path.exists(PROCESSED_CSV_FILE):
+		open(PROCESSED_CSV_FILE, 'a').close()
+	if not os.path.exists(FAILED_CSV_FILE):
+		open(FAILED_CSV_FILE, 'a').close()
+
 def get_video_to_process():
     with FileLock(TO_PROCESS_CSV_FILE + ".lock"):
         video_id = None
 
-        csv_reader = csv.reader(open(TO_PROCESS_CSV_FILE, "rb"))
+        csv_reader = csv.reader(open(TO_PROCESS_CSV_FILE, "r+"))
 
         data = list(csv_reader)
         if len(data) > 0:
@@ -38,7 +46,7 @@ def get_video_to_process():
 
 def is_video_in_csv(csv_path, video_id):
     with FileLock(csv_path + ".lock"):
-        csv_reader = csv.reader(open(csv_path, "rb"))
+        csv_reader = csv.reader(open(csv_path, "r+"))
         data = list(csv_reader)
 
         for row in data:
@@ -50,15 +58,15 @@ def is_video_in_csv(csv_path, video_id):
 def put_video_to_failed(video_id, reason):
     if not is_video_in_csv(FAILED_CSV_FILE, video_id):
         with FileLock(FAILED_CSV_FILE + ".lock"):
-            csv_writer = csv.writer(open(FAILED_CSV_FILE, "ab"))
+            csv_writer = csv.writer(open(FAILED_CSV_FILE, "a+"))
             csv_writer.writerow([video_id, reason])
 
 
-def put_video_to_processed(video_id, reason):
+def put_video_to_processed(video_id):
     if not is_video_in_csv(PROCESSED_CSV_FILE, video_id):
         with FileLock(PROCESSED_CSV_FILE + ".lock"):
-            csv_writer = csv.writer(open(PROCESSED_CSV_FILE, "ab"))
-            csv_writer.writerow([video_id, reason])
+            csv_writer = csv.writer(open(PROCESSED_CSV_FILE, "a+"))
+            csv_writer.writerow([video_id])
 
 
 def video_parser_loop():
@@ -78,6 +86,7 @@ def video_parser_loop():
         video_id = get_video_to_process()
 
 
+setup()
 video_parser_loop()
 
 # video_parser.parse_video("FNmZ3ldVlmc")
