@@ -19,9 +19,11 @@ sys.setdefaultencoding('utf8')
 
 curr_dir_path = os.path.dirname(os.path.realpath(__file__))
 
-const.TO_PROCESS_CSV_FILE = os.path.join(curr_dir_path, "videos_to_process.csv")
+const.TO_PROCESS_CSV_FILE = os.path.join(
+    curr_dir_path, "videos_to_process.csv")
 const.PROCESSED_CSV_FILE = os.path.join(curr_dir_path, "videos_processed.csv")
-const.FAILED_CSV_FILE = os.path.join(curr_dir_path, "videos_failed_to_process.csv")
+const.FAILED_CSV_FILE = os.path.join(
+    curr_dir_path, "videos_failed_to_process.csv")
 
 
 def setup():
@@ -30,10 +32,9 @@ def setup():
 
     if not os.path.exists(videos_data_dir):
         os.makedirs(videos_data_dir)
-	
-    
-    open(const.TO_PROCESS_CSV_FILE, 'a').close()	
-    open(const.PROCESSED_CSV_FILE, 'a').close()	
+
+    open(const.TO_PROCESS_CSV_FILE, 'a').close()
+    open(const.PROCESSED_CSV_FILE, 'a').close()
     open(const.FAILED_CSV_FILE, 'a').close()
 
 
@@ -82,10 +83,10 @@ def put_video_to_processed(video_id):
 
 
 def video_parser_thread_loop():
-    
+
     while True:
         video_id = get_video_to_process()
-        
+
         if not video_id:
             print 'no videos to parse - wait 5 seconds...'
             time.sleep(5)
@@ -103,17 +104,14 @@ def video_parser_thread_loop():
             # put id to failed csv with reason
             put_video_to_failed(video_id, str(e))
 
-        
-
 
 def start_parsing():
     setup()
 
-
     video_parser_threads = []
     # start parsing threads
     for i in range(0, 8):
-        print 'start parsing thread '+str(i)
+        print 'start parsing thread ' + str(i)
         thr = Thread(target=video_parser_thread_loop)
         thr.start()
         video_parser_threads.append(thr)
@@ -124,7 +122,5 @@ def start_parsing():
 
     stats_util.show_global_stats()
 
+
 start_parsing()
-
-
-

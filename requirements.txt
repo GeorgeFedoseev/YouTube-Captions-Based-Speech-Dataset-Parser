@@ -1,4 +1,10 @@
 chardet==3.0.4
+filelock==3.0.4
+get==0.0.39
 pafy==0.5.4
+post==0.0.26
+public==0.0.65
 pyvtt==0.0.1
+query-string==0.0.28
+request==0.0.26
 youtube-dl==2018.2.25
