@@ -53,5 +53,6 @@ def show_global_stats():
 
     print "stats_total_duration: " + format(stats_total_duration/3600, '.2f')+" hours"
 
-
+if __name__ == '__main__':
+    show_global_stats()
         
