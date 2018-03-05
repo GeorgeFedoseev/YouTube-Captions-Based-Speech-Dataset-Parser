@@ -9,6 +9,11 @@ import const
 import csv
 from filelock import Timeout, FileLock
 
+from threading import Thread
+import time
+
+import traceback
+
 reload(sys)
 sys.setdefaultencoding('utf8')
 
@@ -25,13 +30,12 @@ def setup():
 
     if not os.path.exists(videos_data_dir):
         os.makedirs(videos_data_dir)
+	
+    
+    open(const.TO_PROCESS_CSV_FILE, 'a').close()	
+    open(const.PROCESSED_CSV_FILE, 'a').close()	
+    open(const.FAILED_CSV_FILE, 'a').close()
 
-	if not os.path.exists(const.TO_PROCESS_CSV_FILE):
-		open(const.TO_PROCESS_CSV_FILE, 'a').close()
-	if not os.path.exists(const.PROCESSED_CSV_FILE):
-		open(const.PROCESSED_CSV_FILE, 'a').close()
-	if not os.path.exists(const.FAILED_CSV_FILE):
-		open(const.FAILED_CSV_FILE, 'a').close()
 
 def get_video_to_process():
     with FileLock(const.TO_PROCESS_CSV_FILE + ".lock"):
@@ -77,10 +81,16 @@ def put_video_to_processed(video_id):
             csv_writer.writerow([video_id])
 
 
-def video_parser_loop():
+def video_parser_thread_loop():
+    
+    while True:
+        video_id = get_video_to_process()
+        
+        if not video_id:
+            print 'no videos to parse - wait 5 seconds...'
+            time.sleep(5)
+            continue
 
-    video_id = get_video_to_process()
-    while video_id:
         try:
             video_parser.parse_video(video_id)
 
@@ -88,14 +98,33 @@ def video_parser_loop():
         except Exception as e:
             print('failed to process video ' + video_id + ': ' + str(e))
 
+            traceback.print_exc()
+
             # put id to failed csv with reason
             put_video_to_failed(video_id, str(e))
 
-        video_id = get_video_to_process()
+        
 
 
-setup()
-video_parser_loop()
+def start_parsing():
+    setup()
 
-stats_util.show_global_stats()
+
+    video_parser_threads = []
+    # start parsing threads
+    for i in range(0, 8):
+        print 'start parsing thread '+str(i)
+        thr = Thread(target=video_parser_thread_loop)
+        thr.start()
+        video_parser_threads.append(thr)
+
+    # wait for threads
+    for thr in video_parser_threads:
+        thr.join()
+
+    stats_util.show_global_stats()
+
+start_parsing()
+
+
 
