@@ -18,6 +18,8 @@ def export():
     export_dev_csv_path = os.path.join(export_sets_dir_path, "yt-dev.csv")
     export_test_csv_path = os.path.join(export_sets_dir_path, "yt-test.csv")
 
+    export_vocabulary_txt_path = os.path.join(export_sets_dir_path, "vocabulary.txt")
+
 
     all_rows = []
 
@@ -52,11 +54,13 @@ def export():
     train_count = int(all_count*0.8)
     dev_count = int(all_count*0.1)
 
-    train_rows = all_rows[:train_count]
-    del all_rows[:train_count]
-    dev_rows = all_rows[:dev_count]
-    del all_rows[:dev_count]
-    test_rows = all_rows
+
+    all_rest = list(all_rows)
+    train_rows = all_rest[:train_count]
+    del all_rest[:train_count]
+    dev_rows = all_rest[:dev_count]
+    del all_rest[:dev_count]
+    test_rows = all_rest
 
     print 'devided train:dev:test = '+str(len(train_rows))+':'+str(len(dev_rows))+':'+str(len(test_rows))
 
@@ -73,6 +77,10 @@ def export():
     csv_utils.append_rows_to_csv(export_test_csv_path, test_rows)
 
 
+    # export vocabulary
+    vocabulary = open(export_vocabulary_txt_path, "w")   
+    vocabulary.writelines([x[2]+"\n" for x in all_rows])
+    vocabulary.close()
 
 export()
 

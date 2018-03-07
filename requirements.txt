@@ -3,6 +3,7 @@ cachetools==2.0.1
 certifi==2018.1.18
 chardet==3.0.4
 cycler==0.10.0
+cyrtranslit==0.4
 filelock==3.0.4
 get==0.0.39
 google-api-python-client==1.6.5
