@@ -62,9 +62,15 @@ def export():
 
 
     # write sets
-    csv_utils.write_rows_to_csv(export_train_csv_path, train_rows)
-    csv_utils.write_rows_to_csv(export_dev_csv_path, dev_rows)
-    csv_utils.write_rows_to_csv(export_test_csv_path, test_rows)
+    header = ['wav_filename', 'wav_filesize', 'transcript']
+
+    csv_utils.write_rows_to_csv(export_train_csv_path, [header])
+    csv_utils.write_rows_to_csv(export_dev_csv_path, [header])
+    csv_utils.write_rows_to_csv(export_test_csv_path, [header])
+
+    csv_utils.append_rows_to_csv(export_train_csv_path, train_rows)
+    csv_utils.append_rows_to_csv(export_dev_csv_path, dev_rows)
+    csv_utils.append_rows_to_csv(export_test_csv_path, test_rows)
 
 
 

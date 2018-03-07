@@ -149,9 +149,11 @@ def parse_video(yt_video_id):
 
         stats_total_speech_duration += fragment_duration
 
+        filesize = os.path.getsize(audio_fragment_path)
+
         # add to csv
 
-        csv_f.write(audio_fragment_path+", "+cleared_text+"\n")
+        csv_f.write(audio_fragment_path+", "+str(filesize)+", "+cleared_text+"\n")
         subs_audio_added_count += 1
 
     if subs_cleared_count > 0:

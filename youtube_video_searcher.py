@@ -48,6 +48,12 @@ def searcher_thread_loop():
             if not csv_utils.is_video_in_any_list(video_id):
                 csv_utils.put_video_to_pending(video_id)
 
+        # mark processed
+        csv_utils.put_keywords_to_processed(query)
+
+        # sleep
+        time.sleep(5)
+
 
 def youtube_search(query):
     youtube = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION,

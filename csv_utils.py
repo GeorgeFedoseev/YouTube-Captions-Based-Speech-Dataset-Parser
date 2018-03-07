@@ -101,6 +101,8 @@ def pop_first_row_in_csv(csv_path):
         for row in data:
             csv_writer.writerow(row)
 
+        print 'wrore back '+str(len(data))+' to '+csv_path
+
     return first_row
 
 def remove_row_by_first_val(csv_path, val):
