@@ -70,6 +70,11 @@ def parse_video(yt_video_id):
 
     # download audio
     audio_lowest_size = sorted(video.audiostreams, key=lambda x: x.get_filesize())[0]
+    print 'audio lowest download size: '+str(audio_lowest_size.get_filesize())
+    if audio_lowest_size.get_filesize() > 500000000:
+        remove_video_dir(yt_video_id)
+        raise Exception("audio_file_is_too_big")
+
     audio_path = os.path.join(video_data_path, "audio."+audio_lowest_size.extension) 
 
     if not os.path.exists(audio_path):
@@ -112,7 +117,8 @@ def parse_video(yt_video_id):
 
         
         if not os.path.exists(audio_fragment_path):
-            speech_utils.cut_speech_from_audio(audio_path, s.start, s.end, audio_fragment_path)
+            if not speech_utils.cut_speech_from_audio(audio_path, s.start, s.end, audio_fragment_path):
+                continue
 
         '''
         if not os.path.exists(audio_fragment_path):

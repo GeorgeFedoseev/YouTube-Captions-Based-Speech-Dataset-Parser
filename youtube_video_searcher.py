@@ -5,6 +5,11 @@ from apiclient.discovery import build
 from apiclient.errors import HttpError
 from oauth2client.tools import argparser
 
+import csv_utils
+import time
+
+from threading import Thread
+
 import sys
 reload(sys)
 sys.setdefaultencoding('utf8')
@@ -20,9 +25,28 @@ YOUTUBE_API_VERSION = "v3"
 
 
 def start_searcher_thread():
+    print 'starting searcher thread'
+    thr = Thread(target=searcher_thread_loop)
+    thr.start()
 
+    return thr
 
 def searcher_thread_loop():
+    while True:
+        query = csv_utils.get_keywords_to_process()
+        if query == None:
+            print 'all search queries processed. waiting 5 seconds to check again...'
+            time.sleep(5)
+            continue
+
+        print 'searching query '+query
+        video_ids = youtube_search(query)
+        print 'found '+str(len(video_ids))+' videos'
+
+        # add only video ids that dont exist in video csvs
+        for video_id in video_ids:
+            if not csv_utils.is_video_in_any_list(video_id):
+                csv_utils.put_video_to_pending(video_id)
 
 
 def youtube_search(query):

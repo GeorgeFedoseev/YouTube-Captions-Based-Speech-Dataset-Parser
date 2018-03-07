@@ -17,14 +17,17 @@ def show_global_stats():
     stats_processed_videos_count = 0
     stats_failed_videos_count = 0
     stats_pending_videos_count = 0
+    stats_processing_videos_count = 0
 
     # get queue stats
-    with FileLock(const.PROCESSED_CSV_FILE+".lock"):
-        stats_processed_videos_count = len(list(csv.reader(open(const.PROCESSED_CSV_FILE, "r"))))
-    with FileLock(const.FAILED_CSV_FILE+".lock"):
-        stats_failed_videos_count = len(list(csv.reader(open(const.FAILED_CSV_FILE, "r"))))
-    with FileLock(const.TO_PROCESS_CSV_FILE+".lock"):
-        stats_pending_videos_count = len(list(csv.reader(open(const.TO_PROCESS_CSV_FILE, "r"))))
+    with FileLock(const.VID_PROCESSED_CSV_FILE+".lock"):
+        stats_processed_videos_count = len(list(csv.reader(open(const.VID_PROCESSED_CSV_FILE, "r"))))
+    with FileLock(const.VID_FAILED_CSV_FILE+".lock"):
+        stats_failed_videos_count = len(list(csv.reader(open(const.VID_FAILED_CSV_FILE, "r"))))
+    with FileLock(const.VID_TO_PROCESS_CSV_FILE+".lock"):
+        stats_pending_videos_count = len(list(csv.reader(open(const.VID_TO_PROCESS_CSV_FILE, "r"))))
+    with FileLock(const.VID_PROCESSING_CSV_FILE+".lock"):
+        stats_processing_videos_count = len(list(csv.reader(open(const.VID_PROCESSING_CSV_FILE, "r"))))
 
     for item in os.listdir(videos_data_dir):
         item_path = os.path.join(videos_data_dir, item)
@@ -38,7 +41,7 @@ def show_global_stats():
             print 'WARNING: no stats for video '+item
             continue
 
-        with FileLock(const.PROCESSED_CSV_FILE+".lock"):
+        with FileLock(const.VID_PROCESSED_CSV_FILE+".lock"):
             stats_csv = list(csv.reader(open(stats_path, "r")))            
             stats = stats_csv[1]
             stats_total_duration += float(stats[0])
@@ -50,6 +53,7 @@ def show_global_stats():
     print "stats_failed_videos_count: "+str(stats_failed_videos_count)
     print "stats_processed_videos_count: " + str(stats_processed_videos_count)
     print "stats_pending_videos_count: " + str(stats_pending_videos_count)
+    print "stats_processing_videos_count: " + str(stats_processing_videos_count)
 
     print "stats_total_duration: " + format(stats_total_duration/3600, '.2f')+" hours"
 

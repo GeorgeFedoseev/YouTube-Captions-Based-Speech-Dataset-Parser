@@ -29,7 +29,7 @@ def cut_speech_from_audio(full_audio_path, subs_start, subs_end, output_fragment
     speech_intervals = v.convert_windows_to_readible_labels(raw_detection)
 
     if len(speech_intervals) == 0:
-        return
+        return False
 
    
     
@@ -53,7 +53,7 @@ def cut_speech_from_audio(full_audio_path, subs_start, subs_end, output_fragment
     if p.returncode != 0:
         raise Exception("failed_ffmpeg_conversion")
 
-
+    return True
 
 
 

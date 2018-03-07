@@ -13,6 +13,8 @@ import time
 
 import traceback
 
+import youtube_video_searcher
+
 
 
 reload(sys)
@@ -62,6 +64,10 @@ def video_parser_thread_loop():
 def start_parsing():
     setup()
 
+
+    # start searching thread
+    youtube_video_searcher.start_searcher_thread()
+
     video_parser_threads = []
     # start parsing threads
     for i in range(0, 8):
@@ -69,6 +75,8 @@ def start_parsing():
         thr = Thread(target=video_parser_thread_loop)
         thr.start()
         video_parser_threads.append(thr)
+
+
 
     # wait for threads
     for thr in video_parser_threads:
