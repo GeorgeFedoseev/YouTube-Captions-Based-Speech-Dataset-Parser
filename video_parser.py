@@ -47,21 +47,22 @@ def parse_video(yt_video_id):
     subs_path_pre = os.path.join(video_data_path, "subs.vtt")
     subs_path = os.path.join(video_data_path, "subs.ru.vtt")
 
-    print 'downloading subtitles to ' + subs_path
+    if not os.path.exists(subs_path):    
+        print 'downloading subtitles to ' + subs_path
 
-    p = subprocess.Popen(["youtube-dl", "--write-sub", "--sub-lang", "ru",
-                          "--skip-download",
-                          "-o", subs_path_pre,
-                          yt_video_id], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    out, err = p.communicate()
+        p = subprocess.Popen(["youtube-dl", "--write-sub", "--sub-lang", "ru",
+                              "--skip-download",
+                              "-o", subs_path_pre,
+                              yt_video_id], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        out, err = p.communicate()
 
-    if p.returncode != 0:
-        remove_video_dir(yt_video_id)
-        raise Exception("error_downloading_subtitles")
+        if p.returncode != 0:
+            remove_video_dir(yt_video_id)
+            raise Exception("error_downloading_subtitles")
 
-    if not os.path.exists(subs_path):
-        remove_video_dir(yt_video_id)
-        raise Exception("subtitles_not_available")
+        if not os.path.exists(subs_path):
+            remove_video_dir(yt_video_id)
+            raise Exception("subtitles_not_available")
 
     # download audio
     audio_lowest_size = sorted(

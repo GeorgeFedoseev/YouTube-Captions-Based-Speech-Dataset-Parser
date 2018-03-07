@@ -13,7 +13,7 @@ sys.setdefaultencoding('utf8')
 def cvt_num(num_str):
     return num2words(int(num_str), lang='ru')
 
-s = '1 perspective операционка 2'
+s = '1 perspective операционка 2.5'
 
 print cyrtranslit.to_cyrillic(s, 'ru')
 
