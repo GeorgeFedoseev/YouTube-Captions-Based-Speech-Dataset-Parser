@@ -1,5 +1,5 @@
 import pafy
-from subprocess import call
+import subprocess
 
 import pyvtt
 import os
@@ -14,8 +14,11 @@ import shutil
 
 import contextlib
 import wave
+import speech_utils
 
 import csv
+
+
 
 def remove_video_dir(video_id):
     curr_dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -26,6 +29,7 @@ def remove_video_dir(video_id):
 def parse_video(yt_video_id):
 
     stats_total_speech_duration = 0
+    stats_speech_correspondance_to_subs_quality = 0
 
     print 'PARSE VIDEO '+yt_video_id
 
@@ -48,10 +52,15 @@ def parse_video(yt_video_id):
 
     print 'downloading subtitles to '+subs_path
 
-    call(["youtube-dl", "--write-sub", "--sub-lang", "ru",
+    p = subprocess.Popen(["youtube-dl", "--write-sub", "--sub-lang", "ru",
      "--skip-download",
      "-o", subs_path_pre,
-      yt_video_id])
+      yt_video_id], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    out, err = p.communicate()
+
+    if p.returncode != 0:
+        remove_video_dir(yt_video_id)
+        raise Exception("error_downloading_subtitles")
 
     if not os.path.exists(subs_path):
         remove_video_dir(yt_video_id)
@@ -64,7 +73,8 @@ def parse_video(yt_video_id):
     audio_path = os.path.join(video_data_path, "audio."+audio_lowest_size.extension) 
 
     if not os.path.exists(audio_path):
-        audio_lowest_size.download(filepath=audio_path)
+        print 'downloading audio '+audio_path
+        audio_lowest_size.download(filepath=audio_path, quiet=True)
 
     if not os.path.exists(audio_path):
         remove_video_dir(yt_video_id)
@@ -84,7 +94,10 @@ def parse_video(yt_video_id):
 
 
 
-    # create paths
+    # audio, text -> csv
+
+    subs_audio_added_count = 0
+    subs_cleared_count = 0
 
     subs = pyvtt.WebVTTFile.open(subs_path)
     for s in subs:
@@ -93,10 +106,15 @@ def parse_video(yt_video_id):
         if cleared_text == "":
             continue
 
+        subs_cleared_count += 1
+
         audio_fragment_path = os.path.join(parts_dir_path, yt_video_id+"-"+str(s.start.ordinal)+"-"+str(s.end.ordinal)+".wav")
 
         
+        if not os.path.exists(audio_fragment_path):
+            speech_utils.cut_speech_from_audio(audio_path, s.start, s.end, audio_fragment_path)
 
+        '''
         if not os.path.exists(audio_fragment_path):
             call(["ffmpeg", "-y",
              "-i", audio_path,
@@ -110,6 +128,7 @@ def parse_video(yt_video_id):
              
              audio_fragment_path
              ])
+        '''
 
         fragment_duration = 0
 
@@ -121,15 +140,21 @@ def parse_video(yt_video_id):
         if fragment_duration < 1:
             continue
 
+
         stats_total_speech_duration += fragment_duration
 
-        csv_f.write(audio_fragment_path+", "+cleared_text+"\n")
+        # add to csv
 
+        csv_f.write(audio_fragment_path+", "+cleared_text+"\n")
+        subs_audio_added_count += 1
+
+    if subs_cleared_count > 0:
+        stats_speech_correspondance_to_subs_quality = float(subs_audio_added_count)/subs_cleared_count
 
     csv_f.close()
 
     # stats
-    write_stats(video_data_path, ["speech_duration"], [stats_total_speech_duration])
+    write_stats(video_data_path, ["speech_duration", "speech_correspondance_to_subs_quality"], [stats_total_speech_duration, stats_speech_correspondance_to_subs_quality])
 
 
 

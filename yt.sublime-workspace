@@ -4,6 +4,146 @@
 		"selected_items":
 		[
 			[
+				"inter",
+				"intervals\tstatement"
+			],
+			[
+				"wa",
+				"wav_path"
+			],
+			[
+				"exc",
+				"format_exc\tfunction"
+			],
+			[
+				"aud",
+				"audio_fragment_path\tstatement"
+			],
+			[
+				"spee",
+				"speech_utils"
+			],
+			[
+				"speech",
+				"speech_end\tstatement"
+			],
+			[
+				"subs",
+				"subs_end"
+			],
+			[
+				"co",
+				"convert_windows_to_readible_labels\tfunction"
+			],
+			[
+				"ur",
+				"urllib\tmodule"
+			],
+			[
+				"pri",
+				"print_exc\tfunction"
+			],
+			[
+				"vide",
+				"video_id\tstatement"
+			],
+			[
+				"a",
+				"append\tfunction"
+			],
+			[
+				"thread",
+				"threads\tstatement"
+			],
+			[
+				"stats",
+				"stats_total_duration\tstatement"
+			],
+			[
+				"ite",
+				"item\tstatement"
+			],
+			[
+				"sta",
+				"stats_processed_videos_count\tstatement"
+			],
+			[
+				"is",
+				"isdir\tmodule"
+			],
+			[
+				"pa",
+				"path\tmodule"
+			],
+			[
+				"fram",
+				"fragment_duration\tstatement"
+			],
+			[
+				"cont",
+				"continue\tkeyword"
+			],
+			[
+				"con",
+				"continue\tkeyword"
+			],
+			[
+				"fra",
+				"fragment_duration\tstatement"
+			],
+			[
+				"video",
+				"video_id\tparam"
+			],
+			[
+				"put",
+				"put_video_to_processed\tfunction"
+			],
+			[
+				"P",
+				"PROCESSED_CSV_FILE\tstatement"
+			],
+			[
+				"pu",
+				"put_video_to_failed\tfunction"
+			],
+			[
+				"cs",
+				"csv_reader\tstatement"
+			],
+			[
+				"write",
+				"writerow"
+			],
+			[
+				"csv",
+				"csv_writer\tstatement"
+			],
+			[
+				"sub",
+				"subtitles"
+			],
+			[
+				"vi",
+				"video_id\tstatement"
+			],
+			[
+				"get",
+				"get_video_to_process\tfunction"
+			],
+			[
+				"p",
+				"parse_video\tfunction"
+			],
+			[
+				"cu",
+				"curr_dir_path"
+			],
+			[
+				"su",
+				"subtitles"
+			],
+			[
 				"im",
 				"image_to_string\tfunction"
 			],
@@ -39,12 +179,55 @@
 			"file": "main.py",
 			"settings":
 			{
-				"buffer_size": 1725,
+				"buffer_size": 3442,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "videos_processed.csv",
+			"settings":
+			{
+				"buffer_size": 84,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "video_parser.py",
+			"settings":
+			{
+				"buffer_size": 3624,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "videos_to_process.csv",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "test.py",
+			"settings":
+			{
+				"buffer_size": 505,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "speech_utils.py",
+			"settings":
+			{
+				"buffer_size": 1112,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		}
 	],
-	"build_system": "",
+	"build_system": "Packages/Python/Python.sublime-build",
 	"build_system_choices":
 	[
 		[
@@ -67,8 +250,8 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 239.0,
-		"last_filter": "insta",
+		"height": 372.0,
+		"last_filter": "",
 		"selected_items":
 		[
 			[
@@ -112,6 +295,21 @@
 	],
 	"file_history":
 	[
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/videos_failed_to_process.csv",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/videos_to_process.csv",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/youtube_video_searcher.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/video_parser.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/speech_utils.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/test.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/vad.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/const.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/stats_util.py",
+		"/Users/gosha/Library/Application Support/Sublime Text 3/Packages/Jedi - Python autocompletion/Default.sublime-keymap",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/audio_utils.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/yt.sublime-project",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/main.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/data/tssa",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/videos_processed.csv",
 		"/Users/gosha/Desktop/writing5.2.txt",
 		"/Users/gosha/Desktop/writing5.1.txt",
 		"/Users/gosha/Desktop/goodnia-ipa/skyhighquizapp/index.html",
@@ -146,6 +344,15 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"smooth",
+			"smoo",
+			"plt",
+			"FAILED_CSV_FILE",
+			"PROCESSED_CSV_FILE",
+			"TO_PROCESS_CSV_FILE",
+			"https://www.youtube.com/watch?v=",
+			"video_id",
+			"utils"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -153,6 +360,10 @@
 		"regex": false,
 		"replace_history":
 		[
+			"const.FAILED_CSV_FILE",
+			"const.PROCESSED_CSV_FILE",
+			"const.TO_PROCESS_CSV_FILE",
+			""
 		],
 		"reverse": false,
 		"show_context": true,
@@ -169,10 +380,63 @@
 				{
 					"buffer": 0,
 					"file": "main.py",
-					"semi_transient": true,
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1725,
+						"buffer_size": 3442,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2926,
+								2926
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": -1,
+								"modified": true,
+								"selection": true,
+								"status": -1,
+								"syntax": "python"
+							},
+							"auto_complete_triggers":
+							[
+								{
+									"characters": ".",
+									"selector": "source.python - string - comment - constant.numeric"
+								},
+								{
+									"characters": ".",
+									"selector": "source.python - string - constant.numeric"
+								},
+								{
+									"characters": ".",
+									"selector": "source.python - string - constant.numeric"
+								}
+							],
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1230.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "videos_processed.csv",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 84,
 						"regions":
 						{
 						},
@@ -187,21 +451,191 @@
 						{
 							"WordCount":
 							{
+								"changes": 14,
+								"count": 4,
+								"modified": true,
+								"selection": true,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "video_parser.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3624,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1698,
+								1719
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
 								"changes": -1,
 								"modified": true,
 								"selection": true,
 								"status": -1,
 								"syntax": "python"
 							},
-							"show_definitions": false,
 							"syntax": "Packages/Python/Python.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 882.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "videos_to_process.csv",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": 82,
+								"count": 8,
+								"modified": true,
+								"selection": true,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "test.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 505,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								205,
+								205
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": -1,
+								"modified": true,
+								"selection": true,
+								"status": -1,
+								"syntax": "python"
+							},
+							"auto_complete_triggers":
+							[
+								{
+									"characters": ".",
+									"selector": "source.python - string - comment - constant.numeric"
+								},
+								{
+									"characters": ".",
+									"selector": "source.python - string - constant.numeric"
+								}
+							],
+							"syntax": "Packages/Python/Python.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "speech_utils.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1112,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								706,
+								706
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": -1,
+								"modified": true,
+								"selection": true,
+								"status": -1,
+								"syntax": "python"
+							},
+							"auto_complete_triggers":
+							[
+								{
+									"characters": ".",
+									"selector": "source.python - string - comment - constant.numeric"
+								},
+								{
+									"characters": ".",
+									"selector": "source.python - string - constant.numeric"
+								}
+							],
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 131.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -213,7 +647,7 @@
 	},
 	"input":
 	{
-		"height": 0.0
+		"height": 35.0
 	},
 	"layout":
 	{
@@ -246,7 +680,7 @@
 	{
 		"height": 0.0
 	},
-	"pinned_build_system": "Packages/Python/Python.sublime-build",
+	"pinned_build_system": "Anaconda Python Builder",
 	"project": "yt.sublime-project",
 	"replace":
 	{
@@ -288,7 +722,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 240.0,
+	"side_bar_width": 311.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

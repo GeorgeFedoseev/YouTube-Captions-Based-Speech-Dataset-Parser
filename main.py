@@ -14,6 +14,8 @@ import time
 
 import traceback
 
+
+
 reload(sys)
 sys.setdefaultencoding('utf8')
 
@@ -63,7 +65,7 @@ def is_video_in_csv(csv_path, video_id):
         data = list(csv_reader)
 
         for row in data:
-            if row[0] == video_id:
+            if len(row) > 0 and row[0] == video_id:
                 return True
     return False
 
@@ -88,7 +90,7 @@ def video_parser_thread_loop():
         video_id = get_video_to_process()
 
         if not video_id:
-            print 'no videos to parse - wait 5 seconds...'
+            #print 'no videos to parse - wait 5 seconds...'
             time.sleep(5)
             continue
 
@@ -100,9 +102,12 @@ def video_parser_thread_loop():
             print('failed to process video ' + video_id + ': ' + str(e))
 
             traceback.print_exc()
+            #trace = traceback.format_exc().replace('\n', '  ')
 
+            error_type = str(e)
+            
             # put id to failed csv with reason
-            put_video_to_failed(video_id, str(e))
+            put_video_to_failed(video_id, error_type)
 
 
 def start_parsing():
