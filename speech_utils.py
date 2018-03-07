@@ -6,6 +6,7 @@ from vad import VoiceActivityDetector
 
 def cut_speech_from_audio(full_audio_path, subs_start, subs_end, output_fragment_path):
 
+    
     print 'trimming speech -> '+output_fragment_path
 
     p = subprocess.Popen(["ffmpeg", "-y",
@@ -25,7 +26,13 @@ def cut_speech_from_audio(full_audio_path, subs_start, subs_end, output_fragment
 
     # detect speech borders
     v = VoiceActivityDetector(output_fragment_path)
-    raw_detection = v.detect_speech()
+
+    try:
+        raw_detection = v.detect_speech()
+    except Exception as e:
+        print 'error detecting Speech with VAD'
+        return False 
+
     speech_intervals = v.convert_windows_to_readible_labels(raw_detection)
 
     if len(speech_intervals) == 0:

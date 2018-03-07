@@ -120,21 +120,7 @@ def parse_video(yt_video_id):
             if not speech_utils.cut_speech_from_audio(audio_path, s.start, s.end, audio_fragment_path):
                 continue
 
-        '''
-        if not os.path.exists(audio_fragment_path):
-            call(["ffmpeg", "-y",
-             "-i", audio_path,
-
-             "-ss", str(s.start),
-             "-to", str(s.end),
-             "-ac", "1",
-             "-ab", "16",
-             "-ar", "16000",
-
-             
-             audio_fragment_path
-             ])
-        '''
+        
 
         fragment_duration = 0
 
@@ -166,7 +152,7 @@ def parse_video(yt_video_id):
         raise Exception("too_little_speech")
 
     # stats
-    write_stats(video_data_path, ["speech_duration", "speech_correspondance_to_subs_quality"], [stats_total_speech_duration, stats_speech_correspondance_to_subs_quality])
+    write_stats(video_data_path, ["speech_duration", "speech_correspondance_to_subs_quality", "samples_count"], [stats_total_speech_duration, stats_speech_correspondance_to_subs_quality, subs_audio_added_count])
 
 
 

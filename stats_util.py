@@ -13,6 +13,8 @@ def show_global_stats():
 
     stats_total_duration = 0.0
     stats_videos_folders_count = 0
+
+    stats_total_samples_count = 0
     
     stats_processed_videos_count = 0
     stats_failed_videos_count = 0
@@ -35,6 +37,8 @@ def show_global_stats():
         if not os.path.isdir(item_path):
             continue
 
+        stats_videos_folders_count+=1
+
         stats_path = os.path.join(item_path, "stats.csv")
 
         if not os.path.exists(stats_path):
@@ -46,6 +50,12 @@ def show_global_stats():
             stats = stats_csv[1]
             stats_total_duration += float(stats[0])
 
+            if len(stats) > 1:
+                subs_correspondance = float(stats[1])
+
+            if len(stats) > 2:
+                stats_total_samples_count += int(stats[2])
+
 
     # print stats
 
@@ -55,6 +65,7 @@ def show_global_stats():
     print "stats_pending_videos_count: " + str(stats_pending_videos_count)
     print "stats_processing_videos_count: " + str(stats_processing_videos_count)
 
+    print "stats_total_samples_count: " + str(stats_total_samples_count)
     print "stats_total_duration: " + format(stats_total_duration/3600, '.2f')+" hours"
 
 if __name__ == '__main__':
