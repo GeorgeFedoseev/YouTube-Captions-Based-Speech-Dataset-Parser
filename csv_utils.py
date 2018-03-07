@@ -22,6 +22,14 @@ def clear_csv(csv_path):
     with FileLock(csv_path + ".lock"):
         csv_writer = csv.writer(open(csv_path, "w+"))
 
+def read_all(csv_path):
+    data = []
+    with FileLock(csv_path + ".lock"):
+        csv_reader = csv.reader(open(csv_path, "r+"))
+        data = list(csv_reader)
+
+    return data
+
 
 def get_column_csv(csv_path, column_index):
     column = []
@@ -33,6 +41,16 @@ def get_column_csv(csv_path, column_index):
             if len(row) > column_index:
                 column.append(row[column_index])
     return column
+
+def append_rows_to_csv(csv_path, rows):
+    
+    with FileLock(csv_path + ".lock"):
+        csv_writer = csv.writer(open(csv_path, "a+"))
+        for row in rows:
+            csv_writer.writerow(row)
+def write_rows_to_csv(csv_path, rows):
+    clear_csv(csv_path)
+    append_rows_to_csv(csv_path, rows)
 
 def append_column_to_csv(csv_path, column):
     

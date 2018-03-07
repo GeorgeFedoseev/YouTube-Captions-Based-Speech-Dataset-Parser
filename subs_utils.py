@@ -12,4 +12,6 @@ def clear_subtitle_text(text):
 	cleared_text = cleared_text.strip()
 	cleared_text = re.sub(' +', ' ', cleared_text)
 
+    cleared_text = cleared_text.lower()
+
 	return cleared_text

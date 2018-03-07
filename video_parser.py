@@ -143,7 +143,7 @@ def parse_video(yt_video_id):
             rate = f.getframerate()
             fragment_duration = frames / float(rate)
 
-        if fragment_duration < 1:
+        if fragment_duration < 1 or fragment_duration > 10:
             continue
 
 
@@ -158,6 +158,10 @@ def parse_video(yt_video_id):
         stats_speech_correspondance_to_subs_quality = float(subs_audio_added_count)/subs_cleared_count
 
     csv_f.close()
+
+    if subs_audio_added_count < 20:
+        remove_video_dir(yt_video_id)
+        raise Exception("too_little_speech")
 
     # stats
     write_stats(video_data_path, ["speech_duration", "speech_correspondance_to_subs_quality"], [stats_total_speech_duration, stats_speech_correspondance_to_subs_quality])
