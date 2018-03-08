@@ -52,6 +52,8 @@ def video_parser_thread_loop():
         except Exception as e:
             print('failed to process video ' + video_id + ': ' + str(e))
 
+            video_parser.remove_video_dir(video_id)
+
             traceback.print_exc()
             #trace = traceback.format_exc().replace('\n', '  ')
 
@@ -73,6 +75,7 @@ def start_parsing():
     for i in range(0, 8):
         print 'start parsing thread ' + str(i)
         thr = Thread(target=video_parser_thread_loop)
+        thr.daemon = True
         thr.start()
         video_parser_threads.append(thr)
 

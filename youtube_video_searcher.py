@@ -27,6 +27,7 @@ YOUTUBE_API_VERSION = "v3"
 def start_searcher_thread():
     print 'starting searcher thread'
     thr = Thread(target=searcher_thread_loop)
+    thr.daemon = True
     thr.start()
 
     return thr

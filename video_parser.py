@@ -21,8 +21,8 @@ import csv
 def remove_video_dir(video_id):
     curr_dir_path = os.path.dirname(os.path.realpath(__file__))
     video_data_path = os.path.join(curr_dir_path, "data/" + video_id + "/")
-
-    shutil.rmtree(video_data_path)
+    if os.path.exists(video_data_path):
+        shutil.rmtree(video_data_path)
 
 
 def parse_video(yt_video_id):
@@ -57,11 +57,9 @@ def parse_video(yt_video_id):
         out, err = p.communicate()
 
         if p.returncode != 0:
-            remove_video_dir(yt_video_id)
             raise Exception("error_downloading_subtitles")
 
         if not os.path.exists(subs_path):
-            remove_video_dir(yt_video_id)
             raise Exception("subtitles_not_available")
 
     # download audio
@@ -69,7 +67,6 @@ def parse_video(yt_video_id):
         video.audiostreams, key=lambda x: x.get_filesize())[0]
     print 'audio lowest download size: ' + str(audio_lowest_size.get_filesize())
     if audio_lowest_size.get_filesize() > 500000000:
-        remove_video_dir(yt_video_id)
         raise Exception("audio_file_is_too_big")
 
     audio_path = os.path.join(
@@ -80,8 +77,27 @@ def parse_video(yt_video_id):
         audio_lowest_size.download(filepath=audio_path, quiet=True)
 
     if not os.path.exists(audio_path):
-        remove_video_dir(yt_video_id)
         raise Exception("audio_download_failed")
+
+
+    # convert full audio to wav so we dont have to decode for each small piece
+    print 'converting full audio to wav -> '+audio_path_wav
+    audio_path_wav = os.path.join(
+        video_data_path, "audio.wav" )
+
+    if not os.path.exists(audio_path_wav):
+        p = subprocess.Popen(["ffmpeg", "-y",
+             "-i", audio_path,
+             "-ac", "1",
+             "-ab", "16",
+             "-ar", "16000",         
+             audio_path_wav
+             ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+        out, err = p.communicate()
+
+        if p.returncode != 0:
+            raise Exception("audio_ffmpeg_cvt_failed")            
 
     # cut by subs
 
@@ -115,7 +131,7 @@ def parse_video(yt_video_id):
         fragment_duration = 0
 
         if not os.path.exists(audio_fragment_path):
-            fragment_duration = speech_utils.cut_speech_from_audio(audio_path, s.start, s.end, audio_fragment_path)
+            fragment_duration = speech_utils.cut_speech_from_audio(audio_path_wav, s.start, s.end, audio_fragment_path)
         else:
             with contextlib.closing(wave.open(audio_fragment_path, 'r')) as f:
                 frames = f.getnframes()
@@ -142,8 +158,7 @@ def parse_video(yt_video_id):
 
     csv_f.close()
 
-    if subs_audio_added_count < 20:
-        remove_video_dir(yt_video_id)
+    if subs_audio_added_count < 20:       
         raise Exception("too_little_speech")
 
     # stats
