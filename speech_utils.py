@@ -22,7 +22,8 @@ def cut_speech_from_audio(full_audio_path, subs_start, subs_end, output_fragment
     out, err = p.communicate()
 
     if p.returncode != 0:
-        raise Exception("failed_ffmpeg_conversion")
+        print("failed_ffmpeg_conversion")
+        return 0
 
     # detect speech borders
     v = VoiceActivityDetector(output_fragment_path)
@@ -31,12 +32,12 @@ def cut_speech_from_audio(full_audio_path, subs_start, subs_end, output_fragment
         raw_detection = v.detect_speech()
     except Exception as e:
         print 'error detecting Speech with VAD'
-        return False 
+        return 0 
 
     speech_intervals = v.convert_windows_to_readible_labels(raw_detection)
 
     if len(speech_intervals) == 0:
-        return False
+        return 0
 
    
     
@@ -58,9 +59,10 @@ def cut_speech_from_audio(full_audio_path, subs_start, subs_end, output_fragment
     out, err = p.communicate()
 
     if p.returncode != 0:
-        raise Exception("failed_ffmpeg_conversion")
+        print("failed_ffmpeg_conversion")
+        return 0
 
-    return True
+    return speech_end - speech_start
 
 
 

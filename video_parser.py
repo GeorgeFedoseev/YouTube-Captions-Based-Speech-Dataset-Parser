@@ -111,16 +111,17 @@ def parse_video(yt_video_id):
         audio_fragment_path = os.path.join(
             parts_dir_path, yt_video_id + "-" + str(s.start.ordinal) + "-" + str(s.end.ordinal) + ".wav")
 
-        if not os.path.exists(audio_fragment_path):
-            if not speech_utils.cut_speech_from_audio(audio_path, s.start, s.end, audio_fragment_path):
-                continue
 
         fragment_duration = 0
 
-        with contextlib.closing(wave.open(audio_fragment_path, 'r')) as f:
-            frames = f.getnframes()
-            rate = f.getframerate()
-            fragment_duration = frames / float(rate)
+        if not os.path.exists(audio_fragment_path):
+            fragment_duration = speech_utils.cut_speech_from_audio(audio_path, s.start, s.end, audio_fragment_path)
+        else:
+            with contextlib.closing(wave.open(audio_fragment_path, 'r')) as f:
+                frames = f.getnframes()
+                rate = f.getframerate()
+                fragment_duration = frames / float(rate)
+        
 
         if fragment_duration < 1 or fragment_duration > 10:
             continue
