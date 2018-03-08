@@ -81,9 +81,11 @@ def parse_video(yt_video_id):
 
 
     # convert full audio to wav so we dont have to decode for each small piece
-    print 'converting full audio to wav -> '+audio_path_wav
+
     audio_path_wav = os.path.join(
         video_data_path, "audio.wav" )
+
+    print 'converting full audio to wav -> '+audio_path_wav
 
     if not os.path.exists(audio_path_wav):
         p = subprocess.Popen(["ffmpeg", "-y",
