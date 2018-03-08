@@ -1,2 +1,5 @@
 venv
 data
+*.lock
+*.csv
+export-sets
