@@ -42,7 +42,7 @@ def show_global_stats():
         stats_path = os.path.join(item_path, "stats.csv")
 
         if not os.path.exists(stats_path):
-            print 'WARNING: no stats for video '+item
+            #print 'WARNING: no stats for video '+item
             continue
 
         with FileLock(const.VID_PROCESSED_CSV_FILE+".lock"):
