@@ -25,6 +25,7 @@ pyasn1==0.4.2
 pyasn1-modules==0.2.1
 pyparsing==2.2.0
 python-dateutil==2.6.1
+python-speech-features==0.6
 pytz==2018.3
 pyvtt==0.0.1
 query-string==0.0.28
