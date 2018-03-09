@@ -33,7 +33,7 @@ def export():
 
         parts_csv_path = os.path.join(item_path, "parts.csv")
 
-        if not os.path.isdir(parts_csv_path):
+        if not os.path.exists(parts_csv_path):
             continue
 
         parts = csv_utils.read_all(parts_csv_path)
