@@ -93,7 +93,7 @@ def remove_source_lower_than_target():
             target_len = len(transcript)
             if source_len < target_len:
                 bad+=1
-                print "source_len < target_len "+str(float(bad)/total_scanned*100)+'%'
+                print "source_len < target_len "+str(float(bad)/total_scanned*100)+'% (of '+str(total_scanned)+')'
             else:
                 writer.writerow(row)
         f.close()
