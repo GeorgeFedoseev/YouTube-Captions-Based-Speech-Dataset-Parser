@@ -103,4 +103,5 @@ def remove_source_lower_than_target():
                 writer.writerow(row)
         f.close()
 
-remove_source_lower_than_target()
+if __name__ == '__main__':
+    remove_source_lower_than_target()

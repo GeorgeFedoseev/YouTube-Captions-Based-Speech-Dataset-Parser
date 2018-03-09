@@ -42,5 +42,5 @@ def remove_latin_chars():
 
     print 'processed '+str(count)+' samples'
 
-
-remove_latin_chars()
+if __name__ == '__main__':
+    remove_latin_chars()

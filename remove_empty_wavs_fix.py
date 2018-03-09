@@ -35,4 +35,5 @@ def remove_empty_wavs():
                 print('remove '+row[0])
         f.close()
 
-remove_empty_wavs()
+if __name__ == '__main__':
+    remove_empty_wavs()
