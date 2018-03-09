@@ -17,6 +17,7 @@ import speech_utils
 
 import csv
 
+from remove_source_lower_than_target_fix import source_lower_than_target_bad_condition
 
 def remove_video_dir(video_id):
     curr_dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -150,6 +151,10 @@ def parse_video(yt_video_id):
 
         # fix for empty wavs of size 78 bytes
         if filesize < 1000:
+            continue
+
+        # source_len < target_len fix
+        if source_lower_than_target_bad_condition(audio_fragment_path, cleared_text):
             continue
 
         # add to csv

@@ -52,6 +52,14 @@ def audiofile_to_input_vector(audio_filename, numcep, numcontext):
 
     return audioToInputVector(audio, fs, numcep, numcontext)
 
+def source_lower_than_target_bad_condition(wav_file, transcript):
+    source = audiofile_to_input_vector(wav_file, 26, 9)
+    source_len = len(source)
+    #print 'transcript for '+wav_file+': '+transcript            
+    target_len = len(transcript)
+
+    return source_len < target_len
+
 def remove_source_lower_than_target():
     curr_dir_path = os.path.dirname(os.path.realpath(__file__))
     videos_data_dir = os.path.join(curr_dir_path, "data/")
@@ -87,11 +95,8 @@ def remove_source_lower_than_target():
             wav_file = row[0]
             transcript = row[2]
             
-            source = audiofile_to_input_vector(wav_file, 26, 9)
-            source_len = len(source)
-            #print 'transcript for '+wav_file+': '+transcript            
-            target_len = len(transcript)
-            if source_len < target_len:
+            
+            if source_lower_than_target_bad_condition(wav_file, transcript):
                 bad+=1
                 print "source_len < target_len "+str(float(bad)/total_scanned*100)+'% (of '+str(total_scanned)+')'
             else:
