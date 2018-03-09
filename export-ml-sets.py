@@ -32,6 +32,10 @@ def export():
             continue
 
         parts_csv_path = os.path.join(item_path, "parts.csv")
+
+        if not os.path.isdir(parts_csv_path):
+            continue
+
         parts = csv_utils.read_all(parts_csv_path)
 
         all_rows.extend(parts)
