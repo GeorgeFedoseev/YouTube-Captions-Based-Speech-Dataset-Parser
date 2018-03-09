@@ -31,5 +31,8 @@ def remove_empty_wavs():
                 continue
             if int(row[1]) > 1000:
                 writer.writerow(row)
+            else:
+                print('remove '+row[0])
         f.close()
-            
+
+remove_empty_wavs()
