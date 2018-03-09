@@ -148,6 +148,7 @@ def parse_video(yt_video_id):
 
         filesize = os.path.getsize(audio_fragment_path)
 
+        # fix for empty wavs of size 78 bytes
         if filesize < 1000:
             continue
 

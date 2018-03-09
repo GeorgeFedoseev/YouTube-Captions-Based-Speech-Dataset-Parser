@@ -16,6 +16,8 @@ def cvt_num(num_str):
 def clear_subtitle_text(text):
     cleared_text = text
 
+    cleared_text = cleared_text.replace("\n", " ")
+    cleared_text = re.sub(u'[^a-zA-Zа-яА-Я ]+', '', cleared_text, re.UNICODE)
 
 
     # convert latin
@@ -24,10 +26,9 @@ def clear_subtitle_text(text):
     #convert numbers to words
     cleared_text = re.sub(r'\d+', lambda m: cvt_num(m.group()), cleared_text)
 
-   
-
-    cleared_text = cleared_text.replace("\n", " ")
-    cleared_text = re.sub(u'[^a-zA-Zа-яА-Я ]+', '', cleared_text, re.UNICODE)
+    #leave only russian in the end
+    cleared_text = re.sub(u'[^а-яА-Я ]+', '', cleared_text, re.UNICODE)
+    
     cleared_text = cleared_text.strip()
     cleared_text = re.sub(' +', ' ', cleared_text)
     cleared_text = cleared_text.lower()
