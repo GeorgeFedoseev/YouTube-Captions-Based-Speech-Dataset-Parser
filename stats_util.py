@@ -45,7 +45,7 @@ def show_global_stats():
             #print 'WARNING: no stats for video '+item
             continue
 
-        with FileLock(const.VID_PROCESSED_CSV_FILE+".lock"):
+        with FileLock(stats_path+".lock"):
             stats_csv = list(csv.reader(open(stats_path, "r")))            
             stats = stats_csv[1]
             stats_total_duration += float(stats[0])

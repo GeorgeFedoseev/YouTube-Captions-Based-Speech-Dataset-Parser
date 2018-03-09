@@ -148,6 +148,9 @@ def parse_video(yt_video_id):
 
         filesize = os.path.getsize(audio_fragment_path)
 
+        if filesize < 1000:
+            continue
+
         # add to csv
 
         csv_f.write(audio_fragment_path + ", " +
