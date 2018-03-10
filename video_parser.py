@@ -145,7 +145,7 @@ def parse_video(yt_video_id):
         if fragment_duration < 1 or fragment_duration > 10:
             continue
 
-        stats_total_speech_duration += fragment_duration
+        
 
         filesize = os.path.getsize(audio_fragment_path)
 
@@ -156,6 +156,8 @@ def parse_video(yt_video_id):
         # source_len < target_len fix
         if source_lower_than_target_bad_condition(audio_fragment_path, cleared_text):
             continue
+
+        stats_total_speech_duration += fragment_duration
 
         # add to csv
 

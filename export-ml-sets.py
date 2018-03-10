@@ -85,7 +85,7 @@ def export():
 
     # export vocabulary
     vocabulary = open(export_vocabulary_txt_path, "w")   
-    vocabulary.writelines([subs_utils.clear_subtitle_text(x[2])+"\n" for x in all_rows])
+    vocabulary.writelines([x[2]+"\n" for x in all_rows])
     vocabulary.close()
 
 export()
