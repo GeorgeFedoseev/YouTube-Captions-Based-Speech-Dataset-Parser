@@ -17,14 +17,16 @@ def clear_subtitle_text(text):
     cleared_text = text
 
     cleared_text = cleared_text.replace("\n", " ")
+    #convert numbers to words
+    cleared_text = re.sub(r'\d+', lambda m: cvt_num(m.group()), cleared_text)
+    
     cleared_text = re.sub(u'[^a-zA-Zа-яА-Я ]+', '', cleared_text, re.UNICODE)
 
 
     # convert latin
     cleared_text = cyrtranslit.to_cyrillic(cleared_text, 'ru').decode('utf-8')
 
-    #convert numbers to words
-    cleared_text = re.sub(r'\d+', lambda m: cvt_num(m.group()), cleared_text)
+    
 
     #leave only russian in the end
     cleared_text = re.sub(u'[^а-яА-Я ]+', '', cleared_text, re.UNICODE)
