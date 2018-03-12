@@ -46,7 +46,7 @@ def video_parser_thread_loop():
         csv_utils.put_video_to_processing(video_id)
 
         try:
-            video_parser.parse_video(video_id)
+            video_parser.process_video(video_id)
 
             csv_utils.put_video_to_processed(video_id)
         except Exception as e:
@@ -54,7 +54,7 @@ def video_parser_thread_loop():
 
             video_parser.remove_video_dir(video_id)
 
-            traceback.print_exc()
+            #traceback.print_exc()
             #trace = traceback.format_exc().replace('\n', '  ')
 
             error_type = str(e)
@@ -72,7 +72,7 @@ def start_parsing():
 
     video_parser_threads = []
     # start parsing threads
-    for i in range(0, 22):
+    for i in range(0, 12):
         print 'start parsing thread ' + str(i)
         thr = Thread(target=video_parser_thread_loop)
         thr.daemon = True

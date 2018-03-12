@@ -15,11 +15,16 @@ def show_global_stats():
     stats_videos_folders_count = 0
 
     stats_total_samples_count = 0
+    stats_good_samples_count = 0
     
     stats_processed_videos_count = 0
+    
+
     stats_failed_videos_count = 0
     stats_pending_videos_count = 0
     stats_processing_videos_count = 0
+
+    
 
     # get queue stats
     with FileLock(const.VID_PROCESSED_CSV_FILE+".lock"):
@@ -54,18 +59,31 @@ def show_global_stats():
                 subs_correspondance = float(stats[1])
 
             if len(stats) > 2:
-                stats_total_samples_count += int(stats[2])
+                stats_good_samples_count += int(stats[2])
+
+            if len(stats) > 3:
+                stats_total_samples_count += int(stats[3])
 
 
     # print stats
 
     print '[PARSING STATS]'
+
     print "stats_failed_videos_count: "+str(stats_failed_videos_count)
     print "stats_processed_videos_count: " + str(stats_processed_videos_count)
+
+    if stats_processed_videos_count > 0:
+        print "good_videos_percentage: "+str(float(stats_processed_videos_count)/(stats_processed_videos_count+stats_failed_videos_count)*100)+'%'
+
     print "stats_pending_videos_count: " + str(stats_pending_videos_count)
     print "stats_processing_videos_count: " + str(stats_processing_videos_count)
 
     print "stats_total_samples_count: " + str(stats_total_samples_count)
+    print "stats_good_samples_count: " + str(stats_good_samples_count)
+
+    if stats_total_samples_count > 0:
+        print "good_samples_percentage: "+str(float(stats_good_samples_count)/stats_total_samples_count*100)+'%'
+
     print "stats_total_duration: " + format(stats_total_duration/3600, '.2f')+" hours"
 
 if __name__ == '__main__':

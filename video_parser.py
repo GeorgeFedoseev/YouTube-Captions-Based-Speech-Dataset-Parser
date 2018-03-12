@@ -85,11 +85,17 @@ def get_timed_words(yt_video_id):
                 end_time = subs[i+1].start.ordinal
 
         timecodes = [s.start.ordinal] + timecodes + [end_time]
+
+
        
         words_str = re.sub(r'<[^>]*>', '', s.text)
         
         regex = re.compile(r'[\s]+')
         words = regex.split(words_str)
+
+        if len(words)+1 != len(timecodes):
+            raise Exception('video_doesnt_have_auto_subtitles')
+            
 
         for i in range(0, len(words)):
             word = words[i]
@@ -152,7 +158,7 @@ def download_yt_audio(yt_video_id):
     # download audio
     audio_lowest_size = sorted(
         video.audiostreams, key=lambda x: x.get_filesize())[0]
-    print 'audio lowest download size: ' + str(audio_lowest_size.get_filesize())
+    #print 'audio lowest download size: ' + str(audio_lowest_size.get_filesize())
     if audio_lowest_size.get_filesize() > 500000000:
         raise Exception("audio_file_is_too_big")
 
@@ -237,7 +243,12 @@ def process_video(yt_video_id):
 
     timed_words = get_timed_words(yt_video_id)
 
+
+
     subs = get_subs(yt_video_id)
+
+    if len(subs) < 30:
+        raise Exception('too_little_nuber_of_subtitles_in_video')
 
     audio_path = download_yt_audio(yt_video_id)
 

@@ -115,7 +115,7 @@ def pop_first_row_in_csv(csv_path):
 
         f.close()
 
-        print 'wrore back '+str(len(data))+' to '+csv_path
+        #print 'wrote back '+str(len(data))+' to '+csv_path
 
     return first_row
 

@@ -36,7 +36,7 @@ def searcher_thread_loop():
     while True:
         query = csv_utils.get_keywords_to_process()
         if query == None:
-            print 'all search queries processed. waiting 5 seconds to check again...'
+            #print 'all search queries processed. waiting 5 seconds to check again...'
             time.sleep(5)
             continue
 
