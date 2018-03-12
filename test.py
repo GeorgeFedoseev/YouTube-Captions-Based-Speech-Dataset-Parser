@@ -10,6 +10,11 @@ import string
 
 import pafy
 
+import io
+import csv
+
+
+
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
@@ -19,39 +24,47 @@ yt_video_id = "ypEPe5Ii3Aw"
 
 
 
+def get_subs(yt_video_id, auto_subs=False):
 
+    subs_name = "autosubs" if auto_subs else "subs"
 
-def get_timed_words(yt_video_id):
-        # download subtitles
+    # download subtitles
     curr_dir_path = os.path.dirname(os.path.realpath(__file__))
     video_data_path = os.path.join(curr_dir_path, "data/" + yt_video_id + "/")
 
-    print 'video data directory: ' + video_data_path
+ 
 
     if not os.path.exists(video_data_path):
         os.makedirs(video_data_path)
 
    
 
-    subs_path_pre = os.path.join(video_data_path, "autosubs.vtt")
-    subs_path = os.path.join(video_data_path, "autosubs.ru.vtt")
+    subs_path_pre = os.path.join(video_data_path, subs_name+".vtt")
+    subs_path = os.path.join(video_data_path, subs_name+".ru.vtt")
 
     if not os.path.exists(subs_path):    
         print 'downloading subtitles to ' + subs_path
 
-        p = subprocess.Popen(["youtube-dl",  "--write-auto-sub", "--sub-lang", "ru",
+        p = subprocess.Popen(["youtube-dl",  "--write-auto-sub" if auto_subs else "--write-sub",
+                          "--sub-lang", "ru",
                           "--skip-download",
                           "-o", subs_path_pre,
                           yt_video_id], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         out, err = p.communicate()
 
         if p.returncode != 0:
-            raise Exception("error_auto_downloading_subtitles")
+            raise Exception(subs_name+"_error_downloading_subtitles")
 
         if not os.path.exists(subs_path):
-            raise Exception("auto_subtitles_not_available")
+            raise Exception(subs_name+"_subtitles_not_available")
 
     subs = pyvtt.WebVTTFile.open(subs_path)
+
+    return subs
+
+def get_timed_words(yt_video_id):
+    
+    subs = get_subs(yt_video_id, auto_subs = True)
   
 
     timed_words = []
@@ -168,17 +181,126 @@ def cut_audio_piece_to_wav(in_audio_path, out_audio_path, start_sec, end_sec):
         return False
     return True
 
+def is_bad_piece(wav_path, transcript):
+    SAMPLE_RATE = 16000
+    MAX_SECS = 10
 
-audio_path = download_yt_audio(yt_video_id)
+    frames = int(subprocess.check_output(['soxi', '-s', wav_path], stderr=subprocess.STDOUT))
+    
 
-timed_words = get_timed_words(yt_video_id)
+    if int(frames/SAMPLE_RATE*1000/10/2) < len(transcript):
+        # Excluding samples that are too short to fit the transcript
+        return True
+    elif frames/SAMPLE_RATE > MAX_SECS:
+        # Excluding very long samples to keep a reasonable batch-size
+        return True
 
-piece_time = find_string_timing(timed_words, 'прекрасно справляться с задачей', 262000, 1500000)
+def is_bad_subs(subs_text):
+    bad = False
 
-if piece_time:
-    cut_audio_piece_to_wav(audio_path, "/Users/gosha/Desktop/piece.wav",
-                             float(piece_time['start'])/1000,
+    if subs_text.strip() == "":
+        bad = True
+
+    if len(re.findall(r'[0-9]+', subs_text)) > 0:
+        bad = True
+    if len(re.findall(r'[A-Za-z]+', subs_text)) > 0:
+        bad = True
+
+    return bad
+
+def write_stats(video_folder, stats_header, stats):
+    stats_path = os.path.join(video_folder, "stats.csv")
+    csv_writer = csv.writer(open(stats_path, "w"))
+    csv_writer.writerow(stats_header)
+    csv_writer.writerow(stats)
+
+def process_video(yt_video_id):
+    print 'Processing video '+yt_video_id
+
+    curr_dir_path = os.path.dirname(os.path.realpath(__file__))
+    video_data_path = os.path.join(curr_dir_path, "data/" + yt_video_id + "/")
+
+    if not os.path.exists(video_data_path):
+        os.makedirs(video_data_path)
+
+    parts_dir_path = os.path.join(video_data_path, "parts/")
+
+    if not os.path.exists(parts_dir_path):
+        os.makedirs(parts_dir_path)
+
+
+
+    timed_words = get_timed_words(yt_video_id)
+
+    subs = get_subs(yt_video_id)
+
+    audio_path = download_yt_audio(yt_video_id)
+
+
+    # create csv
+    csv_path = os.path.join(video_data_path, "parts.csv")
+    csv_f = io.open(csv_path, "w+", encoding="utf-8")
+
+    good_pieces_count = 0
+    found_timing_count = 0
+    processed_subs_count = 0
+    total_speech_duration = 0.0
+
+
+    for i, s in enumerate(subs):
+        if is_bad_subs(s.text):
+            continue
+
+        processed_subs_count+=1
+        transcript = s.text.replace("\n", " ")
+        transcript = re.sub(u'[^а-яё ]', '', transcript.strip().lower())
+        #print transcript
+        piece_time = find_string_timing(timed_words, transcript, s.start.ordinal, 15000)
+        if not piece_time:
+            continue
+
+        found_timing_count+=1
+
+        # cut audio
+        audio_piece_path = os.path.join(
+            parts_dir_path, yt_video_id + "-" + str(piece_time['start']) + "-" + str(piece_time['end']) + ".wav")
+
+        if not os.path.exists(audio_piece_path):
+            cut_audio_piece_to_wav(audio_path, audio_piece_path,
+                            float(piece_time['start'])/1000,
                             float(piece_time['end'])/1000+0.3)
-else:
-    print('ERROR! - phrase not found')
+
+        # if not bad piece - write to csv
+        if is_bad_piece(audio_piece_path, transcript):
+            continue
+
+        good_pieces_count += 1
+
+        file_size = os.path.getsize(audio_piece_path)
+
+        total_speech_duration += float(piece_time['end'] - piece_time['start'])/1000
+
+        # write to csv
+        csv_f.write(audio_piece_path + ", " +
+                    str(file_size) + ", " + transcript + "\n")
+
+
+    print 'found timed audio for '+str(float(found_timing_count)/processed_subs_count*100)+'%'
+    print 'good pieces: '+str(float(good_pieces_count)/processed_subs_count*100)+'% ('+str(good_pieces_count)+')'
+
+    # stats
+    write_stats(video_data_path, ["speech_duration", "subs_quality", "good_samples", "total_samples"], [
+                total_speech_duration, float(found_timing_count)/processed_subs_count, good_pieces_count, processed_subs_count])
+    
+process_video(yt_video_id)
+
+
+# piece_time = find_string_timing(timed_words, 'прекрасно справляться с задачей', 262000, 1500000)
+
+# if piece_time:
+#     cut_audio_piece_to_wav(audio_path, "/Users/gosha/Desktop/piece.wav",
+#                              float(piece_time['start'])/1000,
+#                             float(piece_time['end'])/1000+0.3)
+# else:
+#     print('ERROR! - phrase not found')
 
