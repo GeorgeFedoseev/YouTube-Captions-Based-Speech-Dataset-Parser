@@ -4,8 +4,140 @@
 		"selected_items":
 		[
 			[
+				"time",
+				"timed_words\tstatement"
+			],
+			[
+				"tota",
+				"stats_total_samples_count"
+			],
+			[
+				"pie",
+				"piece_time"
+			],
+			[
+				"proce",
+				"processed_subs_count"
+			],
+			[
+				"goo",
+				"good_pieces_count"
+			],
+			[
+				"subs",
+				"subs_text"
+			],
+			[
+				"go",
+				"good_pieces_count\tstatement"
+			],
+			[
+				"is",
+				"is_bad_piece\tfunction"
+			],
+			[
 				"aud",
-				"audio_fragment_path"
+				"audio_piece_path\tstatement"
+			],
+			[
+				"fo",
+				"found_timing_count"
+			],
+			[
+				"fou",
+				"found_timing_count\tstatement"
+			],
+			[
+				"pr",
+				"print\tkeyword"
+			],
+			[
+				"lo",
+				"lower"
+			],
+			[
+				"procese",
+				"processed_subs\tstatement"
+			],
+			[
+				"pro",
+				"process_video\tfunction"
+			],
+			[
+				"get",
+				"get_subs\tfunction"
+			],
+			[
+				"su",
+				"subs_name\tstatement"
+			],
+			[
+				"au",
+				"auto_subs"
+			],
+			[
+				"aut",
+				"auto_subs\tparam"
+			],
+			[
+				"en",
+				"end_time"
+			],
+			[
+				"end",
+				"end_time\tstatement"
+			],
+			[
+				"sub",
+				"subs\tstatement"
+			],
+			[
+				"pi",
+				"piece_time\tstatement"
+			],
+			[
+				"audi",
+				"audio_path"
+			],
+			[
+				"dow",
+				"download_yt_audio\tfunction"
+			],
+			[
+				"y",
+				"yt_video_id\tstatement"
+			],
+			[
+				"start",
+				"start_timing"
+			],
+			[
+				"w",
+				"word"
+			],
+			[
+				"fin",
+				"find_string_timing\tfunction"
+			],
+			[
+				"tim",
+				"timed_words"
+			],
+			[
+				"wo",
+				"words_str\tstatement"
+			],
+			[
+				"wor",
+				"words_str\tstatement"
+			],
+			[
+				"from_",
+				"from_string\tfunction"
+			],
+			[
+				"o",
+				"orninal"
 			],
 			[
 				"so",
@@ -76,20 +208,12 @@
 				"stats_videos_folders_count\tstatement"
 			],
 			[
-				"subs",
-				"subs_audio_added_count"
-			],
-			[
 				"pu",
 				"put_keywords_to_processed\tfunction"
 			],
 			[
 				"csv",
 				"csv_utils\tmodule"
-			],
-			[
-				"audi",
-				"audio_fragment_path\tstatement"
 			],
 			[
 				"test",
@@ -152,20 +276,12 @@
 				"item_path\tstatement"
 			],
 			[
-				"get",
-				"get_filesize\tfunction"
-			],
-			[
 				"stats",
 				"stats_processing_videos_count"
 			],
 			[
 				"VID_p",
 				"VID_PROCESSING_CSV_FILE\tstatement"
-			],
-			[
-				"start",
-				"start_searcher_thread\tfunction"
 			],
 			[
 				"vi",
@@ -218,14 +334,6 @@
 			[
 				"p",
 				"PROCESSED_CSV_FILE\tstatement"
-			],
-			[
-				"pr",
-				"PROCESSING_CSV_FILE\tstatement"
-			],
-			[
-				"is",
-				"is_item_in_csv\tfunction"
 			],
 			[
 				"no",
@@ -344,16 +452,8 @@
 				"writerow"
 			],
 			[
-				"sub",
-				"subtitles"
-			],
-			[
 				"cu",
 				"curr_dir_path"
-			],
-			[
-				"su",
-				"subtitles"
 			],
 			[
 				"im",
@@ -388,10 +488,72 @@
 	"buffers":
 	[
 		{
-			"file": "remove_latin_chars_fix.py",
+			"file": "youtube_video_searcher.py",
 			"settings":
 			{
-				"buffer_size": 1085,
+				"buffer_size": 2368,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "main.py",
+			"settings":
+			{
+				"buffer_size": 1842,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "keywords_to_search.csv",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "keywords_done.csv",
+			"settings":
+			{
+				"buffer_size": 8619,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "example_keywords_reviews.txt",
+			"settings":
+			{
+				"buffer_size": 1092,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/gosha/Projects/DeepSpeech/host_install.txt",
+			"settings":
+			{
+				"buffer_size": 739,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "example_keywords_jakushkin.txt",
+			"settings":
+			{
+				"buffer_size": 128,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "example_keywords.txt",
+			"settings":
+			{
+				"buffer_size": 347,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -400,62 +562,25 @@
 			"file": "video_parser.py",
 			"settings":
 			{
-				"buffer_size": 5597,
+				"buffer_size": 9094,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "export-ml-sets.py",
+			"file": "stats_util.py",
 			"settings":
 			{
-				"buffer_size": 2517,
+				"buffer_size": 3022,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "subs_utils.py",
+			"file": "videos_to_process.csv",
 			"settings":
 			{
-				"buffer_size": 934,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "data/05BrqyXoxl4/parts.csv",
-			"settings":
-			{
-				"buffer_size": 6330,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "remove_empty_wavs_fix.py",
-			"settings":
-			{
-				"buffer_size": 955,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "remove_source_lower_than_target_fix.py",
-			"settings":
-			{
-				"buffer_size": 3468,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "example_keywords_big.txt",
-			"settings":
-			{
-				"buffer_size": 29439,
-				"encoding": "UTF-8",
+				"buffer_size": 0,
 				"line_ending": "Unix"
 			}
 		}
@@ -524,24 +649,35 @@
 	},
 	"expanded_folders":
 	[
-		"/Users/gosha/Projects/youtube-audio-captions-parsing",
-		"/Users/gosha/Projects/youtube-audio-captions-parsing/data",
-		"/Users/gosha/Projects/youtube-audio-captions-parsing/data/05BrqyXoxl4"
+		"/Users/gosha/Projects/youtube-audio-captions-parsing"
 	],
 	"file_history":
 	[
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/data/Y-Glvos3ufI/subs.ru.vtt",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/main.py",
-		"/Users/gosha/Projects/youtube-audio-captions-parsing/video_parser.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/csv_utils.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/stats_util.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/keywords_to_search.csv",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/videos_failed_to_process.csv",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/videos_processed.csv",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/videos_processing.csv",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/videos_to_process.csv",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/video_parser.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/data/5HmJ2OXK7L4/autosubs.ru.vtt",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/data/5HmJ2OXK7L4/subs.ru.vtt",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/test.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/speech_utils.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/test/subs.ru.vtt",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/venv/lib/python2.7/site-packages/pyvtt/vttfile.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/venv/lib/python2.7/site-packages/pyvtt/vtttime.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/remove_latin_chars_fix.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/export-ml-sets.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/subs_utils.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/remove_empty_wavs_fix.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/remove_source_lower_than_target_fix.py",
-		"/Users/gosha/Projects/youtube-audio-captions-parsing/subs_utils.py",
-		"/Users/gosha/Projects/youtube-audio-captions-parsing/speech_utils.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/example_keywords_big.txt",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/youtube_video_searcher.py",
-		"/Users/gosha/Projects/youtube-audio-captions-parsing/csv_utils.py",
-		"/Users/gosha/Projects/youtube-audio-captions-parsing/export-ml-sets.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/const.py",
-		"/Users/gosha/Projects/youtube-audio-captions-parsing/test.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/venv/lib/python2.7/site-packages/cyrtranslit/__init__.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/venv/lib/python2.7/site-packages/cyrtranslit/mapping.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/export-sets/vocabulary.txt",
@@ -553,18 +689,13 @@
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/venv/bin/ytdl",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/vad.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/venv/lib/python2.7/site-packages/youtube_dl/YoutubeDL.py",
-		"/Users/gosha/Projects/youtube-audio-captions-parsing/videos_processed.csv",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/data/7mn2OENp3Xg/parts.csv",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/data/uFhFr3op09Y/parts.csv",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/data/mFMZF863unk/parts.csv",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/data/hIO6v8m6xfc/parts.csv",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/data/h37C0iPGBRU/parts.csv",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/data/blSz672ZarU/parts.csv",
-		"/Users/gosha/Projects/youtube-audio-captions-parsing/videos_to_process.csv",
-		"/Users/gosha/Projects/youtube-audio-captions-parsing/venv/lib/python2.7/site-packages/pyvtt/vtttime.py",
-		"/Users/gosha/Projects/youtube-audio-captions-parsing/venv/lib/python2.7/site-packages/pyvtt/vttfile.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/data/blSz672ZarU/subs.ru.vtt",
-		"/Users/gosha/Projects/youtube-audio-captions-parsing/videos_failed_to_process.csv",
 		"/Users/gosha/Library/Application Support/Sublime Text 3/Packages/Jedi - Python autocompletion/Default.sublime-keymap",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/audio_utils.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/yt.sublime-project",
@@ -589,7 +720,7 @@
 	],
 	"find":
 	{
-		"height": 23.0
+		"height": 39.0
 	},
 	"find_in_files":
 	{
@@ -603,6 +734,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"while",
+			"video_data_path",
+			"ordina",
+			"TIME_REPR",
+			".000",
 			" ",
 			"target_len",
 			"        \n",
@@ -651,42 +787,89 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 5,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "remove_latin_chars_fix.py",
+					"file": "youtube_video_searcher.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1085,
+						"buffer_size": 2368,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1065,
-								1065
+								911,
+								911
 							]
 						],
 						"settings":
 						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": ".",
-									"selector": "source.python - string - comment - constant.numeric"
-								},
-								{
-									"characters": ".",
-									"selector": "source.python - string - constant.numeric"
-								}
-							],
 							"syntax": "Packages/Python/Python.sublime-syntax",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 551.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "main.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1842,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1515,
+								1515
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 802.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "keywords_to_search.csv",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -696,129 +879,84 @@
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "video_parser.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5597,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4693,
-								4693
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": ".",
-									"selector": "source.python - string - comment - constant.numeric"
-								},
-								{
-									"characters": ".",
-									"selector": "source.python - string - constant.numeric"
-								}
-							],
-							"show_definitions": false,
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1981.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "export-ml-sets.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2517,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2447,
-								2447
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 601.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
 					"buffer": 3,
-					"file": "subs_utils.py",
+					"file": "keywords_done.csv",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 934,
+						"buffer_size": 8619,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								453,
-								453
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 11135.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "example_keywords_reviews.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1092,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1092,
+								1092
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 16.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "data/05BrqyXoxl4/parts.csv",
-					"semi_transient": true,
+					"buffer": 5,
+					"file": "/Users/gosha/Projects/DeepSpeech/host_install.txt",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6330,
+						"buffer_size": 739,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								909,
-								920
+								143,
+								143
 							]
 						],
 						"settings":
 						{
 							"WordCount":
 							{
-								"changes": -1,
+								"changes": 15,
+								"count": 65,
 								"modified": false,
 								"selection": false,
 								"status": -1,
@@ -834,50 +972,76 @@
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "remove_empty_wavs_fix.py",
+					"buffer": 6,
+					"file": "example_keywords_jakushkin.txt",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 955,
+						"buffer_size": 128,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								936,
-								936
+								128,
+								128
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-					"file": "remove_source_lower_than_target_fix.py",
+					"buffer": 7,
+					"file": "example_keywords.txt",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3468,
+						"buffer_size": 347,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3435,
-								3435
+								48,
+								48
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 20.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "video_parser.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9094,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7065,
+								7065
 							]
 						],
 						"settings":
@@ -898,27 +1062,68 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 795.0,
+						"translation.y": 4100.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
-					"buffer": 7,
-					"file": "example_keywords_big.txt",
+					"buffer": 9,
+					"file": "stats_util.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 29439,
+						"buffer_size": 3022,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								26761,
-								26762
+								1998,
+								1998
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": ".",
+									"selector": "source.python - string - comment - constant.numeric"
+								},
+								{
+									"characters": ".",
+									"selector": "source.python - string - constant.numeric"
+								}
+							],
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 796.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "videos_to_process.csv",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
 							]
 						],
 						"settings":
@@ -926,7 +1131,7 @@
 							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 36975.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 7,
