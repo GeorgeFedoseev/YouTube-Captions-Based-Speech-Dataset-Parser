@@ -28,7 +28,9 @@ def check_paths(remove_if_nf=False):
 
         f = open(csv_path, "w")
         writer = csv.writer(f)
-        for row in parts:
+        for i, row in enumerate(parts):
+            if i == 0: # skip header
+                continue
             write = True
             if not os.path.exists(row[0]):
                 print 'doesnt exist: '+row[0]
