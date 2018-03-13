@@ -14,8 +14,8 @@ def change_paths(find, replace):
     for item in os.listdir(export_csvs_dir):
         csv_path = os.path.join(export_csvs_dir, item)
 
-        print 'process '+csv_path
-        print csv_path.split(".")[-1]
+        #print 'process '+csv_path
+        #print csv_path.split(".")[-1]
         if csv_path.split(".")[-1] != "csv":
             continue        
 
