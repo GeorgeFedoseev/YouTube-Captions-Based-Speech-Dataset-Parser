@@ -32,7 +32,7 @@ def remove_short_transcripts(csv_path):
 
         total_count+=1
         print len(row[2])
-        if len(row[2]) > 70: 
+        if len(row[2]) > 45: 
             writer.writerow(row)
         else:
             removed_count+=1
