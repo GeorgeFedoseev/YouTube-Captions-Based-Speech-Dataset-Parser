@@ -16,7 +16,8 @@ import csv
 import numpy as np
 from scipy.io import wavfile
 
-
+import webrtcvad
+import wave
 
 
 reload(sys)
@@ -217,6 +218,23 @@ def write_stats(video_folder, stats_header, stats):
     csv_writer.writerow(stats_header)
     csv_writer.writerow(stats)
 
+
+def convert_to_wav(in_audio_path, out_audio_path):
+    p = subprocess.Popen(["ffmpeg", "-y",
+         "-i", in_audio_path,         
+         "-ac", "1",
+         "-ab", "16",
+         "-ar", "16000",         
+         out_audio_path
+         ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+    out, err = p.communicate()
+
+    if p.returncode != 0:
+        print("failed_ffmpeg_conversion "+str(err))
+        return False
+    return True
+
 def get_average_value_from_array_around_pos(array, pos, offset):
     start = max(0, pos-offset)
     end = min(pos+offset, len(array))
@@ -225,139 +243,133 @@ def get_average_value_from_array_around_pos(array, pos, offset):
         s += array[i]
     return s/(end-start)
 
+SPEECH_FRAME_SEC = 0.02
+CHECK_FRAMES_NUM = 3
+
+def get_speech_int_array(wave, start, end):
+    vad = webrtcvad.Vad(3)
+
+    samples_per_second = wave.getframerate()
 
 
-def starts_or_ends_during_speech(path):
+    samples_per_frame = int(SPEECH_FRAME_SEC*samples_per_second)
 
-    sampl_rate, data = wavfile.read(path)
-    data = np.absolute(data)   
+    
+    wave.setpos(start*samples_per_second)
 
-    duration = (float(len(data))/sampl_rate)
-    average_val =  np.sum(data)/len(data)
+    wave_view_int = []
+    while wave.tell() < end*samples_per_second:
+        #wave_view_str += "1" if vad.is_speech(wave.readframes(samples_to_get), sample_rate) else "0"
+        wave_view_int.append(1 if vad.is_speech(wave.readframes(samples_per_frame), samples_per_second) else 0)
+        wave.setpos(wave.tell() + samples_per_frame)   
 
-    min_val = 99999999
-    max_val = 0
-    sum_val = 0
-    for v in data:
-        if v < min_val:
-            min_val = v
-        if v > max_val:
-            max_val = v        
+    return wave_view_int 
 
-     
-    med_val = (max_val-min_val)/2
+def has_speech(wave, start, end):
+    speech_array = get_speech_int_array(wave, start, end)
+    return np.sum(speech_array) > 0
 
-    print 'average_val %f' % average_val
-    print 'med_val %f' % med_val
+def starts_with_speech(wave, start, end):
+    speech_array = get_speech_int_array(wave, start, end)
+    #print 'start2: '+(''.join([str(x) for x in speech_array]))
+    return np.sum(speech_array[:CHECK_FRAMES_NUM]) > 0
 
-    offset_samples = int(sampl_rate*0.1)   
+def ends_with_speech(wave, start, end): 
+    speech_array = get_speech_int_array(wave, start, end)
+    #print 'end2: '+(''.join([str(x) for x in speech_array]))
+    return np.sum(speech_array[-CHECK_FRAMES_NUM:]) > 0
 
-    #start = 0.756
+def starts_or_ends_during_speech(wave, start, end):
+    speech_array = get_speech_int_array(wave, start, end)
 
-    def get_val_at_time(t):
-        return get_average_value_from_array_around_pos(data, int(t*sampl_rate), offset_samples)
+    return np.sum(speech_array[-CHECK_FRAMES_NUM:]) > 0 or np.sum(speech_array[:CHECK_FRAMES_NUM]) > 0
 
-    def is_silence(val):
-        print 'check val %f' % val
-        return val < med_val*0.75
 
-    if not is_silence(get_val_at_time(0)):
-        print 'starts with speech'
-        return True
+MAX_ALLOWED_CORRECTION_SEC = 0.2
+CORRECTION_WINDOW_SEC = 0.1
+def try_correct_cut(wave, start, end):
 
-    if not is_silence(get_val_at_time(duration)):
-        print 'ends with speech'
-        return True
+    print 'try correct cut'
 
-    return False
+    corrected_start = start   
 
+    need_start_correction = starts_with_speech(wave, start, end)
+
+
+    if need_start_correction:               
+        # try go forward
+        while need_start_correction and corrected_start <= start + MAX_ALLOWED_CORRECTION_SEC:            
+            corrected_start += CORRECTION_WINDOW_SEC
+            need_start_correction = starts_with_speech(wave, corrected_start, end)
+
+        if need_start_correction:
+            # try go backwards
+            corrected_start = start
+            while need_start_correction and corrected_start >= start - MAX_ALLOWED_CORRECTION_SEC:            
+                corrected_start -= CORRECTION_WINDOW_SEC
+                need_start_correction = starts_with_speech(wave, corrected_start, end)
+
+    if need_start_correction:
+        print 'FAILED to correct start'
+        return None
+
+
+
+    need_end_correction = ends_with_speech(wave, start, end)
+    corrected_end = end
+
+    if need_end_correction:
+        # try go forward
+        while need_end_correction and corrected_end <= end + MAX_ALLOWED_CORRECTION_SEC:            
+            corrected_end += CORRECTION_WINDOW_SEC
+            need_end_correction = ends_with_speech(wave, corrected_start, corrected_end)
+
+        if need_end_correction:
+            # try go backwards
+            corrected_end = end
+            while need_end_correction and corrected_end >= end - MAX_ALLOWED_CORRECTION_SEC:            
+                corrected_end -= CORRECTION_WINDOW_SEC
+                need_end_correction = ends_with_speech(wave, corrected_start, corrected_end)
+
+    if need_end_correction:
+        print 'FAILED to corrected_end'
+        return None
+
+    print 'SUCCESS corrected cut: %f-%f -> %f-%f' % (start, end, corrected_start, corrected_end)
+
+    return (corrected_start, corrected_end)
+
+
+def print_speech_int_array(speech_int_array):
+    print ''.join([str(x) for x in speech_int_array])
+
+
+def print_speech_frames(wave, start, end):
+
+    wave_view_int = get_speech_int_array(wave, start, end)
+
+    print_speech_int_array(wave_view_int)
+
+
+    start_view = wave_view_int[:3]
+    end_view = wave_view_int[-3:]
+
+    print  'start: '+(''.join([str(x) for x in start_view]))
+    print  'end: '+(''.join([str(x) for x in end_view]))
+
+    is_speech_on_start = np.sum(start_view)  > 0
+    is_speech_on_end = np.sum(end_view)  > 0
 
     
 
+    print 'is_speech_on_start: '+str(is_speech_on_start) 
+    print 'is_speech_on_end: '+str(is_speech_on_end)
 
-def correct_cut_by_waveform(path, start, end):
-    sampl_rate, data = wavfile.read(path)
+    return is_speech_on_start or is_speech_on_end
 
-    data = np.absolute(data)
-
-    
-    #print path
-    duration = (float(len(data))/sampl_rate)
-    print 'duration: %f' % duration
-    print 'initial cut: %.2f - %.2f' % (start, end)
-
-    sum_val = 0
-    for v in data:
-        sum_val += v
-        
-
-    average_val =  sum_val/len(data)
+#def try_move_start():
 
 
-    offset_samples = int(sampl_rate*0.05)   
-
-    #start = 0.756
-
-    def get_val_at_time(t):
-        return get_average_value_from_array_around_pos(data, int(t*sampl_rate), offset_samples)    
-    def is_silence(val):
-        return val < average_val/1.3
-    
-
-    # find SILENT START
-    start_later = start    
-
-    while True:       
-        # reached silence or end
-        if is_silence(get_val_at_time(start_later)) or start_later >= end:
-            break
-        start_later += 0.05
-
-    start_earlier = start    
-
-    # while True:       
-    #     # reached silence or 0
-    #     if is_silence(get_val_at_time(start_earlier)) or start_earlier <= 0:
-    #         break
-    #     start_earlier -= 0.05
-
-    # select closest to current pos
-    #if abs(start - start_earlier) > abs(start - start_later):
-    start = start_later
-    # else:
-    #     start = start_earlier
-
-    # find SILENT END
-    end_later = end
-
-    while True:       
-        # reached silence or end
-        if is_silence(get_val_at_time(end_later)) or end_later >= duration:
-            break
-        end_later += 0.05
-
-    end_earlier = end
-
-    while True:       
-        # reached silence or start
-        if is_silence(get_val_at_time(end_earlier)) or end_earlier <= start:
-            break
-        end_earlier -= 0.05
-
-    # select closest to current pos
-    if abs(end - end_earlier) > abs(end - end_later):
-        end = end_later
-    else:
-        end = end_earlier
-        
-
-    print 'new cut %f - %f' % (start, end)
-
-    print "average val: %f (from %i samples)" % (average_val, len(data))
-    
-    return (start, end)
-
-    
 
 
 
@@ -383,6 +395,16 @@ def process_video(yt_video_id):
     subs = get_subs(yt_video_id)
 
     audio_path = download_yt_audio(yt_video_id)
+
+    audio_path_wav = os.path.join(video_data_path, "audio.wav")
+
+
+    if not convert_to_wav(audio_path, audio_path_wav):
+        print 'ERROR: failet to convert to wav'
+
+    wave_obj = wave.open(audio_path_wav, 'r')
+
+
 
 
 
@@ -413,42 +435,39 @@ def process_video(yt_video_id):
         cut_global_time_start = float(piece_time['start'])/1000
         cut_global_time_end = float(piece_time['end'])/1000+0.3
 
-        # cut_extended_global_time_start = max(cut_global_time_start - 1.0, 0)
-        # cut_extended_global_time_end = cut_global_time_end + 1.0
+      
 
+        good_cut = False
 
-        
+        print '----------------'
+        print_speech_frames(wave_obj, cut_global_time_start, cut_global_time_end)
+        if not starts_or_ends_during_speech(wave_obj, cut_global_time_start, cut_global_time_end):            
+            print 'OK: '+audio_piece_path
+            good_cut = True
+        else:
+            print 'BAD: '+audio_piece_path
+            good_cut = False
+            corrected_cut = try_correct_cut(wave_obj, cut_global_time_start, cut_global_time_end)
+            if corrected_cut:
+                cut_global_time_start, cut_global_time_end = corrected_cut
+                good_cut = True
 
-        #if not os.path.exists(audio_piece_path):
-        cut_audio_piece_to_wav(audio_path, audio_piece_path,
-                        cut_global_time_start,
-                        cut_global_time_end)
+        if not has_speech(wave_obj, cut_global_time_start, cut_global_time_end):
+            good_cut = False
 
-        
-
-        # corrected_start, corrected_end = correct_cut_by_waveform(audio_piece_path,
-        #      cut_global_time_start - cut_extended_global_time_start,
-        #      cut_global_time_end - cut_extended_global_time_start)
-
-        # cut_audio_piece_to_wav(audio_piece_path, audio_piece_path,
-        #                 corrected_start,
-        #                 corrected_end)        
-
-        # if not bad piece - write to csv
-        if is_bad_piece(audio_piece_path, transcript):
-            continue
-
-        if "Y53gG0ZauaE-18130-20449" in audio_piece_path:
-            if not starts_or_ends_during_speech(audio_piece_path):            
-                print 'OK: '+audio_piece_path
-            else:
-                print 'BAD: '+audio_piece_path
+        if good_cut:
+            cut_audio_piece_to_wav(audio_path_wav, audio_piece_path,
+                            cut_global_time_start,
+                            cut_global_time_end)  
+        else:
+            if os.path.exists(audio_piece_path):
+                os.remove(audio_piece_path)
 
         good_pieces_count += 1
 
-        file_size = os.path.getsize(audio_piece_path)
+        # file_size = os.path.getsize(audio_piece_path)
 
-        total_speech_duration += float(piece_time['end'] - piece_time['start'])/1000
+        # total_speech_duration += float(piece_time['end'] - piece_time['start'])/1000
 
         
 
@@ -458,7 +477,7 @@ def process_video(yt_video_id):
 
    
 # yQPbqSfPoJw-21990-23430
-yt_video_id = "Y53gG0ZauaE"
+yt_video_id = "tKZUGeBhL3M"
 
 process_video(yt_video_id)
 
