@@ -367,7 +367,7 @@ def print_speech_frames(wave, start, end):
 
     return is_speech_on_start or is_speech_on_end
 
-#def try_move_start():
+
 
 
 
