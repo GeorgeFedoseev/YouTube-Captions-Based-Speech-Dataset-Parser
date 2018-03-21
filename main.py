@@ -84,7 +84,7 @@ def start_parsing():
 
     video_parser_threads = []
     # start parsing threads
-    for i in range(0, 12):
+    for i in range(0, 30):
         print 'start parsing thread ' + str(i)
         thr = Thread(target=video_parser_thread_loop)
         thr.daemon = True

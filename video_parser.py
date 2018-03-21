@@ -472,7 +472,7 @@ def process_video(yt_video_id):
 
         processed_subs_count+=1
         transcript = s.text.replace("\n", " ")
-        transcript = re.sub(u'[^а-яё ]', '', transcript.strip().lower())
+        transcript = re.sub(u'[^а-яё ]', '', transcript.strip().lower()).strip()
         #print transcript
         piece_time = find_string_timing(timed_words, transcript, s.start.ordinal, 15000)
         if not piece_time:
