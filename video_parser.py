@@ -531,7 +531,12 @@ def process_video(yt_video_id):
 
         # if not bad piece - write to csv
         if is_bad_piece(audio_piece_path, transcript):
+            # remove file
+            if os.path.exists(audio_piece_path):
+                os.remove(audio_piece_path)
             continue
+
+
 
         good_pieces_count += 1
 
