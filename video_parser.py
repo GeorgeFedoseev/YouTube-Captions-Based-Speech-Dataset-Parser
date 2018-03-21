@@ -222,10 +222,7 @@ def convert_to_wav(in_audio_path, out_audio_path):
          out_audio_path
          ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
-    try:
-        out, err = p.communicate()
-    except:
-        raise "CANT_USE ffmpeg COMMAND - is ffmpeg installed?"
+    out, err = p.communicate()
 
     if p.returncode != 0:
         print("failed_ffmpeg_conversion "+str(err))
@@ -243,10 +240,7 @@ def cut_audio_piece_to_wav(in_audio_path, out_audio_path, start_sec, end_sec):
          out_audio_path
          ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
-    try:
-        out, err = p.communicate()
-    except:
-        raise "CANT_USE ffmpeg COMMAND - is ffmpeg installed?"
+    out, err = p.communicate()
 
     if p.returncode != 0:
         print("failed_ffmpeg_conversion "+str(err))
@@ -388,10 +382,7 @@ def is_bad_piece(wav_path, transcript):
     MAX_SECS = 10
     MIN_SECS = 1
 
-    try:
-        frames = int(subprocess.check_output(['soxi', '-s', wav_path], stderr=subprocess.STDOUT))
-    except:
-        raise "CANT_USE soxi COMMAND - is sox installed?"
+    frames = int(subprocess.check_output(['soxi', '-s', wav_path], stderr=subprocess.STDOUT))
     
 
     if int(frames/SAMPLE_RATE*1000/10/2) < len(transcript):
