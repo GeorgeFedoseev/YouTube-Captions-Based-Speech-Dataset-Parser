@@ -27,6 +27,11 @@ import numpy as np
 import webrtcvad
 import wave
 
+import sys 
+
+reload(sys)
+sys.setdefaultencoding('utf8')
+
 def remove_video_dir(video_id):
     curr_dir_path = os.path.dirname(os.path.realpath(__file__))
     video_data_path = os.path.join(curr_dir_path, "data/" + video_id + "/")
@@ -55,7 +60,7 @@ def get_subs(yt_video_id, auto_subs=False):
     if not os.path.exists(subs_path):    
         print 'downloading subtitles to ' + subs_path
 
-        p = subprocess.Popen(["youtube-dl",  "--write-auto-sub" if auto_subs else "--write-sub",
+        p = subprocess.Popen(["youtube-dl",  "--write-auto-sub" if auto_subs else "--write-sub",                          
                           "--sub-lang", "ru",
                           "--skip-download",
                           "-o", subs_path_pre,
@@ -75,14 +80,23 @@ def get_subs(yt_video_id, auto_subs=False):
 def get_timed_words(yt_video_id):
     
     subs = get_subs(yt_video_id, auto_subs = True)
+
+    print 'number of auto-subs: %i' % len(subs)
   
 
     timed_words = []
 
+    auto_time_codes_found = 0
+
     for i in range(0, len(subs)):
         s = subs[i]
 
+        print '---'
+        print s.text
+
+
         timecodes = [pyvtt.WebVTTTime.from_string(x).ordinal for x in re.findall(r'<(\d+:\d+:\d+.\d+)>', s.text)]
+        auto_time_codes_found += len(timecodes)
 
         end_time = s.end.ordinal
         if i < len(subs) - 1:
@@ -95,12 +109,28 @@ def get_timed_words(yt_video_id):
        
         words_str = re.sub(r'<[^>]*>', '', s.text)
         
+        
+
+        rows = words_str.split('\n')
+
+        print 'rows: %i ' % len(rows)
+
+        # take last row (bugfix)
+        words_str = rows[-1]
+
+        print '***'
+        print words_str
+
+        
+
         regex = re.compile(r'[\s]+')
         words = regex.split(words_str)
 
         if len(words)+1 != len(timecodes):
-            raise Exception('video_doesnt_have_auto_subtitles')
+            #raise Exception('video_doesnt_have_auto_subtitles')
+            continue
             
+        print 'USE'
 
         for i in range(0, len(words)):
             word = words[i]
@@ -110,6 +140,9 @@ def get_timed_words(yt_video_id):
                 'start': timecodes[i],
                 'end': timecodes[i+1]
                 })
+
+    if auto_time_codes_found == 0:
+        raise Exception('video_doesnt_have_auto_subtitles')
 
     return timed_words
 
@@ -393,7 +426,8 @@ def process_video(yt_video_id):
 
     parts_dir_path = os.path.join(video_data_path, "parts/")
 
-    shutil.rmtree(parts_dir_path)
+    if os.path.exists(parts_dir_path):
+        shutil.rmtree(parts_dir_path)
 
     if not os.path.exists(parts_dir_path):
         os.makedirs(parts_dir_path)
@@ -402,12 +436,16 @@ def process_video(yt_video_id):
 
     timed_words = get_timed_words(yt_video_id)
 
+    print 'found %i timed words' % len(timed_words)
+
 
 
     subs = get_subs(yt_video_id)
 
-    if len(subs) < 30:
-        raise Exception('too_little_nuber_of_subtitles_in_video')
+    print 'number of subs: %i' % len(subs)
+
+    #if len(subs) < 30:
+    #    raise Exception('too_little_nuber_of_subtitles_in_video')
 
     audio_path = download_yt_audio(yt_video_id)
 
@@ -452,6 +490,8 @@ def process_video(yt_video_id):
         # CHECK CUT (if starts or ends on speech) and try to correct
         good_cut = False
 
+        print_speech_frames(wave_obj, cut_global_time_start, cut_global_time_end)
+
         
         if not starts_or_ends_during_speech(wave_obj, cut_global_time_start, cut_global_time_end):                        
             good_cut = True
@@ -468,20 +508,22 @@ def process_video(yt_video_id):
         audio_piece_path = os.path.join(
                 parts_dir_path, yt_video_id + "-" + str(int(cut_global_time_start*1000)) + "-" + str(int(cut_global_time_end*1000)) + ".wav")
 
+        #good_cut = True
+
         if good_cut:
             
             audio_piece_path = os.path.join(
                 parts_dir_path, yt_video_id + "-" + str(int(cut_global_time_start*1000)) + "-" + str(int(cut_global_time_end*1000)) + ".wav")
             print '----------------'
             print audio_piece_path
-            print_speech_frames(wave_obj, cut_global_time_start, cut_global_time_end)
+            
             print 'GOOD CUT'
 
             cut_audio_piece_to_wav(audio_path_wav, audio_piece_path,
                             cut_global_time_start,
                             cut_global_time_end)  
         else:
-            #print 'BAD CUT'
+            print 'BAD CUT'
             if os.path.exists(audio_piece_path):
                 os.remove(audio_piece_path)
             continue
@@ -502,13 +544,17 @@ def process_video(yt_video_id):
                     str(file_size) + ", " + transcript + "\n")
 
 
-    print 'found timed audio for '+str(float(found_timing_count)/processed_subs_count*100)+'%'
+
+
+    print 'found timed audio for '+str(float(found_timing_count)/processed_subs_count*100)+'% ('+str(found_timing_count)+'/'+str(processed_subs_count)+')'
     print 'good pieces: '+str(float(good_pieces_count)/processed_subs_count*100)+'% ('+str(good_pieces_count)+')'
+
+    if good_pieces_count == 0:
+        raise Exception('no_audio_parsed')
 
     # stats
     write_stats(video_data_path, ["speech_duration", "subs_quality", "good_samples", "total_samples"], [
                 total_speech_duration, float(found_timing_count)/processed_subs_count, good_pieces_count, processed_subs_count])
 
-yt_video_id = "JPtJ5gG-95I"
-
-process_video(yt_video_id)
+#yt_video_id = "gB0s8oBCjeQ"
+#process_video(yt_video_id)
