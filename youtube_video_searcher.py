@@ -95,7 +95,7 @@ def youtube_search(query, pageToken=None, page=0):
 
     print "Videos:\n", "\n".join(videos), "\n"
 
-    if search_response["nextPageToken"] and page < MAX_PAGES:
+    if "nextPageToken" in search_response and page < MAX_PAGES:
         print search_response['nextPageToken']
         videos = videos + youtube_search(query, search_response['nextPageToken'], page+1)
 
