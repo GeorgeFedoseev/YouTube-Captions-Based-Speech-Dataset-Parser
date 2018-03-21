@@ -23,6 +23,8 @@ DEVELOPER_KEY = "AIzaSyAKWy4ewu5VraFIFvKcIgl1lWDSa51Ksnk"
 YOUTUBE_API_SERVICE_NAME = "youtube"
 YOUTUBE_API_VERSION = "v3"
 
+MAX_PAGES = 3
+
 
 def start_searcher_thread():
     print 'starting searcher thread'
@@ -56,19 +58,26 @@ def searcher_thread_loop():
         time.sleep(5)
 
 
-def youtube_search(query):
+def youtube_search(query, pageToken=None, page=0):
     youtube = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION,
                     developerKey=DEVELOPER_KEY)
 
     # Call the search.list method to retrieve results matching the specified
     # query term.
+
+    print 'GETTING PAGE %i of query %s' % (page, query)
+
+    #if pageToken != None:
     search_response = youtube.search().list(
         q=query,
         part="id,snippet",
         maxResults=50,
         type="video",
-        videoCaption="closedCaption"
+        videoCaption="closedCaption",
+        pageToken=pageToken,
+        relevanceLanguage='ru'
     ).execute()
+    
 
     videos = []
     
@@ -81,7 +90,14 @@ def youtube_search(query):
         
 
     print "Videos:\n", "\n".join(videos), "\n"
-    #print search_response['nextPageToken']
+
+    if search_response["nextPageToken"] and page < MAX_PAGES:
+        print search_response['nextPageToken']
+        videos = videos + youtube_search(query, search_response['nextPageToken'], page+1)
+
+
 
     return videos
 
+
+#youtube_search("арбуз")

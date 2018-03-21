@@ -41,3 +41,4 @@ subprocess32==3.2.7
 uritemplate==3.0.0
 urllib3==1.22
 webrtcvad==2.0.10
+youtube-dl==2018.3.20
