@@ -5,6 +5,8 @@ import video_parser
 
 import stats_util
 
+import subprocess
+
 
 import csv_utils
 
@@ -20,6 +22,16 @@ import youtube_video_searcher
 reload(sys)
 sys.setdefaultencoding('utf8')
 
+def check_dependencies_installed():
+    try:
+        subprocess.check_output(['soxi'], stderr=subprocess.STDOUT)
+        subprocess.check_output(['youtube-dl', '--help'], stderr=subprocess.STDOUT)
+        subprocess.check_output(['ffmpeg', '--help'], stderr=subprocess.STDOUT)
+    except Exception as ex:
+        print 'ERROR: some of dependencies are not installed: youtube-dl, ffmpeg or sox: '+str(ex)
+        return False
+
+    return True
 
 def setup():
     csv_utils.setup()
@@ -87,5 +99,6 @@ def start_parsing():
 
     stats_util.show_global_stats()
 
-
-start_parsing()
+if __name__ == "__main__":
+    if check_dependencies_installed():
+        start_parsing()
