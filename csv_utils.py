@@ -146,6 +146,9 @@ def put_keywords_to_processed(query):
     remove_keywords_from_all(query)
     put_item_to_csv(const.KWDS_SEARCHED, [query])
 
+def is_query_processed(query):
+    return is_item_in_csv(const.KWDS_SEARCHED, 0)
+
 def remove_keywords_from_all(query):
     remove_row_by_first_val(const.KWDS_TO_SEARCH, query)
     remove_row_by_first_val(const.KWDS_SEARCHED, query)

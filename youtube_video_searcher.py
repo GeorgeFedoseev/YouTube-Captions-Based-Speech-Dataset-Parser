@@ -42,6 +42,10 @@ def searcher_thread_loop():
             time.sleep(5)
             continue
 
+        if csv_utils.is_query_processed(query):
+            print 'query "%s" is already processed' % query
+            continue
+
         print 'searching query '+query
         video_ids = youtube_search(query)
         print 'found '+str(len(video_ids))+' videos'
