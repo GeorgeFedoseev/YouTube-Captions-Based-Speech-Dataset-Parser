@@ -103,11 +103,15 @@ def export(target_folder):
     print 'devided train:dev:test = '+str(len(train_rows))+':'+str(len(dev_rows))+':'+str(len(test_rows))
 
 
+    def get_audio_rel_path(abs_path):
+        return '/'.join(abs_path.split('/')[-4:])
+
     copy_jobs = []
 
     # rename audio files paths
     for row in train_rows:
-        old_path = row[0]
+        old_path = get_audio_rel_path(row[0])
+        print old_path
         filename = os.path.basename(old_path)
         new_path =  os.path.join(export_train_dir_path, filename)       
         copy_jobs.append((old_path, new_path))
@@ -116,7 +120,7 @@ def export(target_folder):
 
 
     for row in dev_rows:
-        old_path = row[0]
+        old_path = get_audio_rel_path(row[0])
         filename = os.path.basename(old_path)
         new_path =  os.path.join(export_dev_dir_path, filename)       
         copy_jobs.append((old_path, new_path))
@@ -124,7 +128,7 @@ def export(target_folder):
         row[0] =  os.path.join(export_dev_dir_path, filename)        
 
     for row in test_rows:
-        old_path = row[0]
+        old_path = get_audio_rel_path(row[0])
         filename = os.path.basename(old_path)
         new_path =  os.path.join(export_test_dir_path, filename)       
         copy_jobs.append((old_path, new_path))
