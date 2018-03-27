@@ -49,11 +49,13 @@ def remove_video_dir(video_id):
         while not removed:
             try:               
                 
-                if not os.path.exists(const.TO_DELETE_DIR_PATH):
-                    subprocess.call(['mkdir', '-p', const.TO_DELETE_DIR_PATH])
+                # if not os.path.exists(const.TO_DELETE_DIR_PATH):
+                #     subprocess.call(['mkdir', '-p', const.TO_DELETE_DIR_PATH])
 
-                deleted_path = os.path.join(const.TO_DELETE_DIR_PATH, video_id)                
-                subprocess.call(['mv', video_data_path, deleted_path])
+                # deleted_path = os.path.join(const.TO_DELETE_DIR_PATH, video_id)                
+                # subprocess.call(['mv', video_data_path, deleted_path])
+
+                shutil.rmtree(video_data_path)
 
                 removed = not os.path.exists(video_data_path)
             except Exception as ex:
