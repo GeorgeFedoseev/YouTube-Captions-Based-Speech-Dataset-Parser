@@ -96,7 +96,10 @@ def get_subs(yt_video_id, auto_subs=False):
                            stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         out, err = p.communicate()
 
-        p.kill()
+        try:
+            p.kill()
+        except:
+            pass
 
         if p.returncode != 0:
             print 'ERROR: %s'+err
@@ -261,7 +264,10 @@ def convert_to_wav(in_audio_path, out_audio_path):
 
     out, err = p.communicate()
 
-    p.kill()
+    try:
+        p.kill()
+    except:
+        pass
 
     if p.returncode != 0:
         print("failed_ffmpeg_conversion "+str(err))
@@ -281,7 +287,10 @@ def cut_audio_piece_to_wav(in_audio_path, out_audio_path, start_sec, end_sec):
 
     out, err = p.communicate()
 
-    p.kill()
+    try:
+        p.kill()
+    except:
+        pass
 
     if p.returncode != 0:
         print("failed_ffmpeg_conversion "+str(err))
