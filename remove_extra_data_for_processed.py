@@ -46,7 +46,7 @@ def remove_extra_data():
             
 
     
-    print 'Removed %i extra files folders from %i total' % (removed, total_scanned)
+    print 'Removed %i extra files from %i folders' % (removed, total_scanned)
 
 
 if __name__ == '__main__':
