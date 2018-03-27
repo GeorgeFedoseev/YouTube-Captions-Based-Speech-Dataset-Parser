@@ -96,6 +96,8 @@ def get_subs(yt_video_id, auto_subs=False):
                            stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         out, err = p.communicate()
 
+        p.kill()
+
         if p.returncode != 0:
             print 'ERROR: %s'+err
             raise Exception(subs_name+"_error_downloading_subtitles")
@@ -259,6 +261,8 @@ def convert_to_wav(in_audio_path, out_audio_path):
 
     out, err = p.communicate()
 
+    p.kill()
+
     if p.returncode != 0:
         print("failed_ffmpeg_conversion "+str(err))
         return False
@@ -276,6 +280,8 @@ def cut_audio_piece_to_wav(in_audio_path, out_audio_path, start_sec, end_sec):
          ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
     out, err = p.communicate()
+
+    p.kill()
 
     if p.returncode != 0:
         print("failed_ffmpeg_conversion "+str(err))
