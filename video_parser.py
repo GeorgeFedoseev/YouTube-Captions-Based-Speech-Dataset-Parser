@@ -55,6 +55,8 @@ def remove_video_dir(video_id):
                 # deleted_path = os.path.join(const.TO_DELETE_DIR_PATH, video_id)                
                 # subprocess.call(['mv', video_data_path, deleted_path])
 
+                subprocess.call(['ls', '-a', video_data_path])
+
                 shutil.rmtree(video_data_path)
 
                 removed = not os.path.exists(video_data_path)
