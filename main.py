@@ -65,7 +65,7 @@ def video_parser_thread_loop():
             print('failed to process video ' + video_id + ': ' + str(e))
 
 
-            time.sleep(3)
+            
             video_parser.remove_video_dir(video_id)
 
             #traceback.print_exc()

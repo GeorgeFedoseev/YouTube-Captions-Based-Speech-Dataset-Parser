@@ -36,8 +36,10 @@ def remove_video_dir(video_id):
     curr_dir_path = os.path.dirname(os.path.realpath(__file__))
     video_data_path = os.path.join(curr_dir_path, "data/" + video_id + "/")
     if os.path.exists(video_data_path):
-        os.chmod(video_data_path, stat.S_IWRITE)
-        shutil.rmtree(video_data_path)
+        try:
+            shutil.rmtree(video_data_path)
+        except:
+            shutil.rmdir(video_data_path)
 
 
 def get_subs(yt_video_id, auto_subs=False):
