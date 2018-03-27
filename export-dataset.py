@@ -59,6 +59,11 @@ def export(target_folder):
         if not os.path.isdir(item_path):
             continue
 
+        # check if folder finished processing
+        stats_path = os.path.join(item_path, "stats.csv")        
+        if not os.path.exists(stats_path):
+            continue
+
         parts_csv_path = os.path.join(item_path, "parts.csv")
 
         if not os.path.exists(parts_csv_path):
