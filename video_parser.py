@@ -93,7 +93,7 @@ def get_subs(yt_video_id, auto_subs=False):
                           "--skip-download",
                           "-o", subs_path_pre,
                           'https://www.youtube.com/watch?v='+yt_video_id],
-                           stdout=subprocess.PIPE, stderr=subprocess.PIPE, close_fds=True)
+                           stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         out, err = p.communicate()
 
         if p.returncode != 0:
@@ -255,7 +255,7 @@ def convert_to_wav(in_audio_path, out_audio_path):
          "-ab", "16",
          "-ar", "16000",         
          out_audio_path
-         ], stdout=subprocess.PIPE, stderr=subprocess.PIPE, close_fds=True)
+         ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
     out, err = p.communicate()
 
@@ -273,7 +273,7 @@ def cut_audio_piece_to_wav(in_audio_path, out_audio_path, start_sec, end_sec):
          "-ab", "16",
          "-ar", "16000",         
          out_audio_path
-         ], stdout=subprocess.PIPE, stderr=subprocess.PIPE, close_fds=True)
+         ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
     out, err = p.communicate()
 
@@ -581,6 +581,8 @@ def process_video(yt_video_id):
             # write to csv
             csv_f.write(audio_piece_path + ", " +
                         str(file_size) + ", " + transcript + "\n")
+    except Exception as ex:
+        raise ex
     finally:
         csv_f.close()
         wave_obj.close()
