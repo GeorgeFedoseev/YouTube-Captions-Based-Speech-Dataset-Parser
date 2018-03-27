@@ -29,7 +29,7 @@ import wave
 
 import time
 
-import sh
+
 
 import sys 
 
@@ -45,11 +45,13 @@ def remove_video_dir(video_id):
         while not removed:
             try:
                 #shutil.rmtree(video_data_path)
-                sh.rm(sh.glob(video_data_path))
+                
+                subprocess.call(['rm','-rf', video_data_path])
+
                 removed = not os.path.exists(video_data_path)
-            except:
+            except ex as Exception:
                 try_count+=1
-                print 'FAILED TO REMOVE DIR %s, retry in 1 sec (%i trial)' % (video_data_path, try_count)
+                print 'FAILED TO REMOVE DIR %s, retry in 1 sec (%i trial): %s' % (video_data_path, try_count, str(ex))
                 time.sleep(1)
 
 
