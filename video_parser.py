@@ -88,7 +88,7 @@ def get_subs(yt_video_id, auto_subs=False):
                           "--sub-lang", "ru",
                           "--skip-download",
                           "-o", subs_path_pre,
-                          '"'+''yt_video_id+'"'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                          '"'+yt_video_id+'"'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         out, err = p.communicate()
 
         if p.returncode != 0:
