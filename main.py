@@ -58,7 +58,7 @@ def setup():
 def video_parser_thread_loop():
 
     while True:
-        try_remove_to_delete_dir()
+        #try_remove_to_delete_dir()
 
         video_id = csv_utils.get_video_to_process()
 
@@ -115,7 +115,7 @@ def start_parsing():
     stats_util.show_global_stats()
 
 if __name__ == "__main__":
-    try_remove_to_delete_dir()
+    #try_remove_to_delete_dir()
 
     if check_dependencies_installed():
         start_parsing()
