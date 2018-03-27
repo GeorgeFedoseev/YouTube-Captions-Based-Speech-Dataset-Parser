@@ -17,10 +17,18 @@ import traceback
 
 import youtube_video_searcher
 
+import const
+import shutil
+
 
 
 reload(sys)
 sys.setdefaultencoding('utf8')
+
+def try_remove_to_delete_dir():
+    if os.path.exists(const.TO_DELETE_DIR_PATH):
+        shutil.rmtree(const.TO_DELETE_DIR_PATH)
+        print 'deleted to_delete folder'
 
 def check_dependencies_installed():
     try:
@@ -65,7 +73,7 @@ def video_parser_thread_loop():
             print('failed to process video ' + video_id + ': ' + str(e))
 
 
-            
+
             video_parser.remove_video_dir(video_id)
 
             #traceback.print_exc()
@@ -102,5 +110,7 @@ def start_parsing():
     stats_util.show_global_stats()
 
 if __name__ == "__main__":
+    try_remove_to_delete_dir()
+
     if check_dependencies_installed():
         start_parsing()

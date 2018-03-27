@@ -33,8 +33,12 @@ import time
 
 import sys 
 
+import const
+
 reload(sys)
 sys.setdefaultencoding('utf8')
+
+
 
 def remove_video_dir(video_id):
     curr_dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -43,11 +47,12 @@ def remove_video_dir(video_id):
         removed = False
         try_count = 0
         while not removed:
-            try:
-                #shutil.rmtree(video_data_path)
-                subprocess.call(['mkdir', '-p', os.path.join(curr_dir_path, "to_delete/")])
+            try:               
+                
+                if not os.path.exists(const.TO_DELETE_DIR_PATH):
+                    subprocess.call(['mkdir', '-p', const.TO_DELETE_DIR_PATH])
 
-                deleted_path = os.path.join(curr_dir_path, "to_delete/"+video_id)                
+                deleted_path = os.path.join(const.TO_DELETE_DIR_PATH, video_id)                
                 subprocess.call(['mv', video_data_path, deleted_path])
 
                 removed = not os.path.exists(video_data_path)

@@ -9,3 +9,5 @@ VID_FAILED_CSV_FILE = os.path.join(curr_dir_path, "videos_failed_to_process.csv"
 
 KWDS_TO_SEARCH = os.path.join(curr_dir_path, "keywords_to_search.csv")
 KWDS_SEARCHED = os.path.join(curr_dir_path, "keywords_done.csv")
+
+TO_DELETE_DIR_PATH = os.path.join(curr_dir_path, "to_delete/")
