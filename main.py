@@ -81,7 +81,7 @@ def video_parser_thread_loop():
 
             video_parser.remove_video_dir(video_id)
 
-            traceback.print_exc()
+            #traceback.print_exc()
             #trace = traceback.format_exc().replace('\n', '  ')
 
             error_type = str(e)
