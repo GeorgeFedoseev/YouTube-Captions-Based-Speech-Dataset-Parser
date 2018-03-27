@@ -39,7 +39,7 @@ def remove_video_dir(video_id):
         try:
             shutil.rmtree(video_data_path)
         except:
-            shutil.rmdir(video_data_path)
+            os.rmdir(video_data_path)
 
 
 def get_subs(yt_video_id, auto_subs=False):
