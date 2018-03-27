@@ -492,7 +492,7 @@ def process_video(yt_video_id):
 
     # create csv
     csv_path = os.path.join(video_data_path, "parts.csv")
-    csv_f = open(csv_path, "w+", encoding="utf-8")
+    csv_f = io.open(csv_path, "w+", encoding="utf-8")
 
     good_pieces_count = 0
     found_timing_count = 0
