@@ -36,10 +36,17 @@ def remove_video_dir(video_id):
     curr_dir_path = os.path.dirname(os.path.realpath(__file__))
     video_data_path = os.path.join(curr_dir_path, "data/" + video_id + "/")
     if os.path.exists(video_data_path):
-        try:
-            shutil.rmtree(video_data_path)
-        except:
-            os.rmdir(video_data_path)
+        removed = False
+        try_count = 0
+        while not removed:
+            try:
+                shutil.rmtree(video_data_path)
+                removed = True
+            except:
+                try_count+=1
+                print 'FAILED TO REMOVE DIR %s, retry in 1 sec (%i trial)' % (video_data_path, try_count)
+                time.sleep(1)
+
 
 
 def get_subs(yt_video_id, auto_subs=False):
