@@ -97,10 +97,14 @@ def get_subs(yt_video_id, auto_subs=False):
             print 'ERROR: %s'+err
             raise Exception(subs_name+"_error_downloading_subtitles")
 
+        
+
         if not os.path.exists(subs_path):
             raise Exception(subs_name+"_subtitles_not_available")
 
     subs = pyvtt.WebVTTFile.open(subs_path)
+
+
 
     return subs
 
@@ -447,6 +451,10 @@ def write_stats(video_folder, stats_header, stats):
 def process_video(yt_video_id):
     print 'Processing video '+yt_video_id
 
+    timed_words = get_timed_words(yt_video_id)
+    subs = get_subs(yt_video_id)
+
+
     curr_dir_path = os.path.dirname(os.path.realpath(__file__))
     video_data_path = os.path.join(curr_dir_path, "data/" + yt_video_id + "/")
 
@@ -463,13 +471,7 @@ def process_video(yt_video_id):
 
 
 
-    timed_words = get_timed_words(yt_video_id)
-
-    #print 'found %i timed words' % len(timed_words)
-
-
-
-    subs = get_subs(yt_video_id)
+   
 
     #print 'number of subs: %i' % len(subs)
 
