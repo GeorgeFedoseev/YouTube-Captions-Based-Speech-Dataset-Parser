@@ -428,9 +428,11 @@ def is_bad_subs(subs_text):
 
 def write_stats(video_folder, stats_header, stats):
     stats_path = os.path.join(video_folder, "stats.csv")
-    csv_writer = csv.writer(open(stats_path, "w"))
+    f = open(stats_path, "w")
+    csv_writer = csv.writer(f)
     csv_writer.writerow(stats_header)
     csv_writer.writerow(stats)
+    f.close()
 
 def process_video(yt_video_id):
     print 'Processing video '+yt_video_id
@@ -483,90 +485,93 @@ def process_video(yt_video_id):
     processed_subs_count = 0
     total_speech_duration = 0.0
 
+    try:
+        for i, s in enumerate(subs):
+            if is_bad_subs(s.text):
+                continue
 
-    for i, s in enumerate(subs):
-        if is_bad_subs(s.text):
-            continue
+            processed_subs_count+=1
+            transcript = s.text.replace("\n", " ")
+            transcript = re.sub(u'[^а-яё ]', '', transcript.strip().lower()).strip()
+            #print transcript
+            piece_time = find_string_timing(timed_words, transcript, s.start.ordinal, 15000)
+            if not piece_time:
+                continue
 
-        processed_subs_count+=1
-        transcript = s.text.replace("\n", " ")
-        transcript = re.sub(u'[^а-яё ]', '', transcript.strip().lower()).strip()
-        #print transcript
-        piece_time = find_string_timing(timed_words, transcript, s.start.ordinal, 15000)
-        if not piece_time:
-            continue
+            found_timing_count+=1
 
-        found_timing_count+=1
+            
 
-        
+            cut_global_time_start = float(piece_time['start'])/1000
+            cut_global_time_end = float(piece_time['end'])/1000+0.3
 
-        cut_global_time_start = float(piece_time['start'])/1000
-        cut_global_time_end = float(piece_time['end'])/1000+0.3
-
-      
-        # CHECK CUT (if starts or ends on speech) and try to correct
-        good_cut = False
-
-        #print_speech_frames(wave_obj, cut_global_time_start, cut_global_time_end)
-
-        
-        if not starts_or_ends_during_speech(wave_obj, cut_global_time_start, cut_global_time_end):                        
-            good_cut = True
-        else:            
+          
+            # CHECK CUT (if starts or ends on speech) and try to correct
             good_cut = False
-            corrected_cut = try_correct_cut(wave_obj, cut_global_time_start, cut_global_time_end)
-            if corrected_cut:
-                cut_global_time_start, cut_global_time_end = corrected_cut
+
+            #print_speech_frames(wave_obj, cut_global_time_start, cut_global_time_end)
+
+            
+            if not starts_or_ends_during_speech(wave_obj, cut_global_time_start, cut_global_time_end):                        
                 good_cut = True
+            else:            
+                good_cut = False
+                corrected_cut = try_correct_cut(wave_obj, cut_global_time_start, cut_global_time_end)
+                if corrected_cut:
+                    cut_global_time_start, cut_global_time_end = corrected_cut
+                    good_cut = True
 
-        if not has_speech(wave_obj, cut_global_time_start, cut_global_time_end):
-            good_cut = False
+            if not has_speech(wave_obj, cut_global_time_start, cut_global_time_end):
+                good_cut = False
 
-        audio_piece_path = os.path.join(
-                parts_dir_path, yt_video_id + "-" + str(int(cut_global_time_start*1000)) + "-" + str(int(cut_global_time_end*1000)) + ".wav")
-
-        #good_cut = True
-
-        if good_cut:
-            
             audio_piece_path = os.path.join(
-                parts_dir_path, yt_video_id + "-" + str(int(cut_global_time_start*1000)) + "-" + str(int(cut_global_time_end*1000)) + ".wav")
-            print '----------------'
-            print audio_piece_path
+                    parts_dir_path, yt_video_id + "-" + str(int(cut_global_time_start*1000)) + "-" + str(int(cut_global_time_end*1000)) + ".wav")
+
+            #good_cut = True
+
+            if good_cut:
+                
+                audio_piece_path = os.path.join(
+                    parts_dir_path, yt_video_id + "-" + str(int(cut_global_time_start*1000)) + "-" + str(int(cut_global_time_end*1000)) + ".wav")
+                print '----------------'
+                print audio_piece_path
+                
+                print 'GOOD CUT'
+
+                cut_audio_piece_to_wav(audio_path_wav, audio_piece_path,
+                                cut_global_time_start,
+                                cut_global_time_end)  
+            else:
+                #print 'BAD CUT'
+                if os.path.exists(audio_piece_path):
+                    os.remove(audio_piece_path)
+                continue
             
-            print 'GOOD CUT'
 
-            cut_audio_piece_to_wav(audio_path_wav, audio_piece_path,
-                            cut_global_time_start,
-                            cut_global_time_end)  
-        else:
-            #print 'BAD CUT'
-            if os.path.exists(audio_piece_path):
-                os.remove(audio_piece_path)
-            continue
-        
-
-        # if not bad piece - write to csv
-        if is_bad_piece(audio_piece_path, transcript):
-            # remove file
-            if os.path.exists(audio_piece_path):
-                os.remove(audio_piece_path)
-            continue
+            # if not bad piece - write to csv
+            if is_bad_piece(audio_piece_path, transcript):
+                # remove file
+                if os.path.exists(audio_piece_path):
+                    os.remove(audio_piece_path)
+                continue
 
 
 
-        good_pieces_count += 1
+            good_pieces_count += 1
 
-        file_size = os.path.getsize(audio_piece_path)
+            file_size = os.path.getsize(audio_piece_path)
 
-        total_speech_duration += cut_global_time_end - cut_global_time_start
+            total_speech_duration += cut_global_time_end - cut_global_time_start
 
-        # write to csv
-        csv_f.write(audio_piece_path + ", " +
-                    str(file_size) + ", " + transcript + "\n")
+            # write to csv
+            csv_f.write(audio_piece_path + ", " +
+                        str(file_size) + ", " + transcript + "\n")
+    except ex as Exception:
+        csv_f.close()
+        raise Exception(str(ex))        
 
 
-
+    csv_f.close()
 
     print 'found timed audio for '+str(float(found_timing_count)/processed_subs_count*100)+'% ('+str(found_timing_count)+'/'+str(processed_subs_count)+')'
     print 'good pieces: '+str(float(good_pieces_count)/processed_subs_count*100)+'% ('+str(good_pieces_count)+')'
