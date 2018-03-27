@@ -49,7 +49,7 @@ def remove_video_dir(video_id):
                 subprocess.call(['rm','-rf', video_data_path])
 
                 removed = not os.path.exists(video_data_path)
-            except ex as Exception:
+            except Exception as ex:
                 try_count+=1
                 print 'FAILED TO REMOVE DIR %s, retry in 1 sec (%i trial): %s' % (video_data_path, try_count, str(ex))
                 time.sleep(1)
@@ -566,9 +566,11 @@ def process_video(yt_video_id):
             # write to csv
             csv_f.write(audio_piece_path + ", " +
                         str(file_size) + ", " + transcript + "\n")
-    except ex as Exception:
+    except Exception as ex:
         csv_f.close()
-        raise Exception(str(ex))        
+        raise Exception(str(ex)) 
+        
+
 
 
     csv_f.close()
