@@ -488,7 +488,7 @@ def process_video(yt_video_id):
 
     # create csv
     csv_path = os.path.join(video_data_path, "parts.csv")
-    csv_f = io.open(csv_path, "w+", encoding="utf-8")
+    csv_f = open(csv_path, "w+", encoding="utf-8")
 
     good_pieces_count = 0
     found_timing_count = 0
@@ -576,14 +576,9 @@ def process_video(yt_video_id):
             # write to csv
             csv_f.write(audio_piece_path + ", " +
                         str(file_size) + ", " + transcript + "\n")
-    except Exception as ex:
+    finally:
         csv_f.close()
-        raise Exception(str(ex)) 
-        
-
-
-
-    csv_f.close()
+        wave_obj.close()
 
     print 'found timed audio for '+str(float(found_timing_count)/processed_subs_count*100)+'% ('+str(found_timing_count)+'/'+str(processed_subs_count)+')'
     print 'good pieces: '+str(float(good_pieces_count)/processed_subs_count*100)+'% ('+str(good_pieces_count)+')'
