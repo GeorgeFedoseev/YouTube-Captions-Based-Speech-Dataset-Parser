@@ -45,7 +45,9 @@ def remove_video_dir(video_id):
         while not removed:
             try:
                 #shutil.rmtree(video_data_path)
-                deleted_path = os.path.join(curr_dir_path, "to_delete/"+video_id+"/")
+                subprocess.call(['mkdir', '-p', os.path.join(curr_dir_path, "to_delete/")])
+
+                deleted_path = os.path.join(curr_dir_path, "to_delete/"+video_id)                
                 subprocess.call(['mv', video_data_path, deleted_path])
 
                 removed = not os.path.exists(video_data_path)
