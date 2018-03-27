@@ -80,7 +80,7 @@ def get_timed_words(yt_video_id):
     
     subs = get_subs(yt_video_id, auto_subs = True)
 
-    print 'number of auto-subs: %i' % len(subs)
+    #print 'number of auto-subs: %i' % len(subs)
   
 
     timed_words = []
@@ -90,8 +90,8 @@ def get_timed_words(yt_video_id):
     for i in range(0, len(subs)):
         s = subs[i]
 
-        print '---'
-        print s.text
+        #print '---'
+        #print s.text
 
 
         timecodes = [pyvtt.WebVTTTime.from_string(x).ordinal for x in re.findall(r'<(\d+:\d+:\d+.\d+)>', s.text)]
@@ -112,13 +112,13 @@ def get_timed_words(yt_video_id):
 
         rows = words_str.split('\n')
 
-        print 'rows: %i ' % len(rows)
+        #print 'rows: %i ' % len(rows)
 
         # take last row (bugfix)
         words_str = rows[-1]
 
-        print '***'
-        print words_str
+        #print '***'
+        #print words_str
 
         
 
@@ -129,7 +129,7 @@ def get_timed_words(yt_video_id):
             #raise Exception('video_doesnt_have_auto_subtitles')
             continue
             
-        print 'USE'
+        #print 'USE'
 
         for i in range(0, len(words)):
             word = words[i]
@@ -213,7 +213,7 @@ def download_yt_audio(yt_video_id):
     return audio_path
 
 def convert_to_wav(in_audio_path, out_audio_path):
-    print 'converting to big wav'
+    print 'converting %s to big wav' % in_audio_path
     p = subprocess.Popen(["ffmpeg", "-y",
          "-i", in_audio_path,         
          "-ac", "1",
@@ -363,16 +363,16 @@ def print_speech_frames(wave, start, end):
     start_view = wave_view_int[:3]
     end_view = wave_view_int[-3:]
 
-    print  'start: '+(''.join([str(x) for x in start_view]))
-    print  'end: '+(''.join([str(x) for x in end_view]))
+    #print  'start: '+(''.join([str(x) for x in start_view]))
+    #print  'end: '+(''.join([str(x) for x in end_view]))
 
     is_speech_on_start = np.sum(start_view)  > 0
     is_speech_on_end = np.sum(end_view)  > 0
 
     
 
-    print 'is_speech_on_start: '+str(is_speech_on_start) 
-    print 'is_speech_on_end: '+str(is_speech_on_end)
+    #print 'is_speech_on_start: '+str(is_speech_on_start) 
+    #print 'is_speech_on_end: '+str(is_speech_on_end)
 
     return is_speech_on_start or is_speech_on_end
 
@@ -435,13 +435,13 @@ def process_video(yt_video_id):
 
     timed_words = get_timed_words(yt_video_id)
 
-    print 'found %i timed words' % len(timed_words)
+    #print 'found %i timed words' % len(timed_words)
 
 
 
     subs = get_subs(yt_video_id)
 
-    print 'number of subs: %i' % len(subs)
+    #print 'number of subs: %i' % len(subs)
 
     #if len(subs) < 30:
     #    raise Exception('too_little_nuber_of_subtitles_in_video')
@@ -489,7 +489,7 @@ def process_video(yt_video_id):
         # CHECK CUT (if starts or ends on speech) and try to correct
         good_cut = False
 
-        print_speech_frames(wave_obj, cut_global_time_start, cut_global_time_end)
+        #print_speech_frames(wave_obj, cut_global_time_start, cut_global_time_end)
 
         
         if not starts_or_ends_during_speech(wave_obj, cut_global_time_start, cut_global_time_end):                        
@@ -522,7 +522,7 @@ def process_video(yt_video_id):
                             cut_global_time_start,
                             cut_global_time_end)  
         else:
-            print 'BAD CUT'
+            #print 'BAD CUT'
             if os.path.exists(audio_piece_path):
                 os.remove(audio_piece_path)
             continue
