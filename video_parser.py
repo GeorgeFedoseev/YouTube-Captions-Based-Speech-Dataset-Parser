@@ -94,6 +94,7 @@ def get_subs(yt_video_id, auto_subs=False):
         out, err = p.communicate()
 
         if p.returncode != 0:
+            print 'ERROR: %s'+err
             raise Exception(subs_name+"_error_downloading_subtitles")
 
         if not os.path.exists(subs_path):
