@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"cop",
+				"copy_jobs"
+			],
+			[
+				"copy",
+				"copy_audio_file"
+			],
+			[
+				"train",
+				"export_train_dir_path"
+			],
+			[
+				"make",
+				"makedirs"
+			],
+			[
 				"csv",
 				"csv_utils\tmodule"
 			],
@@ -498,22 +514,6 @@
 			[
 				"exp",
 				"export_sets_dir_path\tstatement"
-			],
-			[
-				"ite",
-				"item_path\tstatement"
-			],
-			[
-				"stats",
-				"stats_processing_videos_count"
-			],
-			[
-				"VID_p",
-				"VID_PROCESSING_CSV_FILE\tstatement"
-			],
-			[
-				"vi",
-				"video_id\tparam"
 			]
 		]
 	},
@@ -538,6 +538,24 @@
 			}
 		},
 		{
+			"file": "keyword-sets/example_math_lesson.txt",
+			"settings":
+			{
+				"buffer_size": 289,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "export-dataset.py",
+			"settings":
+			{
+				"buffer_size": 4766,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "youtube_video_searcher.py",
 			"settings":
 			{
@@ -547,11 +565,13 @@
 			}
 		},
 		{
+			"contents": "+в домашних условиях видео уроки\n1 урок\n1 урок русский\n10 уроков\n2 часть 2 урок\n3 урока\n4 урока\n5 уроков\n6 класс уроки фгос\n6 уроков\n7 уроков\n8 уроков\nанализ урока\nанглийский 2 урок\nаудио уроки\nбесплатные уроки\nвид конспекты уроков\nвидео уроки\nвидео уроки +для начинающих\nвидео уроки бесплатно\nвидео уроки крючком\nвиды уроков\nвязание видео уроки\nг урок\nдомашние видео уроки\nдомашние уроки\nединый урок\nединый урок рф\nзадачи урока\nимя урока\nинтернет урок\nкакой урок\nкарта урока\nкарта урока +по фгос\nклассе уроки истории +в\nконспект 1 уроку\nконспект урока\nконспект урока +на тему\nконспект урока +на тему класс\nконспект урока +по математике\nконспект урока +по русскому\nконспект урока +по русскому языку\nконспект урока +по русскому языку класс\nконспект урока +по фгос\nконспект урока +с презентацией\nконспект урока 1 класс\nконспект урока 10\nконспект урока 10 класс\nконспект урока 11 класс\nконспект урока 2\nконспект урока 2 класс\nконспект урока 3\nконспект урока 3 класс\nконспект урока 4\nконспект урока 4 класс\nконспект урока 5\nконспект урока 5 класс\nконспект урока 6\nконспект урока 6 класс\nконспект урока 7\nконспект урока 7 класс\nконспект урока 8\nконспект урока 8 класс\nконспект урока 9\nконспект урока 9 класс\nконспект урока век\nконспект урока класс\nконспект урока россия\nконспект урока слово\nконспект урока числе\nконспект уроку мира\nконтрольный урок\nкраткий урок\nлитературный урок\nматематика 1 урок\nматематика 2 урок\nматематика 3 урок\nматематика 4 урок\nматематика класс конспект урока\nматематика класс урок\nматематика тема урока\nметоды урока\nмир уроков\nначало урока\nначальные уроки\nнова урок\nновый урок\nобобщающий урок\nобобщенный урок\nобразец урока\nонлайн уроки\nоткрытый класс открытые уроки\nоткрытый урок\nпервые уроки\nпервый урок\nплан конспект урока\nплан урока\nплан урока +на тему\nподготовка +к уроку\nпорно уроки\nпосле уроков\nпочему урок\nпрезентации уроков 4 классе\nпрезентация урока 5 класс\nпрезентация урока русского\nпрезентация уроков 2 класс\nпрезентация уроков языка\nпример урока\nпро урок\nпроизведение урок\nработа +на уроке\nразработки уроков\nрасписание уроков\nраспутин уроки\nраспутин уроки французского\nрассказ уроки\nрассказ уроки французского\nрешение уроков\nроссия урок презентация\nрусский урок 4\nрусский язык урок 1\nсамоанализ урока\nсистема уроков\nскачать бесплатно уроки\nскачать конспект урока\nскачать урок\nслово урок\nсмотреть уроки\nсовременный урок\nсодержание урока\nсочинение уроки\nтекст урок\nтема 1 уроку\nтема 2 урок\nтема 5 урока\nтема урока\nтема урока +по фгос\nтема урока 3 класс\nтема урока 7 класс\nтема урока класс\nтема урока презентация\nтема урока россия\nтемы уроков 1 класс\nтемы уроков 4 класса\nтемы уроков 6 класс\nтемы уроков 8 класс\nтехнологическая карта урока\nтехнологическая карта урока классе\nтехнологический урок\nтипы уроков\nурок +в классе\nурок +в школе\nурок 1 1 школа россии\nурок 11\nурок 11 класс\nурок 16\nурок 2\nурок 2 1 1 1\nурок 2 класс\nурок 21\nурок 4 класс\nурок 5 класс фгос\nурок 9\nурок герой\nурок глагол\nурок деление\nурок деятельность\nурок дроби\nурок з\nурок задание\nурок закрепление\nурок игра\nурок изо\nурок изо класс\nурок имя существительное\nурок информатики\nурок искусство\nурок культуры\nурок лет\nурок литературного чтения\nурок литературы\nурок м\nурок математик\nурок математики 1 класс\nурок математики 2 класс\nурок местоимение\nурок мужества\nурок н\nурок обж\nурок обобщения\nурок обществознания\nурок окружающего\nурок окружающего мира\nурок основная\nурок план класса\nурок права\nурок предложение\nурок презентация\nурок презентация 3 класс\nурок развития\nурок решения задач\nурок россии 1 класс\nурок россии 2 класс\nурок россия\nурок русского 1 класс\nурок русского 6\nурок русского класс\nурок русского языка +по теме\nурок русского языка 1 класс\nурок русского языка 2 класс\nурок русского языка 3\nурок русского языка 3 класс\nурок русского языка класс\nурок рф\nурок сказка\nурок сложения\nурок технологии\nурок труда\nурок умножение\nурок учебник\nурок физической\nурок физической культуры\nурок физкультуры\nурок части речи\nурок человек\nурок числительное\nурок чтения\nурок школа россии\nуроки\nуроки +в 10 классе\nуроки +в домашних условиях\nуроки +для начинающих\nуроки +с +с нуля\nуроки 1 класса\nуроки 21 века\nуроки 3 класс\nуроки 3 школы\nуроки 4 класс русский\nуроки 5 класс\nуроки 6 класс\nуроки 7 класс\nуроки 8 вид\nуроки 8 класс\nуроки 9 класс\nуроки алгебры\nуроки английского\nуроки английского 2 класс\nуроки английского языка\nуроки английского языка класс\nуроки биологии\nуроки века\nуроки войны\nуроки вязания\nуроки географии\nуроки делать\nуроки дома\nуроки жизни\nуроки знаний\nуроки истории\nуроки крючком\nуроки лета\nуроки литературы +в классе\nуроки музыки класс\nуроки начальной школы\nуроки немецкого\nуроки обучения\nуроки правописания\nуроки речи\nуроки рисования\nуроки русского\nуроки русского языка\nуроки русского языка 4\nуроки секса\nуроки спицами\nуроки существительное\nуроки танцев\nуроки условиях\nуроки физики\nуроки французского\nуроки французского герои\nуроки французского краткое\nуроки химии\nуроки языков\nусловиях видео уроки\nучитель +на уроке\nфгос урок\nфильм урок\nформы урока\nцели урока\nчасти урока\nчисла урок класс\nчитать уроки\nшкола 1 урок\nшкола 3 класс урок\nшкола россии конспекты уроков\nшкола урок 1 класс\nшкола урок математики\nшкола урок презентация\nшкола фгос уроки\nязыки видео уроки",
 			"file": "example_keywords_lessons.txt",
+			"file_size": 9379,
+			"file_write_time": 131661490860000000,
 			"settings":
 			{
 				"buffer_size": 5170,
-				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -564,11 +584,10 @@
 			}
 		},
 		{
-			"file": "example_keywords_subtitles.txt",
+			"file": "stats_util.py",
 			"settings":
 			{
-				"buffer_size": 11261,
-				"encoding": "UTF-8",
+				"buffer_size": 3022,
 				"line_ending": "Unix"
 			}
 		},
@@ -749,6 +768,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"export_sets_dir_path",
 			"ffmpeg",
 			"Popen",
 			"video_parser",
@@ -789,6 +809,7 @@
 		"regex": true,
 		"replace_history":
 		[
+			"target_folder",
 			"\n",
 			"\\\\n",
 			"\\n",
@@ -807,7 +828,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 6,
 			"sheets":
 			[
 				{
@@ -849,7 +870,7 @@
 						"translation.y": 807.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
@@ -865,8 +886,8 @@
 						"selection":
 						[
 							[
-								13410,
-								13410
+								5897,
+								5996
 							]
 						],
 						"settings":
@@ -900,14 +921,83 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 6782.0,
+						"translation.y": 2906.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "keyword-sets/example_math_lesson.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 289,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "export-dataset.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4766,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3444,
+								3444
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": ".",
+									"selector": "source.python - string - comment - constant.numeric"
+								},
+								{
+									"characters": ".",
+									"selector": "source.python - string - constant.numeric"
+								}
+							],
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1101.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 4,
 					"file": "youtube_video_searcher.py",
 					"semi_transient": false,
 					"settings":
@@ -941,14 +1031,14 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1046.0,
+						"translation.y": 609.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 5,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 5,
 					"file": "example_keywords_lessons.txt",
 					"semi_transient": false,
 					"settings":
@@ -966,26 +1056,17 @@
 						],
 						"settings":
 						{
-							"WordCount":
-							{
-								"changes": 0,
-								"count": 736,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
 							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 3652.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 6,
 					"file": "yt.sublime-project",
 					"semi_transient": false,
 					"settings":
@@ -997,12 +1078,20 @@
 						"selection":
 						[
 							[
-								3,
-								214
+								354,
+								3
 							]
 						],
 						"settings":
 						{
+							"WordCount":
+							{
+								"changes": -1,
+								"modified": true,
+								"selection": true,
+								"status": -1,
+								"syntax": "json"
+							},
 							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
@@ -1010,39 +1099,49 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "example_keywords_subtitles.txt",
+					"buffer": 7,
+					"file": "stats_util.py",
 					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 11261,
+						"buffer_size": 3022,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								522,
+								522
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"WordCount":
+							{
+								"changes": -1,
+								"modified": true,
+								"selection": true,
+								"status": -1,
+								"syntax": "python"
+							},
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 3781.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 8,
 					"file": "csv_utils.py",
 					"semi_transient": false,
 					"settings":
@@ -1079,7 +1178,7 @@
 						"translation.y": 1444.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 8,
 					"type": "text"
 				}
 			]
