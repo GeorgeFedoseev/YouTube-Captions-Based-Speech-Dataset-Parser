@@ -26,9 +26,12 @@ reload(sys)
 sys.setdefaultencoding('utf8')
 
 def try_remove_to_delete_dir():
-    if os.path.exists(const.TO_DELETE_DIR_PATH):
-        shutil.rmtree(const.TO_DELETE_DIR_PATH)
-        print 'deleted to_delete folder'
+    try:
+        if os.path.exists(const.TO_DELETE_DIR_PATH):
+            shutil.rmtree(const.TO_DELETE_DIR_PATH)
+            print 'deleted to_delete folder'
+    except Exception as ex:
+        print 'failed to remove to_delete folder: %s' % str(ex)
 
 def check_dependencies_installed():
     try:
@@ -55,6 +58,8 @@ def setup():
 def video_parser_thread_loop():
 
     while True:
+        try_remove_to_delete_dir()
+
         video_id = csv_utils.get_video_to_process()
 
         if not video_id:
