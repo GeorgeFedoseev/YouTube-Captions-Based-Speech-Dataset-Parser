@@ -469,12 +469,18 @@ def write_stats(video_folder, stats_header, stats):
 def process_video(yt_video_id):
     print 'Processing video '+yt_video_id
 
+    curr_dir_path = os.path.dirname(os.path.realpath(__file__))
+    video_data_path = os.path.join(curr_dir_path, "data/" + yt_video_id + "/")
+
+    if os.path.exists(video_data_path):
+        print 'video %s is ALREADY PARSED' % yt_video_id
+        return
+
     timed_words = get_timed_words(yt_video_id)
     subs = get_subs(yt_video_id)
 
 
-    curr_dir_path = os.path.dirname(os.path.realpath(__file__))
-    video_data_path = os.path.join(curr_dir_path, "data/" + yt_video_id + "/")
+    
 
     if not os.path.exists(video_data_path):
         os.makedirs(video_data_path)
