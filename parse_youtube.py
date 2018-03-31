@@ -23,6 +23,8 @@ import shutil
 from glob import glob
 
 
+
+
 reload(sys)
 sys.setdefaultencoding('utf8')
 
@@ -107,22 +109,15 @@ def video_parser_thread_loop():
             csv_utils.put_video_to_processed(video_id)
         except Exception as e:
             print('failed to process video ' + video_id + ': ' + str(e))
-
-
-
-            #video_parser.remove_video_dir(video_id)
-
-            #traceback.print_exc()
-            #trace = traceback.format_exc().replace('\n', '  ')
-
             error_type = str(e)
-            
-            # put id to failed csv with reason
             csv_utils.put_video_to_failed(video_id, error_type)
 
 
+        
+
 def start_parsing():
     
+
     
     try:
         # start csv_utils worker thread
