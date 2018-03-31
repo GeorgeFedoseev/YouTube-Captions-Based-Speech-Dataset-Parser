@@ -60,6 +60,11 @@ def video_parser_thread_loop():
     while True:
         #try_remove_to_delete_dir()
 
+        if youtube_video_searcher.is_searching:
+            # dont interefere
+            sleep(3)
+            continue
+
         video_id = csv_utils.get_video_to_process()
 
         if csv_utils.is_video_processed_or_failed(video_id):

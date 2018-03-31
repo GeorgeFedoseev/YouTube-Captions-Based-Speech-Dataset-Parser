@@ -81,13 +81,13 @@ def write_column_to_csv(csv_path, column):
     append_column_to_csv(csv_path, column)
 
 def get_item_in_csv(csv_path, row_first_cell_val):
-    #with FileLock(csv_path + ".lock"):
-    csv_reader = csv.reader(open(csv_path, "r+"))
-    data = list(csv_reader)
+    with FileLock(csv_path + ".lock"):
+        csv_reader = csv.reader(open(csv_path, "r+"))
+        data = list(csv_reader)
 
-    for row in data:
-        if len(row) > 0 and row[0] == row_first_cell_val:
-            return row
+        for row in data:
+            if len(row) > 0 and row[0] == row_first_cell_val:
+                return row
     return None
 
 def is_item_in_csv(csv_path, item):

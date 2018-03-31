@@ -26,6 +26,8 @@ YOUTUBE_API_VERSION = "v3"
 
 MAX_PAGES = 3
 
+is_searching = False
+
 
 def start_searcher_thread():
     print 'starting searcher thread'
@@ -46,8 +48,11 @@ def searcher_thread_loop():
 
         if query == None:
             #print 'all search queries processed. waiting 5 seconds to check again...'
+            is_searching = False
             time.sleep(5)
             continue
+
+        is_searching = True
 
         if csv_utils.is_query_processed(query):
             print 'query "%s" is already processed' % query
