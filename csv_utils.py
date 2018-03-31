@@ -2,9 +2,12 @@ import csv
 from filelock import Timeout, FileLock
 
 import const
+import os
 
 import time
 import datetime
+
+from Queue import *
 
 
 def setup():
@@ -20,6 +23,55 @@ def setup():
     not_fully_processed_last_time = get_column_csv(const.VID_PROCESSING_CSV_FILE, 0)
     clear_csv(const.VID_PROCESSING_CSV_FILE)
     append_column_to_csv(const.VID_TO_PROCESS_CSV_FILE, not_fully_processed_last_time)
+
+
+# CSV MEM ABSTRACTION with syncing with filesystem every n seconds
+# {filename: {rows: [], queue: } }
+csv_files_dict = {}
+
+# init from files
+def init_csv_from_file(csv_path):
+    if csv_path in csv_files_dict:
+        return # already inited
+
+    # create csv file if not exists
+    if not os.path.exists(csv_path):
+        open(csv_path, 'a').close()
+
+    f = open(csv_path, "r+")
+    csv_reader = csv.reader(f)
+    rows = list(csv_reader)
+
+    csv_files_dict[csv_path] = {
+        "rows": rows,
+        "queue": Queue()
+    }
+
+    f.close()
+
+def sync_csv_to_file(csv_path):
+    if not (csv_path in csv_files_dict):
+        return # cant write - dont have data
+
+    f = open(csv_path, "w+")
+    f.write('\n'.join(csv_files_dict[csv_path]["rows"])+'\n')
+    f.close()
+
+# writer worker
+def csv_queue_worker():
+    while 1:
+        
+        
+
+def start_csv_queue_worker_thread():
+    print 'start_csv_queue_worker_thread'
+    thr = Thread(target=csv_queue_worker)
+    thr.daemon = True
+    thr.start()
+
+    return thr
+
+
 
 def clear_csv(csv_path):
     with FileLock(csv_path + ".lock", timeout=1):

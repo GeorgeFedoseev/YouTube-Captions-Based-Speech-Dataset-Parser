@@ -118,25 +118,26 @@ def video_parser_thread_loop():
 
 def start_parsing():
     setup()
+    
+    try:
+        # start searching thread
+        youtube_video_searcher.start_searcher_thread()
 
+        video_parser_threads = []
+        # start parsing threads
 
-    # start searching thread
-    youtube_video_searcher.start_searcher_thread()
+        for i in range(0, 25):
+            print 'start parsing thread ' + str(i)
+            thr = Thread(target=video_parser_thread_loop)
+            thr.daemon = True
+            thr.start()
+            video_parser_threads.append(thr)
 
-    video_parser_threads = []
-    # start parsing threads
-    for i in range(0, 25):
-        print 'start parsing thread ' + str(i)
-        thr = Thread(target=video_parser_thread_loop)
-        thr.daemon = True
-        thr.start()
-        video_parser_threads.append(thr)
+        # wait for threads
+        while True: time.sleep(100)
 
-
-
-    # wait for threads
-    for thr in video_parser_threads:
-        thr.join()
+    except (KeyboardInterrupt, SystemExit):
+        print '\n! Received keyboard interrupt, quitting threads.\n'
 
     stats_util.show_global_stats()
 
