@@ -72,7 +72,7 @@ def video_parser_thread_loop():
     while True:
         #try_remove_to_delete_dir()
 
-        print 'video parser loop'
+        #print 'video parser loop'
 
         if youtube_video_searcher.is_searching:
             # dont interefere
@@ -80,10 +80,10 @@ def video_parser_thread_loop():
             time.sleep(3)
             continue
 
-        print "getting video id to parse..."
+        #print "getting video id to parse..."
         video_id = csv_utils.get_video_to_process()
 
-        print 'got video id %s' % video_id
+        #print 'got video id %s' % video_id
 
         if csv_utils.is_video_processed_or_failed(video_id):
             print("VIDEO %s is already processed" % video_id)

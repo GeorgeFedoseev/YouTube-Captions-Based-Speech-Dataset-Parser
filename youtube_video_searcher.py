@@ -46,6 +46,7 @@ def searcher_thread_loop():
 
     while True:
 
+        is_searching = True
 
         with FileLock(const.VID_TO_PROCESS_CSV_FILE+".lock"):
             stats_pending_videos_count = len(list(csv.reader(open(const.VID_TO_PROCESS_CSV_FILE, "r"))))
