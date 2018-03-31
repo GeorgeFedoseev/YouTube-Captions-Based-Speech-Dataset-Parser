@@ -62,6 +62,7 @@ def video_parser_thread_loop():
 
         if youtube_video_searcher.is_searching:
             # dont interefere
+            print 'dont interefere with searching'
             sleep(3)
             continue
 
