@@ -5,6 +5,8 @@ from apiclient.discovery import build
 from apiclient.errors import HttpError
 from oauth2client.tools import argparser
 
+
+
 import csv
 import csv_utils
 import time
@@ -31,6 +33,8 @@ YOUTUBE_API_VERSION = "v3"
 MAX_PAGES = 3
 
 is_searching = False
+
+
 
 
 def start_searcher_thread():
@@ -104,6 +108,8 @@ def searcher_thread_loop():
         print('put_videos_to_pending')
         csv_utils.put_videos_to_pending(videos_to_add)
         print ('added %i videos to pending' % videos_put)
+
+        
 
 
         print('mark query as processed')
