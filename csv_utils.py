@@ -105,9 +105,10 @@ def add_item_to_csv(csv_path, row_list):
 
 def pop_first_row_in_csv(csv_path):
     
+    print 'pop_first_row_in_csv: wait lock'
     
     with FileLock(csv_path + ".lock"):
-        
+        print 'pop_first_row_in_csv: got lock'    
 
         first_row = None
 
@@ -127,7 +128,7 @@ def pop_first_row_in_csv(csv_path):
         f.write('\n'.join(lines)+'\n')
         f.close()
 
-        #print 'wrote back '+str(len(data))+' to '+csv_path
+        print 'wrote back'            
 
     return first_row
 
