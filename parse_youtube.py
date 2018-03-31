@@ -25,6 +25,17 @@ import shutil
 reload(sys)
 sys.setdefaultencoding('utf8')
 
+def remove_filelocks():
+    curr_dir_path = os.path.dirname(os.path.realpath(__file__))
+
+    removed = 0
+    for path in glob(os.path.join(curr_dir_path, "*.lock")):
+        os.remove(path)
+        removed += 1
+
+    print("removed %i file locks" % removed)
+
+
 def try_remove_to_delete_dir():
     try:
         if os.path.exists(const.TO_DELETE_DIR_PATH):
@@ -130,6 +141,8 @@ def start_parsing():
 
 if __name__ == "__main__":
     #try_remove_to_delete_dir()
+
+    remove_filelocks()
 
     if check_dependencies_installed():
         start_parsing()
