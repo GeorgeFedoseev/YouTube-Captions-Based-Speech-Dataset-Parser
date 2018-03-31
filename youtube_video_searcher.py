@@ -45,14 +45,19 @@ def searcher_thread_loop():
     global is_searching
 
     while True:
+
+
         with FileLock(const.VID_TO_PROCESS_CSV_FILE+".lock"):
             stats_pending_videos_count = len(list(csv.reader(open(const.VID_TO_PROCESS_CSV_FILE, "r"))))
 
             if stats_pending_videos_count > 100:
                 # if have enough videos - dont search
                 is_searching = False
-                time.sleep(15)
-                continue
+                
+
+        if not is_searching:
+            time.sleep(15)
+            continue
 
 
 

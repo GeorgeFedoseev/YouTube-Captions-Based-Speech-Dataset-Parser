@@ -121,7 +121,7 @@ def start_parsing():
 
 
     # start searching thread
-    #youtube_video_searcher.start_searcher_thread()
+    youtube_video_searcher.start_searcher_thread()
 
     video_parser_threads = []
     # start parsing threads
