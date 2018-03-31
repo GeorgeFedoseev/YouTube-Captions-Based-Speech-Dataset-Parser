@@ -60,7 +60,7 @@ def video_parser_thread_loop():
     while True:
         #try_remove_to_delete_dir()
 
-        #print 'video parser loop'
+        print 'video parser loop'
 
         if youtube_video_searcher.is_searching:
             # dont interefere
@@ -74,7 +74,7 @@ def video_parser_thread_loop():
             print("VIDEO %s is already processed" % video_id)
 
         if not video_id:
-            #print 'no videos to parse - wait 5 seconds...'
+            print 'no videos to parse - wait 5 seconds...'
             time.sleep(5)
             continue
 
