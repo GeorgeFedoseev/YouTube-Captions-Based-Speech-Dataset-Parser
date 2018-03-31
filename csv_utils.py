@@ -107,7 +107,7 @@ def pop_first_row_in_csv(csv_path):
     print('WAITING lock for %s' % csv_path)
     start_time = time.time()
     with FileLock(csv_path + ".lock"):
-        print("LOCK WAIT took" % datetime.timedelta(seconds=round(time.time() - start_time)))
+        print("LOCK WAIT took %s" % datetime.timedelta(seconds=round(time.time() - start_time)))
 
         first_row = None
 
