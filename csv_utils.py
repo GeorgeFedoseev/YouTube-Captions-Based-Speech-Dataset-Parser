@@ -101,7 +101,11 @@ def add_item_to_csv(csv_path, row_list):
 
 
 def pop_first_row_in_csv(csv_path):
+    print('WAITING lock for %s' % csv_path)
+    start_time = time.time()
     with FileLock(csv_path + ".lock"):
+        print("LOCK WAIT took" % datetime.timedelta(seconds=round(time.time() - start_time)))
+
         first_row = None
 
         csv_reader = csv.reader(open(csv_path, "r+"))
