@@ -550,8 +550,9 @@ def process_video(yt_video_id):
           
             # CHECK CUT (if starts or ends on speech) and try to correct
             good_cut = False
-
+            corrected_cut = False
             #print_speech_frames(wave_obj, cut_global_time_start, cut_global_time_end)
+
 
             
             if not starts_or_ends_during_speech(wave_obj, cut_global_time_start, cut_global_time_end):                        
@@ -567,7 +568,8 @@ def process_video(yt_video_id):
                 good_cut = False
 
             audio_piece_path = os.path.join(
-                    parts_dir_path, yt_video_id + "-" + str(int(cut_global_time_start*1000)) + "-" + str(int(cut_global_time_end*1000)) + ".wav")
+                    parts_dir_path, yt_video_id + "-" + str(int(cut_global_time_start*1000)) 
+                    + "-" + str(int(cut_global_time_end*1000)) + ("_corr" if corrected_cut else "") + ".wav")
 
             #good_cut = True
 
