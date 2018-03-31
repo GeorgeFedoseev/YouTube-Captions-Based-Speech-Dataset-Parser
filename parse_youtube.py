@@ -60,6 +60,8 @@ def video_parser_thread_loop():
     while True:
         #try_remove_to_delete_dir()
 
+        print 'video parser loop'
+
         if youtube_video_searcher.is_searching:
             # dont interefere
             print 'dont interefere with searching'
