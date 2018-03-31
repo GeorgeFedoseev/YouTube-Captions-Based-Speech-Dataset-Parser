@@ -81,13 +81,13 @@ def write_column_to_csv(csv_path, column):
     append_column_to_csv(csv_path, column)
 
 def get_item_in_csv(csv_path, row_first_cell_val):
-    with FileLock(csv_path + ".lock"):
-        csv_reader = csv.reader(open(csv_path, "r+"))
-        data = list(csv_reader)
+    #with FileLock(csv_path + ".lock"):
+    csv_reader = csv.reader(open(csv_path, "r+"))
+    data = list(csv_reader)
 
-        for row in data:
-            if len(row) > 0 and row[0] == row_first_cell_val:
-                return row
+    for row in data:
+        if len(row) > 0 and row[0] == row_first_cell_val:
+            return row
     return None
 
 def is_item_in_csv(csv_path, item):
@@ -173,6 +173,9 @@ def put_video_to_pending(video_id):
         return
     remove_video_from_processing(video_id)
     add_item_to_csv(const.VID_TO_PROCESS_CSV_FILE, [video_id])
+
+def put_videos_to_pending(video_ids):    
+    append_column_to_csv(const.VID_TO_PROCESS_CSV_FILE, video_ids)
 
 def put_video_to_processing(video_id):
     remove_video_from_pending(video_id)
