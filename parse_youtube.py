@@ -65,7 +65,7 @@ def video_parser_thread_loop():
         if youtube_video_searcher.is_searching:
             # dont interefere
             print 'dont interefere with searching'
-            sleep(3)
+            time.sleep(3)
             continue
 
         video_id = csv_utils.get_video_to_process()
