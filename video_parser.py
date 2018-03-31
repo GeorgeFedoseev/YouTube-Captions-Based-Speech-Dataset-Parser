@@ -361,12 +361,13 @@ def try_correct_cut(wave, start, end):
             corrected_start += CORRECTION_WINDOW_SEC
             need_start_correction = starts_with_speech(wave, corrected_start, end)
 
-        if need_start_correction:
-            # try go backwards
-            corrected_start = start
-            while need_start_correction and corrected_start >= start - MAX_ALLOWED_CORRECTION_SEC:            
-                corrected_start -= CORRECTION_WINDOW_SEC
-                need_start_correction = starts_with_speech(wave, corrected_start, end)
+        # DISABLE backwards correction for start cause many bad samples with extra word on start
+        # if need_start_correction:
+        #     # try go backwards
+        #     corrected_start = start
+        #     while need_start_correction and corrected_start >= start - MAX_ALLOWED_CORRECTION_SEC:            
+        #         corrected_start -= CORRECTION_WINDOW_SEC
+        #         need_start_correction = starts_with_speech(wave, corrected_start, end)
 
     if need_start_correction:
         #print 'FAILED to correct start'
