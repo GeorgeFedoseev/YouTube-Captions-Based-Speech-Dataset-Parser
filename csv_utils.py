@@ -22,14 +22,14 @@ def setup():
     append_column_to_csv(const.VID_TO_PROCESS_CSV_FILE, not_fully_processed_last_time)
 
 def clear_csv(csv_path):
-    with FileLock(csv_path + ".lock"):
+    with FileLock(csv_path + ".lock", timeout=1):
         f = open(csv_path, "w+")
         csv_writer = csv.writer(f)
         f.close()
 
 def read_all(csv_path):
     data = []
-    with FileLock(csv_path + ".lock"):
+    with FileLock(csv_path + ".lock", timeout=1):
         f = open(csv_path, "r+")
         csv_reader = csv.reader(f)
         data = list(csv_reader)
@@ -39,7 +39,7 @@ def read_all(csv_path):
 
 def get_column_csv(csv_path, column_index):
     column = []
-    with FileLock(csv_path + ".lock"):
+    with FileLock(csv_path + ".lock", timeout=1):
         csv_reader = csv.reader(open(csv_path, "r+"))
         data = list(csv_reader)
 
@@ -50,7 +50,7 @@ def get_column_csv(csv_path, column_index):
 
 def append_rows_to_csv(csv_path, rows):
     
-    with FileLock(csv_path + ".lock"):
+    with FileLock(csv_path + ".lock", timeout=1):
         f = open(csv_path, "a+")
         csv_writer = csv.writer(f)
         for row in rows:
@@ -64,7 +64,7 @@ def write_rows_to_csv(csv_path, rows):
 
 def append_column_to_csv(csv_path, column):
     
-    with FileLock(csv_path + ".lock"):
+    with FileLock(csv_path + ".lock", timeout=1):
 
         lines = []
         
@@ -81,7 +81,7 @@ def write_column_to_csv(csv_path, column):
     append_column_to_csv(csv_path, column)
 
 def get_item_in_csv(csv_path, row_first_cell_val):
-    with FileLock(csv_path + ".lock"):
+    with FileLock(csv_path + ".lock", timeout=1):
         csv_reader = csv.reader(open(csv_path, "r+"))
         data = list(csv_reader)
 
@@ -96,7 +96,7 @@ def is_item_in_csv(csv_path, item):
 
 def add_item_to_csv(csv_path, row_list):
     if not is_item_in_csv(csv_path, row_list[0]):
-        with FileLock(csv_path + ".lock"):
+        with FileLock(csv_path + ".lock", timeout=1):
             f = open(csv_path, "a+")
             csv_writer = csv.writer(f)
             csv_writer.writerow(row_list)
@@ -107,7 +107,7 @@ def pop_first_row_in_csv(csv_path):
     
     print 'pop_first_row_in_csv: wait lock'
     
-    with FileLock(csv_path + ".lock"):
+    with FileLock(csv_path + ".lock", timeout=1):
         print 'pop_first_row_in_csv: got lock'    
 
         first_row = None
@@ -133,7 +133,7 @@ def pop_first_row_in_csv(csv_path):
     return first_row
 
 def remove_row_by_first_val(csv_path, val):
-    with FileLock(csv_path + ".lock"):
+    with FileLock(csv_path + ".lock", timeout=1):
         csv_reader = csv.reader(open(csv_path, "r+"))
         data = list(csv_reader)   
 
