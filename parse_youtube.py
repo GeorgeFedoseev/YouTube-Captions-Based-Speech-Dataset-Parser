@@ -34,6 +34,8 @@ def remove_filelocks():
         os.remove(path)
         removed += 1
 
+        print("removed %s" % path)
+
     print("removed %i file locks" % removed)
 
 
@@ -57,6 +59,7 @@ def check_dependencies_installed():
     return True
 
 def setup():
+    print 'main setup - start'
     csv_utils.setup()
 
     curr_dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -64,6 +67,8 @@ def setup():
 
     if not os.path.exists(videos_data_dir):
         os.makedirs(videos_data_dir)
+
+    print 'main setup - end'
 
 
 
@@ -117,16 +122,21 @@ def video_parser_thread_loop():
 
 
 def start_parsing():
-    setup()
+    
     
     try:
+        # start csv_utils worker thread
+        csv_utils.start_csv_queue_worker_thread()
+
+        setup()
+
         # start searching thread
         youtube_video_searcher.start_searcher_thread()
 
         video_parser_threads = []
         # start parsing threads
 
-        for i in range(0, 25):
+        for i in range(0, 20):
             print 'start parsing thread ' + str(i)
             thr = Thread(target=video_parser_thread_loop)
             thr.daemon = True

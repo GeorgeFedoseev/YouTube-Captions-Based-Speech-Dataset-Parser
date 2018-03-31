@@ -46,18 +46,22 @@ def searcher_thread_loop():
 
     while True:
 
-        is_searching = True
+        is_searching = False
 
-        with FileLock(const.VID_TO_PROCESS_CSV_FILE+".lock"):
-            stats_pending_videos_count = len(list(csv.reader(open(const.VID_TO_PROCESS_CSV_FILE, "r"))))
-
-            if stats_pending_videos_count > 100:
-                # if have enough videos - dont search
-                is_searching = False
+        
+        stats_pending_videos_count = len(csv_utils.read_all(const.VID_TO_PROCESS_CSV_FILE))
+        
+            
+        if stats_pending_videos_count < 100:
+            # if have kwds to serach - search
+            print("check if have KWDS_TO_SEARCH")
+            stats_pending_keywords_count = len(csv_utils.read_all(const.KWDS_TO_SEARCH))
+            if stats_pending_keywords_count > 0:
+                is_searching = True
                 
 
         if not is_searching:
-            time.sleep(15)
+            time.sleep(2)
             continue
 
 
@@ -97,6 +101,7 @@ def searcher_thread_loop():
                 videos_to_add.append(video_id)
                 videos_put += 1
 
+        print('put_videos_to_pending')
         csv_utils.put_videos_to_pending(videos_to_add)
         print ('added %i videos to pending' % videos_put)
 
@@ -107,7 +112,7 @@ def searcher_thread_loop():
 
         print('sleep before next query')
         # sleep
-        time.sleep(5)
+        time.sleep(1)
 
 
 def youtube_search(query, pageToken=None, page=0):
@@ -141,7 +146,7 @@ def youtube_search(query, pageToken=None, page=0):
             videos.append(search_result["id"]["videoId"])
         
 
-    print "Videos:\n", "\n".join(videos), "\n"
+    #print "Videos:\n", "\n".join(videos), "\n"
 
     if "nextPageToken" in search_response and page < MAX_PAGES:
         print search_response['nextPageToken']
