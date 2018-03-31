@@ -66,7 +66,7 @@ def video_parser_thread_loop():
             print("VIDEO %s is already processed" % video_id)
 
         if not video_id:
-            print 'no videos to parse - wait 5 seconds...'
+            #print 'no videos to parse - wait 5 seconds...'
             time.sleep(5)
             continue
 
