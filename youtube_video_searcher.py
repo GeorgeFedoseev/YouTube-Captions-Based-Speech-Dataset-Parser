@@ -57,14 +57,22 @@ def searcher_thread_loop():
         video_ids = youtube_search(query)
         print 'found '+str(len(video_ids))+' videos'
 
+        videos_put = 0
         # add only video ids that dont exist in video csvs
         for video_id in video_ids:
             if not csv_utils.is_video_in_any_list(video_id):
+                print 'put video %s' % video_id
                 csv_utils.put_video_to_pending(video_id)
+                videos_put += 1
 
+        print ('added %i videos to pending' % videos_put)
+
+
+        print('mark query as processed')
         # mark processed
         csv_utils.put_keywords_to_processed(query)
 
+        print('sleep before next query')
         # sleep
         time.sleep(5)
 
