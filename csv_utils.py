@@ -3,6 +3,8 @@ from filelock import Timeout, FileLock
 
 import const
 
+import time
+
 
 def setup():
     open(const.VID_TO_PROCESS_CSV_FILE, 'a').close()
