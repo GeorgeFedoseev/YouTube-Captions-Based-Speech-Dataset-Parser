@@ -472,6 +472,8 @@ def process_video(yt_video_id):
     curr_dir_path = os.path.dirname(os.path.realpath(__file__))
     video_data_path = os.path.join(curr_dir_path, "data/" + yt_video_id + "/")
 
+    
+    # check additionally if processed
     if os.path.exists(video_data_path):
         print 'video %s is ALREADY PARSED' % yt_video_id
         return

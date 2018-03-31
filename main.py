@@ -62,6 +62,9 @@ def video_parser_thread_loop():
 
         video_id = csv_utils.get_video_to_process()
 
+        if csv_utils.is_video_processed_or_failed(video_id):
+            print("VIDEO %s is already processed" % video_id)
+
         if not video_id:
             print 'no videos to parse - wait 5 seconds...'
             time.sleep(5)
