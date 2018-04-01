@@ -468,8 +468,7 @@ def write_stats(video_folder, stats_header, stats):
     f.close()
 
 def process_video(yt_video_id):
-    # sleep to allow other threads acces to csvs
-    #time.sleep(1)
+    
 
     print 'Processing video '+yt_video_id
 

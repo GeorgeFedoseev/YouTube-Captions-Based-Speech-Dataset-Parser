@@ -112,6 +112,8 @@ def video_parser_thread_loop():
             error_type = str(e)
             csv_utils.put_video_to_failed(video_id, error_type)
 
+        # sleep to allow other threads acces to csvs
+        time.sleep(0.2)
 
         
 
