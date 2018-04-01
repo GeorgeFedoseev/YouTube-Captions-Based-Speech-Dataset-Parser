@@ -480,7 +480,7 @@ def process_video(yt_video_id):
     # check additionally if processed
     if os.path.exists(video_data_path):
         print 'video %s is ALREADY PARSED' % yt_video_id
-        return
+        raise Exception('video_already_parsed')
 
     timed_words = get_timed_words(yt_video_id)
     subs = get_subs(yt_video_id)
