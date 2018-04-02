@@ -42,6 +42,8 @@ csv_files_dict = {}
 
 csv_files_dict_rlock = threading.RLock()
 
+csv_worker_thread = None
+
 
 
 # init from files
@@ -152,12 +154,14 @@ def csv_queue_worker():
         
 
 def start_csv_queue_worker_thread():
-    print 'start_csv_queue_worker_thread'
-    thr = threading.Thread(target=csv_queue_worker)
-    thr.daemon = True
-    thr.start()
+    if csv_worker_thread == None:
+        print 'start_csv_queue_worker_thread'
+        csv_worker_thread = threading.Thread(target=csv_queue_worker)
+        csv_worker_thread.daemon = True
+        csv_worker_thread.start()
 
-    return thr
+        return thr
+    return csv_worker_thread
 
 # CSV OPERATIONS
 
@@ -365,3 +369,6 @@ def get_video_to_process():
     if row != None and len(row) > 0:
         return row[0]
     return None
+
+
+
