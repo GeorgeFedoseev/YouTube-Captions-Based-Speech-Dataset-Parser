@@ -572,10 +572,8 @@ def process_video(yt_video_id):
 
             #good_cut = True
 
-            if good_cut:
-                
-                audio_piece_path = os.path.join(
-                    parts_dir_path, yt_video_id + "-" + str(int(cut_global_time_start*1000)) + "-" + str(int(cut_global_time_end*1000)) + ".wav")
+            if good_cut:               
+         
                 print '----------------'
                 print audio_piece_path
                 
