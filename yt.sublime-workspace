@@ -4,6 +4,154 @@
 		"selected_items":
 		[
 			[
+				"csv",
+				"csv_path\tparam"
+			],
+			[
+				"K",
+				"KWDS_TO_SEARCH\tstatement"
+			],
+			[
+				"cs",
+				"csv_path"
+			],
+			[
+				"a",
+				"append\tfunction"
+			],
+			[
+				"init",
+				"init_csv_from_file\tfunction"
+			],
+			[
+				"sync",
+				"sync_csv_to_file\tfunction"
+			],
+			[
+				"perf",
+				"performed_count\tstatement"
+			],
+			[
+				"ne",
+				"new_data"
+			],
+			[
+				"read",
+				"read_all\tfunction"
+			],
+			[
+				"writer",
+				"write_rows_to_csv\tfunction"
+			],
+			[
+				"firs",
+				"first_row\tstatement"
+			],
+			[
+				"appe",
+				"append_rows_to_csv\tfunction"
+			],
+			[
+				"start",
+				"start_csv_queue_worker_thread\tfunction"
+			],
+			[
+				"remo",
+				"removed"
+			],
+			[
+				"time",
+				"timeout\tparam"
+			],
+			[
+				"corre",
+				"corrected_cut"
+			],
+			[
+				"sear",
+				"searching"
+			],
+			[
+				"putv",
+				"put_videos_to_pending\tfunction"
+			],
+			[
+				"vides",
+				"videos_put\tstatement"
+			],
+			[
+				"dir",
+				"dir_items\tstatement"
+			],
+			[
+				"vide",
+				"video_id\tstatement"
+			],
+			[
+				"is",
+				"is_video_processed_or_failed\tfunction"
+			],
+			[
+				"write",
+				"write"
+			],
+			[
+				"remove_video",
+				"remove_video_from_processing\tfunction"
+			],
+			[
+				"remove",
+				"remove_video_from_processing\tfunction"
+			],
+			[
+				"rm",
+				"remove\tfunction"
+			],
+			[
+				"item",
+				"item_path"
+			],
+			[
+				"su",
+				"subprocess\tmodule"
+			],
+			[
+				"VIDEODA",
+				"video_data_path\tstatement"
+			],
+			[
+				"try",
+				"try_remove_to_delete_dir\tfunction"
+			],
+			[
+				"to",
+				"to_delete"
+			],
+			[
+				"tota",
+				"total_scanned\tstatement"
+			],
+			[
+				"j",
+				"join"
+			],
+			[
+				"tr",
+				"try\tTry/Except/Else"
+			],
+			[
+				"videoda",
+				"video_data_path\tstatement"
+			],
+			[
+				"video",
+				"video_data_path\tstatement"
+			],
+			[
+				"exce",
+				"except"
+			],
+			[
 				"cop",
 				"copy_jobs"
 			],
@@ -20,16 +168,8 @@
 				"makedirs"
 			],
 			[
-				"csv",
-				"csv_utils\tmodule"
-			],
-			[
 				"KW",
 				"KWDS_SEARCHED\tstatement"
-			],
-			[
-				"exce",
-				"Exception\tclass"
 			],
 			[
 				"chec",
@@ -104,14 +244,6 @@
 				"speech_array\tstatement"
 			],
 			[
-				"corre",
-				"corrected_start"
-			],
-			[
-				"try",
-				"try_correct_cut\tfunction"
-			],
-			[
 				"correc",
 				"corrected_end"
 			],
@@ -140,10 +272,6 @@
 				"get_speech_int_array\tfunction"
 			],
 			[
-				"start",
-				"starts_on_speech\tstatement"
-			],
-			[
 				"samples",
 				"samples_per_frame\tstatement"
 			],
@@ -154,10 +282,6 @@
 			[
 				"is_spe",
 				"is_speech_on_start"
-			],
-			[
-				"read",
-				"readframes"
 			],
 			[
 				"sapme",
@@ -196,14 +320,6 @@
 				"audio_path_wav\tstatement"
 			],
 			[
-				"vide",
-				"video_data_path\tstatement"
-			],
-			[
-				"j",
-				"join\tfunction"
-			],
-			[
 				"max",
 				"max_val\tstatement"
 			],
@@ -222,10 +338,6 @@
 			[
 				"audpa",
 				"audio_piece_path\tstatement"
-			],
-			[
-				"is",
-				"is_cut_during_speech"
 			],
 			[
 				"reu",
@@ -272,28 +384,12 @@
 				"average_val\tstatement"
 			],
 			[
-				"remove",
-				"removed_count\tstatement"
-			],
-			[
 				"remov",
 				"removed_count\tstatement"
 			],
 			[
-				"write",
-				"writerow"
-			],
-			[
 				"wri",
 				"write\tstatement"
-			],
-			[
-				"time",
-				"timed_words\tstatement"
-			],
-			[
-				"tota",
-				"stats_total_samples_count"
 			],
 			[
 				"pie",
@@ -338,10 +434,6 @@
 			[
 				"get",
 				"get_subs\tfunction"
-			],
-			[
-				"su",
-				"subs_name\tstatement"
 			],
 			[
 				"au",
@@ -404,20 +496,12 @@
 				"source_lower_than_target_bad_condition\tfunction"
 			],
 			[
-				"remo",
-				"remove_source_lower_than_target_fix\tmodule"
-			],
-			[
 				"wav",
 				"wav_file\tstatement"
 			],
 			[
 				"sou",
 				"source_len\tstatement"
-			],
-			[
-				"to",
-				"total_scanned\tstatement"
 			],
 			[
 				"wa",
@@ -430,100 +514,25 @@
 			[
 				"audio",
 				"audio_path\tstatement"
-			],
-			[
-				"pa",
-				"path\tmodule"
-			],
-			[
-				"num",
-				"num_str\tparam"
-			],
-			[
-				"la",
-				"lang\tparam"
-			],
-			[
-				"wr",
-				"writelines\tfunction"
-			],
-			[
-				"statto",
-				"stats_total_samples_count\tstatement"
-			],
-			[
-				"statstota",
-				"stats_total_samples_count\tstatement"
-			],
-			[
-				"statsvi",
-				"stats_videos_folders_count\tstatement"
-			],
-			[
-				"pu",
-				"put_keywords_to_processed\tfunction"
-			],
-			[
-				"test",
-				"test_rows\tstatement"
-			],
-			[
-				"ex",
-				"export_test_csv_path\tstatement"
-			],
-			[
-				"dev",
-				"dev_rows\tstatement"
-			],
-			[
-				"expo",
-				"export_train_csv_path\tstatement"
-			],
-			[
-				"tra",
-				"train_rows\tstatement"
-			],
-			[
-				"de",
-				"dev_count\tstatement"
-			],
-			[
-				"all",
-				"all_rows\tstatement"
-			],
-			[
-				"trai",
-				"train_rows"
-			],
-			[
-				"al",
-				"all_rows\tstatement"
-			],
-			[
-				"s",
-				"shuffle"
-			],
-			[
-				"app",
-				"append_rows_to_csv\tfunction"
-			],
-			[
-				"clea",
-				"clear_csv\tfunction"
-			],
-			[
-				"exp",
-				"export_sets_dir_path\tstatement"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "main.py",
+			"file": "parse_youtube.py",
 			"settings":
 			{
-				"buffer_size": 2376,
+				"buffer_size": 3714,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "keyword-sets/keywords_audiobook.txt",
+			"settings":
+			{
+				"buffer_size": 15908,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -532,25 +541,7 @@
 			"file": "video_parser.py",
 			"settings":
 			{
-				"buffer_size": 16566,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "keyword-sets/example_math_lesson.txt",
-			"settings":
-			{
-				"buffer_size": 289,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "export-dataset.py",
-			"settings":
-			{
-				"buffer_size": 4766,
+				"buffer_size": 18479,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -559,35 +550,8 @@
 			"file": "youtube_video_searcher.py",
 			"settings":
 			{
-				"buffer_size": 2874,
+				"buffer_size": 4178,
 				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "+в домашних условиях видео уроки\n1 урок\n1 урок русский\n10 уроков\n2 часть 2 урок\n3 урока\n4 урока\n5 уроков\n6 класс уроки фгос\n6 уроков\n7 уроков\n8 уроков\nанализ урока\nанглийский 2 урок\nаудио уроки\nбесплатные уроки\nвид конспекты уроков\nвидео уроки\nвидео уроки +для начинающих\nвидео уроки бесплатно\nвидео уроки крючком\nвиды уроков\nвязание видео уроки\nг урок\nдомашние видео уроки\nдомашние уроки\nединый урок\nединый урок рф\nзадачи урока\nимя урока\nинтернет урок\nкакой урок\nкарта урока\nкарта урока +по фгос\nклассе уроки истории +в\nконспект 1 уроку\nконспект урока\nконспект урока +на тему\nконспект урока +на тему класс\nконспект урока +по математике\nконспект урока +по русскому\nконспект урока +по русскому языку\nконспект урока +по русскому языку класс\nконспект урока +по фгос\nконспект урока +с презентацией\nконспект урока 1 класс\nконспект урока 10\nконспект урока 10 класс\nконспект урока 11 класс\nконспект урока 2\nконспект урока 2 класс\nконспект урока 3\nконспект урока 3 класс\nконспект урока 4\nконспект урока 4 класс\nконспект урока 5\nконспект урока 5 класс\nконспект урока 6\nконспект урока 6 класс\nконспект урока 7\nконспект урока 7 класс\nконспект урока 8\nконспект урока 8 класс\nконспект урока 9\nконспект урока 9 класс\nконспект урока век\nконспект урока класс\nконспект урока россия\nконспект урока слово\nконспект урока числе\nконспект уроку мира\nконтрольный урок\nкраткий урок\nлитературный урок\nматематика 1 урок\nматематика 2 урок\nматематика 3 урок\nматематика 4 урок\nматематика класс конспект урока\nматематика класс урок\nматематика тема урока\nметоды урока\nмир уроков\nначало урока\nначальные уроки\nнова урок\nновый урок\nобобщающий урок\nобобщенный урок\nобразец урока\nонлайн уроки\nоткрытый класс открытые уроки\nоткрытый урок\nпервые уроки\nпервый урок\nплан конспект урока\nплан урока\nплан урока +на тему\nподготовка +к уроку\nпорно уроки\nпосле уроков\nпочему урок\nпрезентации уроков 4 классе\nпрезентация урока 5 класс\nпрезентация урока русского\nпрезентация уроков 2 класс\nпрезентация уроков языка\nпример урока\nпро урок\nпроизведение урок\nработа +на уроке\nразработки уроков\nрасписание уроков\nраспутин уроки\nраспутин уроки французского\nрассказ уроки\nрассказ уроки французского\nрешение уроков\nроссия урок презентация\nрусский урок 4\nрусский язык урок 1\nсамоанализ урока\nсистема уроков\nскачать бесплатно уроки\nскачать конспект урока\nскачать урок\nслово урок\nсмотреть уроки\nсовременный урок\nсодержание урока\nсочинение уроки\nтекст урок\nтема 1 уроку\nтема 2 урок\nтема 5 урока\nтема урока\nтема урока +по фгос\nтема урока 3 класс\nтема урока 7 класс\nтема урока класс\nтема урока презентация\nтема урока россия\nтемы уроков 1 класс\nтемы уроков 4 класса\nтемы уроков 6 класс\nтемы уроков 8 класс\nтехнологическая карта урока\nтехнологическая карта урока классе\nтехнологический урок\nтипы уроков\nурок +в классе\nурок +в школе\nурок 1 1 школа россии\nурок 11\nурок 11 класс\nурок 16\nурок 2\nурок 2 1 1 1\nурок 2 класс\nурок 21\nурок 4 класс\nурок 5 класс фгос\nурок 9\nурок герой\nурок глагол\nурок деление\nурок деятельность\nурок дроби\nурок з\nурок задание\nурок закрепление\nурок игра\nурок изо\nурок изо класс\nурок имя существительное\nурок информатики\nурок искусство\nурок культуры\nурок лет\nурок литературного чтения\nурок литературы\nурок м\nурок математик\nурок математики 1 класс\nурок математики 2 класс\nурок местоимение\nурок мужества\nурок н\nурок обж\nурок обобщения\nурок обществознания\nурок окружающего\nурок окружающего мира\nурок основная\nурок план класса\nурок права\nурок предложение\nурок презентация\nурок презентация 3 класс\nурок развития\nурок решения задач\nурок россии 1 класс\nурок россии 2 класс\nурок россия\nурок русского 1 класс\nурок русского 6\nурок русского класс\nурок русского языка +по теме\nурок русского языка 1 класс\nурок русского языка 2 класс\nурок русского языка 3\nурок русского языка 3 класс\nурок русского языка класс\nурок рф\nурок сказка\nурок сложения\nурок технологии\nурок труда\nурок умножение\nурок учебник\nурок физической\nурок физической культуры\nурок физкультуры\nурок части речи\nурок человек\nурок числительное\nурок чтения\nурок школа россии\nуроки\nуроки +в 10 классе\nуроки +в домашних условиях\nуроки +для начинающих\nуроки +с +с нуля\nуроки 1 класса\nуроки 21 века\nуроки 3 класс\nуроки 3 школы\nуроки 4 класс русский\nуроки 5 класс\nуроки 6 класс\nуроки 7 класс\nуроки 8 вид\nуроки 8 класс\nуроки 9 класс\nуроки алгебры\nуроки английского\nуроки английского 2 класс\nуроки английского языка\nуроки английского языка класс\nуроки биологии\nуроки века\nуроки войны\nуроки вязания\nуроки географии\nуроки делать\nуроки дома\nуроки жизни\nуроки знаний\nуроки истории\nуроки крючком\nуроки лета\nуроки литературы +в классе\nуроки музыки класс\nуроки начальной школы\nуроки немецкого\nуроки обучения\nуроки правописания\nуроки речи\nуроки рисования\nуроки русского\nуроки русского языка\nуроки русского языка 4\nуроки секса\nуроки спицами\nуроки существительное\nуроки танцев\nуроки условиях\nуроки физики\nуроки французского\nуроки французского герои\nуроки французского краткое\nуроки химии\nуроки языков\nусловиях видео уроки\nучитель +на уроке\nфгос урок\nфильм урок\nформы урока\nцели урока\nчасти урока\nчисла урок класс\nчитать уроки\nшкола 1 урок\nшкола 3 класс урок\nшкола россии конспекты уроков\nшкола урок 1 класс\nшкола урок математики\nшкола урок презентация\nшкола фгос уроки\nязыки видео уроки",
-			"file": "example_keywords_lessons.txt",
-			"file_size": 9379,
-			"file_write_time": 131661490860000000,
-			"settings":
-			{
-				"buffer_size": 5170,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "yt.sublime-project",
-			"settings":
-			{
-				"buffer_size": 357,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "stats_util.py",
-			"settings":
-			{
-				"buffer_size": 3022,
 				"line_ending": "Unix"
 			}
 		},
@@ -595,7 +559,7 @@
 			"file": "csv_utils.py",
 			"settings":
 			{
-				"buffer_size": 5457,
+				"buffer_size": 9683,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -669,6 +633,26 @@
 	],
 	"file_history":
 	[
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/venv/lib/python2.7/site-packages/tqdm/_tqdm.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/videos_to_process.csv",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/videos_processing.csv",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/remove_extra_data_for_processed.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/keyword-sets/keywords_foodprep.txt",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/export-dataset.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/remove_failed_data.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/csv_utils.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/main.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/keyword-sets/example_math_doklad.txt",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/yt.sublime-project",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/video_parser.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/venv/lib/python2.7/site-packages/subprocess32.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/venv/lib/python2.7/site-packages/pip/_vendor/distlib/_backport/shutil.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/const.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/venv/lib/python2.7/site-packages/youtube_dl/YoutubeDL.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/venv/lib/python2.7/site-packages/pyvtt/vttfile.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/youtube_video_searcher.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/keyword-sets/example_math_lesson.txt",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/example_keywords_lessons.txt",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/data/yQPbqSfPoJw/subs.ru.vtt",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/data/yQPbqSfPoJw/autosubs.ru.vtt",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/data/glMSP5bAP-M/parts.csv",
@@ -676,35 +660,28 @@
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/data/8r59DX_azR8/parts.csv",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/test_captions_api.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/data/JPtJ5gG-95I/autosubs.ru.vtt",
-		"/Users/gosha/Projects/youtube-audio-captions-parsing/videos_processing.csv",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/videos_processed.csv",
-		"/Users/gosha/Projects/youtube-audio-captions-parsing/videos_to_process.csv",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/keywords_to_search.csv",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/test_waveform_correction.py",
-		"/Users/gosha/Projects/youtube-audio-captions-parsing/youtube_video_searcher.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/export-sets/yt-dev.csv",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/keywords_done.csv",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/example_keywords_reviews.txt",
 		"/Users/gosha/Projects/DeepSpeech/host_install.txt",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/example_keywords_jakushkin.txt",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/example_keywords.txt",
-		"/Users/gosha/Projects/youtube-audio-captions-parsing/video_parser.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/stats_util.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/remove_short_transcript_samples.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/path_checker.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/change_paths.py",
-		"/Users/gosha/Projects/youtube-audio-captions-parsing/main.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/vad.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/test_autosubs_for_correction.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/data/Y-Glvos3ufI/subs.ru.vtt",
-		"/Users/gosha/Projects/youtube-audio-captions-parsing/csv_utils.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/videos_failed_to_process.csv",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/data/5HmJ2OXK7L4/autosubs.ru.vtt",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/data/5HmJ2OXK7L4/subs.ru.vtt",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/test.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/speech_utils.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/test/subs.ru.vtt",
-		"/Users/gosha/Projects/youtube-audio-captions-parsing/venv/lib/python2.7/site-packages/pyvtt/vttfile.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/venv/lib/python2.7/site-packages/pyvtt/vtttime.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/remove_latin_chars_fix.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/export-ml-sets.py",
@@ -712,7 +689,6 @@
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/remove_empty_wavs_fix.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/remove_source_lower_than_target_fix.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/example_keywords_big.txt",
-		"/Users/gosha/Projects/youtube-audio-captions-parsing/const.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/venv/lib/python2.7/site-packages/cyrtranslit/__init__.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/venv/lib/python2.7/site-packages/cyrtranslit/mapping.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/export-sets/vocabulary.txt",
@@ -722,7 +698,6 @@
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/processed_search_keywords_list.csv",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/venv/lib/python2.7/site-packages/pafy/backend_shared.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/venv/bin/ytdl",
-		"/Users/gosha/Projects/youtube-audio-captions-parsing/venv/lib/python2.7/site-packages/youtube_dl/YoutubeDL.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/data/7mn2OENp3Xg/parts.csv",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/data/uFhFr3op09Y/parts.csv",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/data/mFMZF863unk/parts.csv",
@@ -732,7 +707,6 @@
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/data/blSz672ZarU/subs.ru.vtt",
 		"/Users/gosha/Library/Application Support/Sublime Text 3/Packages/Jedi - Python autocompletion/Default.sublime-keymap",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/audio_utils.py",
-		"/Users/gosha/Projects/youtube-audio-captions-parsing/yt.sublime-project",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/data/tssa",
 		"/Users/gosha/Desktop/writing5.2.txt",
 		"/Users/gosha/Desktop/writing5.1.txt",
@@ -754,13 +728,14 @@
 	],
 	"find":
 	{
-		"height": 23.0
+		"height": 39.0
 	},
 	"find_in_files":
 	{
 		"height": 101.0,
 		"where_history":
 		[
+			""
 		]
 	},
 	"find_state":
@@ -768,6 +743,37 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"sleep",
+			"ALREADY",
+			"mark query as processed",
+			"write_rows_to_csv",
+			"append_rows_to_csv",
+			"FileLock",
+			"csv_files_dict_rlock",
+			"write_rows_to_csv",
+			"add_item_to_csv",
+			"get_item_in_csv",
+			"_append_op",
+			"corrected",
+			"re.sub",
+			"re.",
+			"remove_video_dir",
+			"p.kill()",
+			"Popen",
+			"POpe",
+			"def close",
+			"close",
+			"open",
+			"video_does",
+			"get_timed_words",
+			"video_doesnt",
+			"open",
+			"except ",
+			"open",
+			"remove_video_dir",
+			"print",
+			"remove_video_dir",
+			"rmdir",
 			"export_sets_dir_path",
 			"ffmpeg",
 			"Popen",
@@ -809,6 +815,8 @@
 		"regex": true,
 		"replace_history":
 		[
+			"add_row_to_csv",
+			"get_row_in_csv",
 			"target_folder",
 			"\n",
 			"\\\\n",
@@ -828,295 +836,24 @@
 	"groups":
 	[
 		{
-			"selected": 6,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "main.py",
+					"file": "parse_youtube.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2376,
+						"buffer_size": 3714,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1976,
-								1976
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": ".",
-									"selector": "source.python - string - comment - constant.numeric"
-								},
-								{
-									"characters": ".",
-									"selector": "source.python - string - constant.numeric"
-								}
-							],
-							"show_definitions": false,
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 807.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "video_parser.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 16566,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5897,
-								5996
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": ".",
-									"selector": "source.python - string - comment - constant.numeric"
-								},
-								{
-									"characters": ".",
-									"selector": "source.python - string - constant.numeric"
-								},
-								{
-									"characters": ".",
-									"selector": "source.python - string - constant.numeric"
-								},
-								{
-									"characters": ".",
-									"selector": "source.python - string - constant.numeric"
-								},
-								{
-									"characters": ".",
-									"selector": "source.python - string - constant.numeric"
-								}
-							],
-							"show_definitions": false,
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 2906.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "keyword-sets/example_math_lesson.txt",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 289,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "export-dataset.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4766,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3444,
-								3444
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": ".",
-									"selector": "source.python - string - comment - constant.numeric"
-								},
-								{
-									"characters": ".",
-									"selector": "source.python - string - constant.numeric"
-								}
-							],
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1101.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "youtube_video_searcher.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2874,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2651,
-								2651
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": ".",
-									"selector": "source.python - string - comment - constant.numeric"
-								},
-								{
-									"characters": ".",
-									"selector": "source.python - string - constant.numeric"
-								}
-							],
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 609.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "example_keywords_lessons.txt",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5170,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5170,
-								5170
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 3652.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "yt.sublime-project",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 357,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								354,
-								3
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": -1,
-								"modified": true,
-								"selection": true,
-								"status": -1,
-								"syntax": "json"
-							},
-							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "stats_util.py",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 3022,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								522,
-								522
+								2795,
+								2795
 							]
 						],
 						"settings":
@@ -1129,32 +866,149 @@
 								"status": -1,
 								"syntax": "python"
 							},
+							"auto_complete_triggers":
+							[
+								{
+									"characters": ".",
+									"selector": "source.python - string - comment - constant.numeric"
+								},
+								{
+									"characters": ".",
+									"selector": "source.python - string - constant.numeric"
+								},
+								{
+									"characters": ".",
+									"selector": "source.python - string - constant.numeric"
+								},
+								{
+									"characters": ".",
+									"selector": "source.python - string - constant.numeric"
+								},
+								{
+									"characters": ".",
+									"selector": "source.python - string - constant.numeric"
+								},
+								{
+									"characters": ".",
+									"selector": "source.python - string - constant.numeric"
+								}
+							],
 							"syntax": "Packages/Python/Python.sublime-syntax",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1021.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 8,
-					"file": "csv_utils.py",
+					"buffer": 1,
+					"file": "keyword-sets/keywords_audiobook.txt",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5457,
+						"buffer_size": 15908,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2672,
-								2672
+								15908,
+								15908
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": 0,
+								"count": 1908,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "video_parser.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 18479,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								12424,
+								12295
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": -1,
+								"modified": true,
+								"selection": true,
+								"status": -1,
+								"syntax": "python"
+							},
+							"auto_complete_triggers":
+							[
+								{
+									"characters": ".",
+									"selector": "source.python - string - comment - constant.numeric"
+								},
+								{
+									"characters": ".",
+									"selector": "source.python - string - constant.numeric"
+								},
+								{
+									"characters": ".",
+									"selector": "source.python - string - constant.numeric"
+								}
+							],
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 6585.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "youtube_video_searcher.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4178,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								166,
+								166
 							]
 						],
 						"settings":
@@ -1168,6 +1022,18 @@
 								{
 									"characters": ".",
 									"selector": "source.python - string - constant.numeric"
+								},
+								{
+									"characters": ".",
+									"selector": "source.python - string - constant.numeric"
+								},
+								{
+									"characters": ".",
+									"selector": "source.python - string - constant.numeric"
+								},
+								{
+									"characters": ".",
+									"selector": "source.python - string - constant.numeric"
 								}
 							],
 							"syntax": "Packages/Python/Python.sublime-syntax",
@@ -1175,10 +1041,72 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1444.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "csv_utils.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9683,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9522,
+								9522
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": -1,
+								"modified": true,
+								"selection": true,
+								"status": -1,
+								"syntax": "python"
+							},
+							"auto_complete_triggers":
+							[
+								{
+									"characters": ".",
+									"selector": "source.python - string - comment - constant.numeric"
+								},
+								{
+									"characters": ".",
+									"selector": "source.python - string - constant.numeric"
+								},
+								{
+									"characters": ".",
+									"selector": "source.python - string - constant.numeric"
+								},
+								{
+									"characters": ".",
+									"selector": "source.python - string - constant.numeric"
+								},
+								{
+									"characters": ".",
+									"selector": "source.python - string - constant.numeric"
+								}
+							],
+							"show_definitions": false,
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3338.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
 					"type": "text"
 				}
 			]
@@ -1217,7 +1145,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 274.0
+		"height": 353.0
 	},
 	"output.find_results":
 	{

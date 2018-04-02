@@ -54,7 +54,7 @@ def init_csv_from_file(csv_path):
         if csv_path in csv_files_dict:
             return # already inited
 
-        print("init csv %s" % csv_path)
+        #print("init csv %s" % csv_path)
 
         # create csv file if not exists
         if not os.path.exists(csv_path):

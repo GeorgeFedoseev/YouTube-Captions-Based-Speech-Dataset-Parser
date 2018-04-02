@@ -14,10 +14,24 @@ import sys
 
 from tqdm import tqdm # progressbar
 
+import audio_utils
+
+import subprocess
+
 NUM_THREADS = 8
 DATASET_NAME = "yt-subs"
 
-def export(target_folder):
+def check_dependencies_installed():
+    try:
+        subprocess.check_output(['soxi'], stderr=subprocess.STDOUT)        
+        subprocess.check_output(['ffmpeg', '--help'], stderr=subprocess.STDOUT)
+    except Exception as ex:
+        print 'ERROR: some of dependencies are not installed: youtube-dl, ffmpeg or sox: '+str(ex)
+        return False
+
+    return True
+
+def export(target_folder, apply_filter=True):
 
     target_folder = os.path.abspath(os.path.expanduser(target_folder))
 
@@ -116,7 +130,7 @@ def export(target_folder):
     # rename audio files paths
     for row in train_rows:
         old_path = get_audio_rel_path(row[0])
-        print old_path
+        #print old_path
         filename = os.path.basename(old_path)
         new_path =  os.path.join(export_train_dir_path, filename)       
         copy_jobs.append((old_path, new_path))
@@ -143,14 +157,18 @@ def export(target_folder):
 
     pbar = tqdm(total=len(copy_jobs))
 
-    def copy_audio_file(job):
+    def process_audio_file(job):
+        from_path = job[0]
+        to_path = job[1]
         #print 'copy %s -> %s' % job
-        shutil.copyfile(job[0], job[1])
+        #shutil.copyfile(from_path, to_path)        
+        audio_utils.correct_volume(from_path, to_path)
+        audio_utils.apply_bandpass_filter(to_path, to_path)
         pbar.update(1)
 
 
     pool = ThreadPool(NUM_THREADS)
-    pool.map(copy_audio_file, copy_jobs)
+    pool.map(process_audio_file, copy_jobs)
 
     pbar.close()
 
@@ -174,6 +192,9 @@ def export(target_folder):
 
 
 if __name__ == '__main__':
+    if not check_dependencies_installed():
+        raise SystemExit
+
     if len(sys.argv) < 2:
         print('USAGE: python export-dataset.py <export_dir_path>')
     else:    
