@@ -121,9 +121,7 @@ def start_parsing():
     
 
     
-    try:
-        # start csv_utils worker thread
-        csv_utils.start_csv_queue_worker_thread()
+    try:        
 
         setup()
 

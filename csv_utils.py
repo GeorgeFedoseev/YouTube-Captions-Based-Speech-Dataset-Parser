@@ -49,7 +49,8 @@ csv_worker_thread = None
 # init from files
 def init_csv_from_file(csv_path):    
 
-    
+    # lazy init
+    maybe_start_csv_queue_worker_thread()
 
     with csv_files_dict_rlock:
 
@@ -153,7 +154,7 @@ def csv_queue_worker():
         time.sleep(1) 
         
 
-def start_csv_queue_worker_thread():
+def maybe_start_csv_queue_worker_thread():
     if csv_worker_thread == None:
         print 'start_csv_queue_worker_thread'
         csv_worker_thread = threading.Thread(target=csv_queue_worker)
