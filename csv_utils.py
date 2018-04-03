@@ -49,8 +49,6 @@ def setup():
 
 
 
-
-
 # init from files
 def init_csv_from_file(csv_path):    
 
@@ -167,7 +165,7 @@ def maybe_start_csv_queue_worker_thread():
         csv_worker_thread = threading.Thread(target=csv_queue_worker)
         csv_worker_thread.daemon = True
         csv_worker_thread.start()
-                
+
     return csv_worker_thread
 
 # CSV OPERATIONS
