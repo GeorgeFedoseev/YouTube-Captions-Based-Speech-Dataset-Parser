@@ -13,6 +13,17 @@ import threading
 
 import traceback
 
+# CSV MEM ABSTRACTION with syncing with filesystem every n seconds
+# {filename: {rows: [], queue: } }
+csv_files_dict = {}
+
+csv_files_dict_rlock = threading.RLock()
+
+csv_worker_thread = None
+
+
+
+
 def setup():
     print('csv utils setup - start')
     open(const.VID_TO_PROCESS_CSV_FILE, 'a').close()
@@ -36,13 +47,7 @@ def setup():
     print('csv utils setup - end')
 
 
-# CSV MEM ABSTRACTION with syncing with filesystem every n seconds
-# {filename: {rows: [], queue: } }
-csv_files_dict = {}
 
-csv_files_dict_rlock = threading.RLock()
-
-csv_worker_thread = None
 
 
 
