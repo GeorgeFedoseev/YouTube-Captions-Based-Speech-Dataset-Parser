@@ -31,7 +31,7 @@ def check_dependencies_installed():
 
     return True
 
-def export(target_folder, apply_filter=True):
+def export(target_folder, apply_filter=True, skip_audio=False):
 
     target_folder = os.path.abspath(os.path.expanduser(target_folder))
 
@@ -155,24 +155,6 @@ def export(target_folder, apply_filter=True):
         row[0] =  os.path.join(export_test_dir_path, filename)        
 
 
-    pbar = tqdm(total=len(copy_jobs))
-
-    def process_audio_file(job):
-        from_path = job[0]
-        to_path = job[1]
-        #print 'copy %s -> %s' % job
-        #shutil.copyfile(from_path, to_path)  
-        if not os.path.exists(to_path):      
-            audio_utils.correct_volume(from_path, to_path)
-            audio_utils.apply_bandpass_filter(to_path, to_path)
-        pbar.update(1)
-
-
-    pool = ThreadPool(NUM_THREADS)
-    pool.map(process_audio_file, copy_jobs)
-
-    pbar.close()
-
     # write sets csvs
     header = ['wav_filename', 'wav_filesize', 'transcript']
 
@@ -191,15 +173,38 @@ def export(target_folder, apply_filter=True):
     vocabulary.close()
 
 
+    if not skip_audio:
+        # write audio files
+        pbar = tqdm(total=len(copy_jobs))
+
+        def process_audio_file(job):
+            from_path = job[0]
+            to_path = job[1]
+            #print 'copy %s -> %s' % job
+            #shutil.copyfile(from_path, to_path)  
+            if not os.path.exists(to_path):      
+                audio_utils.correct_volume(from_path, to_path)
+                audio_utils.apply_bandpass_filter(to_path, to_path)
+            pbar.update(1)
+
+
+        pool = ThreadPool(NUM_THREADS)
+        pool.map(process_audio_file, copy_jobs)
+
+        pbar.close()
+
+    
+
+
 
 if __name__ == '__main__':
     if not check_dependencies_installed():
         raise SystemExit
 
     if len(sys.argv) < 2:
-        print('USAGE: python export-dataset.py <export_dir_path>')
+        print('USAGE: python export-dataset.py <export_dir_path> [--skip-audio]')
     else:    
-        export(sys.argv[1])
+        export(sys.argv[1], skip_audio=("--skip-audio" in str(sys.argv)))
 
 
 
