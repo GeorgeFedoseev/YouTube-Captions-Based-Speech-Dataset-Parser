@@ -161,14 +161,13 @@ def csv_queue_worker():
 
 def maybe_start_csv_queue_worker_thread():
     global csv_worker_thread
-    
+
     if csv_worker_thread == None:
         print 'start_csv_queue_worker_thread'
         csv_worker_thread = threading.Thread(target=csv_queue_worker)
         csv_worker_thread.daemon = True
         csv_worker_thread.start()
-
-        return thr
+                
     return csv_worker_thread
 
 # CSV OPERATIONS
