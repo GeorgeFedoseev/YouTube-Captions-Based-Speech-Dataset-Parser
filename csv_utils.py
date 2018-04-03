@@ -1,8 +1,8 @@
 import csv
-from filelock import Timeout, FileLock
 
 import const
 import os
+import sys
 
 import time
 import datetime
@@ -11,7 +11,7 @@ from Queue import *
 
 import threading
 
-import traceback
+
 
 # CSV MEM ABSTRACTION with syncing with filesystem every n seconds
 # {filename: {rows: [], queue: } }
@@ -107,7 +107,7 @@ def sync_csv_to_file(csv_path):
     if not (csv_path in csv_files_dict):
         return # cant write - dont have data
 
-    #print('sync_csv_to_file - start')
+    print('sync_csv_to_file - start')
 
     lines = []
     for row in csv_files_dict[csv_path]["rows"]:
@@ -118,7 +118,7 @@ def sync_csv_to_file(csv_path):
     f.write('\n'.join(lines)+'\n')
     f.close()
     
-    #print('sync_csv_to_file - end')
+    print('sync_csv_to_file - end')
 
 # writer worker
 def csv_queue_worker():
@@ -150,11 +150,19 @@ def csv_queue_worker():
                 if performed_count > 0:
                     sync_csv_to_file(csv_path)
 
+             # finished queue
+            # check if main thread is still alive
+            is_main_thread_active = lambda : any((i.name == "MainThread") and i.is_alive() for i in threading.enumerate())
+            #print("is_main_thread_active: %s" % str(is_main_thread_active()))
+            if not is_main_thread_active():
+                print ("main thread is not alive - exit")
+                sys.exit()
+
         #print ("performed %i queue operations" % performed_count)
 
 
 
-        time.sleep(1) 
+        time.sleep(0.1) 
         
 
 def maybe_start_csv_queue_worker_thread():
@@ -163,7 +171,7 @@ def maybe_start_csv_queue_worker_thread():
     if csv_worker_thread == None:
         print 'start_csv_queue_worker_thread'
         csv_worker_thread = threading.Thread(target=csv_queue_worker)
-        csv_worker_thread.daemon = True
+        csv_worker_thread.daemon = False
         csv_worker_thread.start()
 
     return csv_worker_thread
