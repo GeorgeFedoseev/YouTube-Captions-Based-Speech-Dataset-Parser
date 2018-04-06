@@ -85,6 +85,9 @@ def export(target_folder, apply_filter=True, skip_audio=False):
 
         parts = csv_utils.read_all(parts_csv_path)
 
+        # remove duplicates
+        parts = reduce(lambda x,y: x+[y] if not y in x else x, parts,[])
+
         all_rows.extend(parts)
 
 
