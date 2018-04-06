@@ -4,16 +4,32 @@
 		"selected_items":
 		[
 			[
+				"cs",
+				"csv_worker_thread\tstatement"
+			],
+			[
+				"Sys",
+				"SystemExit\tclass"
+			],
+			[
+				"app",
+				"apply_bandpass_filter\tfunction"
+			],
+			[
+				"audi",
+				"audio_utils\tmodule"
+			],
+			[
+				"from",
+				"from_path\tstatement"
+			],
+			[
 				"csv",
 				"csv_path\tparam"
 			],
 			[
 				"K",
 				"KWDS_TO_SEARCH\tstatement"
-			],
-			[
-				"cs",
-				"csv_path"
 			],
 			[
 				"a",
@@ -226,10 +242,6 @@
 			[
 				"parts",
 				"parts_dir_path\tstatement"
-			],
-			[
-				"audi",
-				"audio_piece_path"
 			],
 			[
 				"cut",
@@ -502,18 +514,6 @@
 			[
 				"sou",
 				"source_len\tstatement"
-			],
-			[
-				"wa",
-				"wav_file"
-			],
-			[
-				"co",
-				"close\tfunction"
-			],
-			[
-				"audio",
-				"audio_path\tstatement"
 			]
 		]
 	},
@@ -523,16 +523,7 @@
 			"file": "parse_youtube.py",
 			"settings":
 			{
-				"buffer_size": 3714,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "keyword-sets/keywords_audiobook.txt",
-			"settings":
-			{
-				"buffer_size": 15908,
+				"buffer_size": 3632,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -541,16 +532,43 @@
 			"file": "video_parser.py",
 			"settings":
 			{
-				"buffer_size": 18479,
+				"buffer_size": 18292,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "youtube_video_searcher.py",
+			"file": "subs_utils.py",
 			"settings":
 			{
-				"buffer_size": 4178,
+				"buffer_size": 934,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "folder-video-ids.py",
+			"settings":
+			{
+				"buffer_size": 587,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "audio_utils.py",
+			"settings":
+			{
+				"buffer_size": 1011,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "export-dataset.py",
+			"settings":
+			{
+				"buffer_size": 5861,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -559,8 +577,16 @@
 			"file": "csv_utils.py",
 			"settings":
 			{
-				"buffer_size": 9683,
+				"buffer_size": 10280,
 				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "yt.sublime-project",
+			"settings":
+			{
+				"buffer_size": 357,
 				"line_ending": "Unix"
 			}
 		}
@@ -633,6 +659,9 @@
 	],
 	"file_history":
 	[
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/csv_utils.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/youtube_video_searcher.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/keyword-sets/keywords_audiobook.txt",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/venv/lib/python2.7/site-packages/tqdm/_tqdm.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/videos_to_process.csv",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/videos_processing.csv",
@@ -640,7 +669,6 @@
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/keyword-sets/keywords_foodprep.txt",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/export-dataset.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/remove_failed_data.py",
-		"/Users/gosha/Projects/youtube-audio-captions-parsing/csv_utils.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/main.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/keyword-sets/example_math_doklad.txt",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/yt.sublime-project",
@@ -650,7 +678,6 @@
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/const.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/venv/lib/python2.7/site-packages/youtube_dl/YoutubeDL.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/venv/lib/python2.7/site-packages/pyvtt/vttfile.py",
-		"/Users/gosha/Projects/youtube-audio-captions-parsing/youtube_video_searcher.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/keyword-sets/example_math_lesson.txt",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/example_keywords_lessons.txt",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/data/yQPbqSfPoJw/subs.ru.vtt",
@@ -743,6 +770,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"csv_worker_thread",
+			"start_",
+			"csv_ut",
+			"print",
 			"sleep",
 			"ALREADY",
 			"mark query as processed",
@@ -836,7 +867,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 4,
 			"sheets":
 			[
 				{
@@ -845,15 +876,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3714,
+						"buffer_size": 3632,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2795,
-								2795
+								2846,
+								2846
 							]
 						],
 						"settings":
@@ -875,149 +906,6 @@
 								{
 									"characters": ".",
 									"selector": "source.python - string - constant.numeric"
-								},
-								{
-									"characters": ".",
-									"selector": "source.python - string - constant.numeric"
-								},
-								{
-									"characters": ".",
-									"selector": "source.python - string - constant.numeric"
-								},
-								{
-									"characters": ".",
-									"selector": "source.python - string - constant.numeric"
-								},
-								{
-									"characters": ".",
-									"selector": "source.python - string - constant.numeric"
-								}
-							],
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1021.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "keyword-sets/keywords_audiobook.txt",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 15908,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								15908,
-								15908
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": 0,
-								"count": 1908,
-								"modified": false,
-								"selection": false,
-								"status": -1,
-								"syntax": "plain text"
-							},
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "video_parser.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 18479,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								12424,
-								12295
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": -1,
-								"modified": true,
-								"selection": true,
-								"status": -1,
-								"syntax": "python"
-							},
-							"auto_complete_triggers":
-							[
-								{
-									"characters": ".",
-									"selector": "source.python - string - comment - constant.numeric"
-								},
-								{
-									"characters": ".",
-									"selector": "source.python - string - constant.numeric"
-								},
-								{
-									"characters": ".",
-									"selector": "source.python - string - constant.numeric"
-								}
-							],
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 6585.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "youtube_video_searcher.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4178,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								166,
-								166
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": ".",
-									"selector": "source.python - string - comment - constant.numeric"
 								},
 								{
 									"characters": ".",
@@ -1048,20 +936,20 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "csv_utils.py",
+					"buffer": 1,
+					"file": "video_parser.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 9683,
+						"buffer_size": 18292,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								9522,
-								9522
+								6703,
+								7124
 							]
 						],
 						"settings":
@@ -1087,23 +975,269 @@
 								{
 									"characters": ".",
 									"selector": "source.python - string - constant.numeric"
-								},
+								}
+							],
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "subs_utils.py",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 934,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "folder-video-ids.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 587,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								587,
+								587
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
 								{
 									"characters": ".",
-									"selector": "source.python - string - constant.numeric"
+									"selector": "source.python - string - comment - constant.numeric"
 								},
 								{
 									"characters": ".",
 									"selector": "source.python - string - constant.numeric"
 								}
 							],
-							"show_definitions": false,
 							"syntax": "Packages/Python/Python.sublime-syntax",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 3338.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "audio_utils.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1011,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								23,
+								44
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": -1,
+								"modified": true,
+								"selection": true,
+								"status": -1,
+								"syntax": "python"
+							},
+							"auto_complete_triggers":
+							[
+								{
+									"characters": ".",
+									"selector": "source.python - string - comment - constant.numeric"
+								},
+								{
+									"characters": ".",
+									"selector": "source.python - string - constant.numeric"
+								}
+							],
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "export-dataset.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5861,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5369,
+								5390
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": -1,
+								"modified": true,
+								"selection": true,
+								"status": -1,
+								"syntax": "python"
+							},
+							"auto_complete_triggers":
+							[
+								{
+									"characters": ".",
+									"selector": "source.python - string - comment - constant.numeric"
+								},
+								{
+									"characters": ".",
+									"selector": "source.python - string - constant.numeric"
+								}
+							],
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2297.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "csv_utils.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10280,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3922,
+								3922
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": -1,
+								"modified": true,
+								"selection": true,
+								"status": -1,
+								"syntax": "python"
+							},
+							"auto_complete_triggers":
+							[
+								{
+									"characters": ".",
+									"selector": "source.python - string - comment - constant.numeric"
+								},
+								{
+									"characters": ".",
+									"selector": "source.python - string - constant.numeric"
+								}
+							],
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "yt.sublime-project",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 357,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								357
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": -1,
+								"modified": true,
+								"selection": true,
+								"status": -1,
+								"syntax": "json"
+							},
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 3,

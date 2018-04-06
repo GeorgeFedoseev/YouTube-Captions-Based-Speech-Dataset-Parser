@@ -183,8 +183,11 @@ def export(target_folder, apply_filter=True, skip_audio=False):
             #print 'copy %s -> %s' % job
             #shutil.copyfile(from_path, to_path)  
             if not os.path.exists(to_path):      
-                audio_utils.correct_volume(from_path, to_path)
-                audio_utils.apply_bandpass_filter(to_path, to_path)
+                tmp_path = "%s.tmp.wav" % to_path
+                audio_utils.correct_volume(from_path, tmp_path)
+                audio_utils.apply_bandpass_filter(tmp_path, to_path)
+                # remove tmp
+                os.remove(tmp_path)
             pbar.update(1)
 
 
