@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"tmp",
+				"tmp_path\tstatement"
+			],
+			[
 				"cs",
 				"csv_worker_thread\tstatement"
 			],
@@ -510,10 +514,6 @@
 			[
 				"wav",
 				"wav_file\tstatement"
-			],
-			[
-				"sou",
-				"source_len\tstatement"
 			]
 		]
 	},
@@ -568,7 +568,7 @@
 			"file": "export-dataset.py",
 			"settings":
 			{
-				"buffer_size": 5861,
+				"buffer_size": 6080,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -755,7 +755,7 @@
 	],
 	"find":
 	{
-		"height": 39.0
+		"height": 23.0
 	},
 	"find_in_files":
 	{
@@ -867,7 +867,7 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 5,
 			"sheets":
 			[
 				{
@@ -889,14 +889,6 @@
 						],
 						"settings":
 						{
-							"WordCount":
-							{
-								"changes": -1,
-								"modified": true,
-								"selection": true,
-								"status": -1,
-								"syntax": "python"
-							},
 							"auto_complete_triggers":
 							[
 								{
@@ -954,14 +946,6 @@
 						],
 						"settings":
 						{
-							"WordCount":
-							{
-								"changes": -1,
-								"modified": true,
-								"selection": true,
-								"status": -1,
-								"syntax": "python"
-							},
 							"auto_complete_triggers":
 							[
 								{
@@ -1078,112 +1062,6 @@
 						],
 						"settings":
 						{
-							"WordCount":
-							{
-								"changes": -1,
-								"modified": true,
-								"selection": true,
-								"status": -1,
-								"syntax": "python"
-							},
-							"auto_complete_triggers":
-							[
-								{
-									"characters": ".",
-									"selector": "source.python - string - comment - constant.numeric"
-								},
-								{
-									"characters": ".",
-									"selector": "source.python - string - constant.numeric"
-								}
-							],
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "export-dataset.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5861,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5369,
-								5390
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": -1,
-								"modified": true,
-								"selection": true,
-								"status": -1,
-								"syntax": "python"
-							},
-							"auto_complete_triggers":
-							[
-								{
-									"characters": ".",
-									"selector": "source.python - string - comment - constant.numeric"
-								},
-								{
-									"characters": ".",
-									"selector": "source.python - string - constant.numeric"
-								}
-							],
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 2297.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "csv_utils.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 10280,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3922,
-								3922
-							]
-						],
-						"settings":
-						{
-							"WordCount":
-							{
-								"changes": -1,
-								"modified": true,
-								"selection": true,
-								"status": -1,
-								"syntax": "python"
-							},
 							"auto_complete_triggers":
 							[
 								{
@@ -1207,6 +1085,100 @@
 					"type": "text"
 				},
 				{
+					"buffer": 5,
+					"file": "export-dataset.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6080,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2623,
+								2623
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": -1,
+								"modified": true,
+								"selection": true,
+								"status": -1,
+								"syntax": "python"
+							},
+							"auto_complete_triggers":
+							[
+								{
+									"characters": ".",
+									"selector": "source.python - string - comment - constant.numeric"
+								},
+								{
+									"characters": ".",
+									"selector": "source.python - string - constant.numeric"
+								},
+								{
+									"characters": ".",
+									"selector": "source.python - string - constant.numeric"
+								}
+							],
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 858.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "csv_utils.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10280,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3922,
+								3922
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": ".",
+									"selector": "source.python - string - comment - constant.numeric"
+								},
+								{
+									"characters": ".",
+									"selector": "source.python - string - constant.numeric"
+								}
+							],
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
 					"buffer": 7,
 					"file": "yt.sublime-project",
 					"semi_transient": false,
@@ -1225,14 +1197,6 @@
 						],
 						"settings":
 						{
-							"WordCount":
-							{
-								"changes": -1,
-								"modified": true,
-								"selection": true,
-								"status": -1,
-								"syntax": "json"
-							},
 							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},

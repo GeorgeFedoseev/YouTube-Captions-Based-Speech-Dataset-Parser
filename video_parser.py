@@ -344,8 +344,8 @@ def starts_or_ends_during_speech(wave, start, end):
     return np.sum(speech_array[-CHECK_FRAMES_NUM:]) > 0 or np.sum(speech_array[:CHECK_FRAMES_NUM]) > 0
 
 
-MAX_ALLOWED_CORRECTION_SEC = 0.2
-CORRECTION_WINDOW_SEC = 0.1
+MAX_ALLOWED_CORRECTION_SEC = 0.5
+CORRECTION_WINDOW_SEC = SPEECH_FRAME_SEC*10
 def try_correct_cut(wave, start, end):
 
     #print 'try correct cut'
