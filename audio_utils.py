@@ -1,4 +1,5 @@
 import subprocess
+import wave
 
 def apply_bandpass_filter(in_path, out_path):
     # ffmpeg -i input.wav -acodec pcm_s16le -ac 1 -ar 16000 -af lowpass=3000,highpass=200 output.wav
