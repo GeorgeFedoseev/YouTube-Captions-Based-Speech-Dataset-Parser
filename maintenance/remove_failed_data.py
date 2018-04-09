@@ -10,7 +10,7 @@ import shutil
 from tqdm import tqdm # progressbar
 
 def remove_failed_data():
-    curr_dir_path = os.path.dirname(os.path.realpath(__file__))
+    curr_dir_path = os.getcwd()
     videos_data_dir = os.path.join(curr_dir_path, "data/")
 
     total_scanned = 0

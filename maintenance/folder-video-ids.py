@@ -1,7 +1,7 @@
 import os
 
 def folder_video_ids():
-    curr_dir_path = os.path.dirname(os.path.realpath(__file__))
+    curr_dir_path = os.getcwd()
     videos_data_dir = os.path.join(curr_dir_path, "data/")
 
     
@@ -24,5 +24,5 @@ def folder_video_ids():
     
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':    
     folder_video_ids()

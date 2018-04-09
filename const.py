@@ -2,6 +2,8 @@ import os
 
 curr_dir_path = os.path.dirname(os.path.realpath(__file__))
 
+VIDEO_DATA_DIR = os.path.join(curr_dir_path, "data/")
+
 csv_data_path = os.path.join(curr_dir_path, "csv_data/")
 
 VID_TO_PROCESS_CSV_FILE = os.path.join(csv_data_path, "videos_to_process.csv")

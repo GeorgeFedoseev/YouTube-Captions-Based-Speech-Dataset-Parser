@@ -1,17 +1,19 @@
 import sys
 import os
 
+import time
+
 import video_parser
 
-import stats_util
+
 
 import subprocess
 
-
-import queue_utils
+from utils import stats_util
+from utils import queue_utils
 
 from threading import Thread
-import time
+
 
 import traceback
 
@@ -24,30 +26,9 @@ from glob import glob
 
 
 
-
 reload(sys)
 sys.setdefaultencoding('utf8')
 
-def remove_filelocks():
-    curr_dir_path = os.path.dirname(os.path.realpath(__file__))
-
-    removed = 0
-    for path in glob(os.path.join(curr_dir_path, "*.lock")):
-        os.remove(path)
-        removed += 1
-
-        print("removed %s" % path)
-
-    print("removed %i file locks" % removed)
-
-
-def try_remove_to_delete_dir():
-    try:
-        if os.path.exists(const.TO_DELETE_DIR_PATH):
-            shutil.rmtree(const.TO_DELETE_DIR_PATH)
-            print 'deleted to_delete folder'
-    except Exception as ex:
-        print 'failed to remove to_delete folder: %s' % str(ex)
 
 def check_dependencies_installed():
     try:
@@ -71,8 +52,6 @@ def setup():
         os.makedirs(videos_data_dir)
 
     print 'main setup - end'
-
-
 
 def video_parser_thread_loop():
 
@@ -119,8 +98,6 @@ def video_parser_thread_loop():
 
 def start_parsing():
     
-
-    
     try:        
 
         setup()
@@ -146,10 +123,9 @@ def start_parsing():
 
     stats_util.show_global_stats()
 
-if __name__ == "__main__":
-    #try_remove_to_delete_dir()
+if __name__ == "__main__":    
 
-    remove_filelocks()
+    
 
     if check_dependencies_installed():
         start_parsing()

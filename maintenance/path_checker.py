@@ -5,10 +5,10 @@ import const
 
 import sys
 
-from filelock import Timeout, FileLock
+
 
 def check_paths(remove_if_nf=False):
-    curr_dir_path = os.path.dirname(os.path.realpath(__file__))
+    curr_dir_path = os.getcwd()
     export_csvs_dir = os.path.join(curr_dir_path, "export-sets/")
 
     for item in os.listdir(export_csvs_dir):

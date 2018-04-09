@@ -10,6 +10,8 @@ from Queue import *
 
 import threading
 
+import const
+
 
 
 # CSV MEM ABSTRACTION with syncing with filesystem every n seconds
@@ -89,7 +91,7 @@ def sync_csv_to_file(csv_path):
     if not (csv_path in csv_files_dict):
         return # cant write - dont have data
 
-    print('sync_csv_to_file - start')
+    #print('sync_csv_to_file - start')
 
     lines = []
     for row in csv_files_dict[csv_path]["rows"]:
@@ -100,7 +102,7 @@ def sync_csv_to_file(csv_path):
     f.write('\n'.join(lines)+'\n')
     f.close()
     
-    print('sync_csv_to_file - end')
+    #print('sync_csv_to_file - end')
 
 # writer worker
 def csv_queue_worker():
@@ -211,6 +213,22 @@ def clear_csv(csv_path):
     with csv_files_dict[csv_path]["lock"]:
         csv_files_dict[csv_path]["queue"].put((_clear_op, []))
 
+
+
+def prepend_rows_to_csv(csv_path, rows):  
+    #print("append_rows_to_csv: %s %i" % (csv_path, len(rows)))
+
+    # lazy init
+    init_csv_from_file(csv_path)
+
+    def _append_op(lst, rows):
+        return rows+lst
+
+    #print("append_rows_to_csv - wait lock")
+    with csv_files_dict[csv_path]["lock"]:
+        #print("append_rows_to_csv - got lock")
+        csv_files_dict[csv_path]["queue"].put((_append_op, [rows]))    
+
 def append_rows_to_csv(csv_path, rows):  
     #print("append_rows_to_csv: %s %i" % (csv_path, len(rows)))
 
@@ -238,6 +256,14 @@ def write_rows_to_csv(csv_path, rows):
     with csv_files_dict[csv_path]["lock"]:
         #print("write_rows_to_csv - got lock")
         csv_files_dict[csv_path]["queue"].put((_write_op, [rows]))   
+
+
+def prepend_column_to_csv(csv_path, column):
+    #print("append_column_to_csv")
+    rows = []
+    for val in column:
+        rows.append([val])
+    prepend_rows_to_csv(csv_path, rows)
 
 def append_column_to_csv(csv_path, column):
     #print("append_column_to_csv")

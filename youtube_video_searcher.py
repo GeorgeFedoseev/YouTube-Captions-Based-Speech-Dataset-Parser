@@ -1,21 +1,22 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import time
+import datetime
+
+# yt api
 from apiclient.discovery import build
 from apiclient.errors import HttpError
 from oauth2client.tools import argparser
 
+# csv processing
+import const
+from utils import csv_utils
+from utils import queue_utils
 
-
-import csv
-import csv_utils
-import time
-import datetime
-
+# threading
 from threading import Thread
 
-import const
-from filelock import Timeout, FileLock
 
 import sys
 reload(sys)
@@ -73,7 +74,7 @@ def searcher_thread_loop():
         print('GETTING KEYWORDS... ')
         start_time = time.time()
 
-        query = csv_utils.get_keywords_to_process()
+        query = queue_utils.get_keywords_to_process()
 
         print("GOT KEYWORDS, took %s" % datetime.timedelta(seconds=round(time.time() - start_time)))
 
@@ -87,7 +88,7 @@ def searcher_thread_loop():
 
         is_searching = True
 
-        if csv_utils.is_query_processed(query):
+        if queue_utils.is_query_processed(query):
             print 'query "%s" is already processed' % query
             continue
 
@@ -100,13 +101,13 @@ def searcher_thread_loop():
         videos_to_add = []
         # add only video ids that dont exist in video csvs
         for video_id in video_ids:
-            if not csv_utils.is_video_in_any_list(video_id):
+            if not queue_utils.is_video_in_any_list(video_id):
                 print 'put video %s' % video_id
                 videos_to_add.append(video_id)
                 videos_put += 1
 
         print('put_videos_to_pending')
-        csv_utils.put_videos_to_pending(videos_to_add)
+        queue_utils.put_videos_to_pending(videos_to_add)
         print ('added %i videos to pending' % videos_put)
 
         
@@ -114,7 +115,7 @@ def searcher_thread_loop():
 
         print('mark query as processed')
         # mark processed
-        csv_utils.put_keywords_to_processed(query)
+        queue_utils.put_keywords_to_processed(query)
 
         print('sleep before next query')
         # sleep
