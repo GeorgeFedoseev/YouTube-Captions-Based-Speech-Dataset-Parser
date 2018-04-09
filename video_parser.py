@@ -29,6 +29,8 @@ import wave
 
 import time
 
+import audio_utils
+
 
 
 import sys 
@@ -38,32 +40,6 @@ import const
 reload(sys)
 sys.setdefaultencoding('utf8')
 
-
-
-# def remove_video_dir(video_id):
-#     curr_dir_path = os.path.dirname(os.path.realpath(__file__))
-#     video_data_path = os.path.join(curr_dir_path, "data/" + video_id + "/")
-#     if os.path.exists(video_data_path):
-#         removed = False
-#         try_count = 0
-#         while not removed:
-#             try:               
-                
-#                 # if not os.path.exists(const.TO_DELETE_DIR_PATH):
-#                 #     subprocess.call(['mkdir', '-p', const.TO_DELETE_DIR_PATH])
-
-#                 # deleted_path = os.path.join(const.TO_DELETE_DIR_PATH, video_id)                
-#                 # subprocess.call(['mv', video_data_path, deleted_path])
-
-#                 subprocess.call(['ls', '-a', video_data_path])
-
-#                 shutil.rmtree(video_data_path)
-
-#                 removed = not os.path.exists(video_data_path)
-#             except Exception as ex:
-#                 try_count+=1
-#                 print 'FAILED TO REMOVE DIR %s, retry in 1 sec (%i trial): %s' % (video_data_path, try_count, str(ex))
-#                 time.sleep(1)
 
 
 
@@ -252,50 +228,7 @@ def download_yt_audio(yt_video_id):
 
     return audio_path
 
-def convert_to_wav(in_audio_path, out_audio_path):
-    print 'converting %s to big wav' % in_audio_path
-    p = subprocess.Popen(["ffmpeg", "-y",
-         "-i", in_audio_path,         
-         "-ac", "1",
-         "-ab", "16",
-         "-ar", "16000",         
-         out_audio_path
-         ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
-    out, err = p.communicate()
-
-    try:
-        p.kill()
-    except:
-        pass
-
-    if p.returncode != 0:
-        print("failed_ffmpeg_conversion "+str(err))
-        return False
-    return True
-
-def cut_audio_piece_to_wav(in_audio_path, out_audio_path, start_sec, end_sec):
-    p = subprocess.Popen(["ffmpeg", "-y",
-         "-i", in_audio_path,
-         "-ss", str(start_sec),
-         "-to", str(end_sec),
-         "-ac", "1",
-         "-ab", "16",
-         "-ar", "16000",         
-         out_audio_path
-         ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-
-    out, err = p.communicate()
-
-    try:
-        p.kill()
-    except:
-        pass
-
-    if p.returncode != 0:
-        print("failed_ffmpeg_conversion "+str(err))
-        return False
-    return True
 
 # correction
 
@@ -512,7 +445,7 @@ def process_video(yt_video_id):
     # get wav audio object
     audio_path_wav = os.path.join(video_data_path, "audio.wav")
     if not os.path.exists(audio_path_wav):
-        if not convert_to_wav(audio_path, audio_path_wav):
+        if not audio_utils.convert_to_wav(audio_path, audio_path_wav):
             raise Exception('ERROR: failed to convert to wav')
 
     wave_obj = wave.open(audio_path_wav, 'r')
@@ -579,9 +512,9 @@ def process_video(yt_video_id):
                 
                 print 'GOOD CUT'
 
-                cut_audio_piece_to_wav(audio_path_wav, audio_piece_path,
-                                cut_global_time_start,
-                                cut_global_time_end)  
+                audio_utils.cut_wave(wave_obj, audio_piece_path,
+                                int(cut_global_time_start*1000),
+                                int(cut_global_time_end*1000))  
             else:
                 #print 'BAD CUT'
                 if os.path.exists(audio_piece_path):
