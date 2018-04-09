@@ -107,7 +107,7 @@ SPEECH_FRAME_SEC = 0.02
 CHECK_FRAMES_NUM = 3
 
 def get_speech_int_array(wave, start, end):
-    vad = webrtcvad.Vad(2)
+    vad = webrtcvad.Vad(3)
 
     samples_per_second = wave.getframerate()
 
@@ -148,8 +148,8 @@ def starts_or_ends_during_speech(wave, start, end):
     return np.sum(speech_array[-CHECK_FRAMES_NUM:]) > 0 or np.sum(speech_array[:CHECK_FRAMES_NUM]) > 0
 
 
-MAX_ALLOWED_CORRECTION_SEC = 0.25
-CORRECTION_WINDOW_SEC = SPEECH_FRAME_SEC*10
+MAX_ALLOWED_CORRECTION_SEC = 0.3
+CORRECTION_WINDOW_SEC = SPEECH_FRAME_SEC*5
 def try_correct_cut(wave, start, end):
 
     #print 'try correct cut'
@@ -166,12 +166,12 @@ def try_correct_cut(wave, start, end):
             need_start_correction = starts_with_speech(wave, corrected_start, end)
 
         # DISABLE backwards correction for start cause many bad samples with extra word on start
-        # if need_start_correction:
-        #     # try go backwards
-        #     corrected_start = start
-        #     while need_start_correction and corrected_start >= start - MAX_ALLOWED_CORRECTION_SEC:            
-        #         corrected_start -= CORRECTION_WINDOW_SEC
-        #         need_start_correction = starts_with_speech(wave, corrected_start, end)
+        if need_start_correction:
+            # try go backwards
+            corrected_start = start
+            while need_start_correction and corrected_start >= start - MAX_ALLOWED_CORRECTION_SEC:            
+                corrected_start -= CORRECTION_WINDOW_SEC
+                need_start_correction = starts_with_speech(wave, corrected_start, end)
 
     if need_start_correction:
         #print 'FAILED to correct start'
@@ -197,6 +197,9 @@ def try_correct_cut(wave, start, end):
 
     if need_end_correction:
         #print 'FAILED to corrected_end'
+        return None
+
+    if corrected_start > corrected_end:
         return None
 
     print 'SUCCESS corrected cut: %f-%f -> %f-%f' % (start, end, corrected_start, corrected_end)

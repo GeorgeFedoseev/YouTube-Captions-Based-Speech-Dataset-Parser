@@ -53,7 +53,34 @@ def get_subs(yt_video_id, auto_subs=False):
 
     subs = pyvtt.WebVTTFile.open(subs_path)
 
+    
 
+    # fix yt autosubs
+    if auto_subs:
+        fixed_subs = []
+
+        for s in subs:           
+            #print "--> "+s.text     
+            rows = s.text.split('\n')            
+
+            # take last row (bugfix)
+            s.text = rows[-1]
+
+            timecodes = [pyvtt.WebVTTTime.from_string(x).ordinal for x in re.findall(r'<(\d+:\d+:\d+.\d+)>', s.text)]
+
+            words_str = re.sub(r'<[^>]*>', '', s.text)
+            words = re.compile(r'[\s]+').split(words_str)
+
+            if len(rows) < 2 and len(timecodes) == 0:
+                continue
+
+            if len(words) > 1 and len(timecodes) == 0:
+                #s.text = "[BAD] "+s.text
+                continue
+
+            fixed_subs.append(s)
+
+        subs = fixed_subs
 
     return subs
 
@@ -73,7 +100,6 @@ def get_timed_words(yt_video_id):
 
         #print '---'
         #print s.text
-
 
         timecodes = [pyvtt.WebVTTTime.from_string(x).ordinal for x in re.findall(r'<(\d+:\d+:\d+.\d+)>', s.text)]
         auto_time_codes_found += len(timecodes)

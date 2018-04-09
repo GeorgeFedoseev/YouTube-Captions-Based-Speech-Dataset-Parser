@@ -112,11 +112,10 @@ def process_video(yt_video_id):
     curr_dir_path = os.path.dirname(os.path.realpath(__file__))
     video_data_path = os.path.join(curr_dir_path, "data/" + yt_video_id + "/")
 
-
     # check additionally if processed
-    if os.path.exists(video_data_path):
-        print 'video %s is ALREADY PARSED' % yt_video_id
-        raise Exception('video_already_parsed')
+    # if os.path.exists(video_data_path):
+    #     print 'video %s is ALREADY PARSED' % yt_video_id
+    #     raise Exception('video_already_parsed')
 
     timed_words = yt_subs_utils.get_timed_words(yt_video_id)
     subs = yt_subs_utils.get_subs(yt_video_id)
@@ -152,13 +151,19 @@ def process_video(yt_video_id):
     processed_subs_count = 0
     total_speech_duration = 0.0
 
+    print "subs count: %i" % len(subs)
+
+    current_video_time = 0
+
     try:
         for i, s in enumerate(subs):
-            if is_bad_subs(s.text):
+            words_str = re.sub(r'<[^>]*>', '', s.text)
+
+            if is_bad_subs(words_str):
                 continue
 
             processed_subs_count+=1
-            transcript = s.text.replace("\n", " ")
+            transcript = words_str.replace("\n", " ")
             transcript = re.sub(u'[^а-яё ]', '', transcript.strip().lower()).strip()
             #print transcript
             piece_time = yt_subs_utils.find_string_timing(timed_words, transcript, s.start.ordinal, 15000)
@@ -167,10 +172,17 @@ def process_video(yt_video_id):
 
             found_timing_count+=1
 
+            #print "process sub %i" % i
+
             
 
             cut_global_time_start = float(piece_time['start'])/1000
             cut_global_time_end = float(piece_time['end'])/1000+0.3
+
+
+
+            # cut_global_time_start = float(s.start.ordinal)/1000
+            # cut_global_time_end = float(s.end.ordinal)/1000 + 0.3
 
           
             # CHECK CUT (if starts or ends on speech) and try to correct
@@ -180,23 +192,31 @@ def process_video(yt_video_id):
 
 
             
-            if not starts_or_ends_during_speech(wave_obj, cut_global_time_start, cut_global_time_end):                        
+            if not audio_utils.starts_or_ends_during_speech(wave_obj, cut_global_time_start, cut_global_time_end):                        
                 good_cut = True
             else:            
                 good_cut = False
-                corrected_cut = try_correct_cut(wave_obj, cut_global_time_start, cut_global_time_end)
-                if corrected_cut:
+                corrected_cut = audio_utils.try_correct_cut(wave_obj, cut_global_time_start, cut_global_time_end)
+                if corrected_cut:                    
                     cut_global_time_start, cut_global_time_end = corrected_cut
                     good_cut = True
 
-            if not has_speech(wave_obj, cut_global_time_start, cut_global_time_end):
+            if not audio_utils.has_speech(wave_obj, cut_global_time_start, cut_global_time_end):
                 good_cut = False
 
             audio_piece_path = os.path.join(
                     parts_dir_path, yt_video_id + "-" + str(int(cut_global_time_start*1000)) 
                     + "-" + str(int(cut_global_time_end*1000)) + ("_corr" if corrected_cut else "") + ".wav")
 
-            #good_cut = True
+            # good_cut = True
+
+
+            
+
+            if cut_global_time_start < current_video_time:
+                continue
+
+
 
             if good_cut:               
          
@@ -223,6 +243,7 @@ def process_video(yt_video_id):
                 continue
 
 
+            current_video_time = cut_global_time_end
 
             good_pieces_count += 1
 
@@ -249,5 +270,5 @@ def process_video(yt_video_id):
     write_stats(video_data_path, ["speech_duration", "subs_quality", "good_samples", "total_samples"], [
                 total_speech_duration, float(found_timing_count)/processed_subs_count, good_pieces_count, processed_subs_count])
 
-yt_video_id = "gB0s8oBCjeQ"
+#yt_video_id = "cMtaWP3KtTU"
 #process_video(yt_video_id)
