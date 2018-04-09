@@ -4,6 +4,12 @@ import const
 import shutil
 
 def setup():
+    if not os.path.exists(const.VIDEO_DATA_DIR):
+        os.makedirs(const.VIDEO_DATA_DIR)
+
+    if not os.path.exists(const.csv_data_path):
+        os.makedirs(const.csv_data_path)
+
     #print('csv utils setup - start')
     open(const.VID_TO_PROCESS_CSV_FILE, 'a').close()
     open(const.VID_PROCESSING_CSV_FILE, 'a').close()

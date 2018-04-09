@@ -1,13 +1,20 @@
 import os
 import csv
 
+import sys
+
+sys.path.insert(0,os.getcwd()) 
+
 import const
 
 import csv_utils
 
 def show_global_stats():
 
-    curr_dir_path = os.path.dirname(os.path.realpath(__file__))
+
+    curr_dir_path = os.getcwd()
+
+    
     videos_data_dir = os.path.join(curr_dir_path, "data/")
 
 
