@@ -8,7 +8,7 @@ import stats_util
 import subprocess
 
 
-import csv_utils
+import queue_utils
 
 from threading import Thread
 import time
@@ -62,7 +62,7 @@ def check_dependencies_installed():
 
 def setup():
     print 'main setup - start'
-    csv_utils.setup()
+    queue_utils.setup()
 
     curr_dir_path = os.path.dirname(os.path.realpath(__file__))
     videos_data_dir = os.path.join(curr_dir_path, "data/")
@@ -88,11 +88,11 @@ def video_parser_thread_loop():
             continue
 
         #print "getting video id to parse..."
-        video_id = csv_utils.get_video_to_process()
+        video_id = queue_utils.get_video_to_process()
 
         #print 'got video id %s' % video_id
 
-        if csv_utils.is_video_processed_or_failed(video_id):
+        if queue_utils.is_video_processed_or_failed(video_id):
             print("VIDEO %s is already processed" % video_id)
 
         if not video_id:
@@ -101,16 +101,16 @@ def video_parser_thread_loop():
             continue
 
         # start video processing
-        csv_utils.put_video_to_processing(video_id)
+        queue_utils.put_video_to_processing(video_id)
 
         try:
             video_parser.process_video(video_id)
 
-            csv_utils.put_video_to_processed(video_id)
+            queue_utils.put_video_to_processed(video_id)
         except Exception as e:
             print('failed to process video ' + video_id + ': ' + str(e))
             error_type = str(e)
-            csv_utils.put_video_to_failed(video_id, error_type)
+            queue_utils.put_video_to_failed(video_id, error_type)
 
         # sleep to allow other threads acces to csvs
         time.sleep(0.2)
@@ -131,7 +131,7 @@ def start_parsing():
         video_parser_threads = []
         # start parsing threads
 
-        for i in range(0, 1):
+        for i in range(0, 20):
             print 'start parsing thread ' + str(i)
             thr = Thread(target=video_parser_thread_loop)
             thr.daemon = True

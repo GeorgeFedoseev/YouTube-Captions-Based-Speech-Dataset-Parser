@@ -3,7 +3,7 @@ import csv
 
 import const
 
-from filelock import Timeout, FileLock
+import csv_utils
 
 def show_global_stats():
 
@@ -27,31 +27,30 @@ def show_global_stats():
     
 
     # get queue stats
-    with FileLock(const.VID_PROCESSED_CSV_FILE+".lock"):
-        stats_processed_videos_count = len(list(csv.reader(open(const.VID_PROCESSED_CSV_FILE, "r"))))
-    with FileLock(const.VID_FAILED_CSV_FILE+".lock"):
-        stats_failed_videos_count = len(list(csv.reader(open(const.VID_FAILED_CSV_FILE, "r"))))
-    with FileLock(const.VID_TO_PROCESS_CSV_FILE+".lock"):
-        stats_pending_videos_count = len(list(csv.reader(open(const.VID_TO_PROCESS_CSV_FILE, "r"))))
-    with FileLock(const.VID_PROCESSING_CSV_FILE+".lock"):
-        stats_processing_videos_count = len(list(csv.reader(open(const.VID_PROCESSING_CSV_FILE, "r"))))
 
-    for item in os.listdir(videos_data_dir):
-        item_path = os.path.join(videos_data_dir, item)
+    if os.path.exists(videos_data_dir):
+    
+        stats_processed_videos_count = len(csv_utils.read_all(const.VID_PROCESSED_CSV_FILE))    
+        stats_failed_videos_count = len(csv_utils.read_all(const.VID_FAILED_CSV_FILE))
+        stats_pending_videos_count = len(csv_utils.read_all(const.VID_TO_PROCESS_CSV_FILE))
+        stats_processing_videos_count = len(csv_utils.read_all(const.VID_PROCESSING_CSV_FILE))
 
-        if not os.path.isdir(item_path):
-            continue
+        for item in os.listdir(videos_data_dir):
+            item_path = os.path.join(videos_data_dir, item)
 
-        stats_videos_folders_count+=1
+            if not os.path.isdir(item_path):
+                continue
 
-        stats_path = os.path.join(item_path, "stats.csv")
+            stats_videos_folders_count+=1
 
-        if not os.path.exists(stats_path):
-            #print 'WARNING: no stats for video '+item
-            continue
+            stats_path = os.path.join(item_path, "stats.csv")
 
-        with FileLock(stats_path+".lock"):
-            stats_csv = list(csv.reader(open(stats_path, "r")))            
+            if not os.path.exists(stats_path):
+                #print 'WARNING: no stats for video '+item
+                continue
+
+            
+            stats_csv = csv_utils.read_all(stats_path) 
             stats = stats_csv[1]
             stats_total_duration += float(stats[0])
 
