@@ -1,16 +1,17 @@
 import os
 import csv
-import csv_utils
+
+import sys
+sys.path.insert(0,os.getcwd()) 
+
+from utils import csv_utils
 
 import random
-
-import subs_utils
 
 import shutil
 
 from multiprocessing.pool import ThreadPool
 
-import sys
 
 from tqdm import tqdm # progressbar
 

@@ -5,10 +5,7 @@
 			"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
 			"name": "Anaconda Python Builder",
 			"selector": "source.python",
-			"shell_cmd": "\"./venv/bin/python\" -u \"$file\"",
-			"env": {
-				"PYTHONIOENCODING": "UTF8"
-			}
+			"shell_cmd": "\"./venv/bin/python\" -u \"$file\""
 		}
 	],
 	"folders":
@@ -19,7 +16,7 @@
 	],
 	"settings":
 	{
-		"python_interpreter": "./venv/bin/python",
-        "anaconda_linting": false
+		"anaconda_linting": false,
+		"python_interpreter": "./venv/bin/python"
 	}
 }
