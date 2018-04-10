@@ -15,7 +15,7 @@ from multiprocessing.pool import ThreadPool
 
 from tqdm import tqdm # progressbar
 
-import audio_utils
+from utils import audio_utils
 
 import subprocess
 

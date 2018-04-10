@@ -1,37 +1,23 @@
+import csv
 import os
 import sys
-
 import time
 import datetime
 
-import csv
-
+import threading
 from Queue import *
 
-import threading
-
-import const
 
 
 
 # CSV MEM ABSTRACTION with syncing with filesystem every n seconds
 # {filename: {rows: [], queue: } }
-csv_files_dict = {}
-
-csv_files_dict_rlock = threading.RLock()
-
-csv_worker_thread = None
+CSV_FILES_DICT = {}
+CSV_FILES_DICT_rlock = threading.RLock()
+CSV_UPDATE_WORKER_THREAD = None
 
 
-
-
-
-    #print('csv utils setup 2')
-
-    #print('csv utils setup - end')
-
-
-
+# CSV UPDATING QUEUE
 
 # init from files
 def init_csv_from_file(csv_path):    
@@ -39,9 +25,9 @@ def init_csv_from_file(csv_path):
     # lazy init
     maybe_start_csv_queue_worker_thread()
 
-    with csv_files_dict_rlock:
+    with CSV_FILES_DICT_rlock:
 
-        if csv_path in csv_files_dict:
+        if csv_path in CSV_FILES_DICT:
             return # already inited
 
         #print("init csv %s" % csv_path)
@@ -60,16 +46,16 @@ def init_csv_from_file(csv_path):
         rows = [r for r in rows if len(r) > 0 and r[0].strip() != ""]
         #print("init_csv_from_file - 2")
 
-
-
         
-        csv_files_dict[csv_path] = {
+        CSV_FILES_DICT[csv_path] = {
             "rows": rows,
             "queue": Queue(),
             "lock": threading.RLock()
         }
 
         f.close()
+
+
 
 def update_from_file(csv_path):
     # in case if first time
@@ -81,23 +67,27 @@ def update_from_file(csv_path):
     #print("init_csv_from_file - 1")
     rows = list(csv_reader)
     rows = [r for r in rows if len(r) > 0 and r[0].strip() != ""]
-    with csv_files_dict[csv_path]["lock"]:
-        csv_files_dict[csv_path]["rows"] = rows
+    with CSV_FILES_DICT[csv_path]["lock"]:
+        CSV_FILES_DICT[csv_path]["rows"] = rows
 
 
 
 
 def sync_csv_to_file(csv_path):
-    if not (csv_path in csv_files_dict):
+    if not (csv_path in CSV_FILES_DICT):
         return # cant write - dont have data
 
     #print('sync_csv_to_file - start')
 
     lines = []
-    for row in csv_files_dict[csv_path]["rows"]:
-        lines.append(','.join(row))
+    for row in CSV_FILES_DICT[csv_path]["rows"]:
+        rows_str = [str(x) for x in row]
+        lines.append(','.join(rows_str))
+
+    #print lines
 
 
+    #print 'write to %s' % csv_path
     f = open(csv_path, "w")
     f.write('\n'.join(lines)+'\n')
     f.close()
@@ -107,15 +97,12 @@ def sync_csv_to_file(csv_path):
 # writer worker
 def csv_queue_worker():
     while 1:
-        
-        
 
         #print("perform queue operations - wait for lock")
-        with csv_files_dict_rlock:
-            update_from_file(const.KWDS_TO_SEARCH)
+        with CSV_FILES_DICT_rlock:            
 
             #print("perform queue operations")
-            for csv_path, item in csv_files_dict.iteritems():
+            for csv_path, item in CSV_FILES_DICT.iteritems():
 
                 performed_count = 0
 
@@ -125,8 +112,9 @@ def csv_queue_worker():
                     if q.empty():
                         break
 
+
                     f, args = q.get()
-                    csv_files_dict[csv_path]["rows"] = f(*([csv_files_dict[csv_path]["rows"]]+args))
+                    CSV_FILES_DICT[csv_path]["rows"] = f(*([CSV_FILES_DICT[csv_path]["rows"]]+args))
                     performed_count += 1
                     q.task_done()   
 
@@ -134,13 +122,15 @@ def csv_queue_worker():
                 if performed_count > 0:
                     sync_csv_to_file(csv_path)
 
-             # finished queue
+            # finished queue
             # check if main thread is still alive
             is_main_thread_active = lambda : any((i.name == "MainThread") and i.is_alive() for i in threading.enumerate())
             #print("is_main_thread_active: %s" % str(is_main_thread_active()))
+
             if not is_main_thread_active():
-                print ("main thread is not alive - exit")
+                #print ("main thread is not alive - exit")
                 sys.exit()
+
 
         #print ("performed %i queue operations" % performed_count)
 
@@ -150,15 +140,15 @@ def csv_queue_worker():
         
 
 def maybe_start_csv_queue_worker_thread():
-    global csv_worker_thread
+    global CSV_UPDATE_WORKER_THREAD
 
-    if csv_worker_thread == None:
-        print 'start_csv_queue_worker_thread'
-        csv_worker_thread = threading.Thread(target=csv_queue_worker)
-        csv_worker_thread.daemon = False
-        csv_worker_thread.start()
+    if CSV_UPDATE_WORKER_THREAD == None:
+        print '[csv_utils] start_csv_queue_worker_thread'
+        CSV_UPDATE_WORKER_THREAD = threading.Thread(target=csv_queue_worker)
+        CSV_UPDATE_WORKER_THREAD.daemon = False
+        CSV_UPDATE_WORKER_THREAD.start()
 
-    return csv_worker_thread
+    return CSV_UPDATE_WORKER_THREAD
 
 # CSV OPERATIONS
 
@@ -173,12 +163,12 @@ def read_all(csv_path):
     #print("read_all2")
 
     # wait untill all queued operations will finish
-    with csv_files_dict[csv_path]["lock"]:
-        #print("read_all3 - wait for queue ops: %i" % csv_files_dict[csv_path]["queue"].qsize())
-        csv_files_dict[csv_path]["queue"].join()
+    with CSV_FILES_DICT[csv_path]["lock"]:
+        #print("read_all3 - wait for queue ops: %i" % CSV_FILES_DICT[csv_path]["queue"].qsize())
+        CSV_FILES_DICT[csv_path]["queue"].join()
         #print("read_all4")
         # now read latest data
-        return csv_files_dict[csv_path]["rows"]
+        return CSV_FILES_DICT[csv_path]["rows"]
 
 
 def get_column_csv(csv_path, column_index):
@@ -195,12 +185,13 @@ def get_row_in_csv(csv_path, row_first_cell_val):
     data = read_all(csv_path)
 
     for row in data:
-        if len(row) > 0 and row[0] == row_first_cell_val:
+        #print 'check %s %s' % (row[0], row_first_cell_val)
+        if len(row) > 0 and row[0].strip() == row_first_cell_val.strip():
             return row
     return None
 
 def is_item_in_csv(csv_path, item):
-    get_row_in_csv(csv_path, item) != None
+    return get_row_in_csv(csv_path, item) != None
 
 # modify operations
 def clear_csv(csv_path):
@@ -210,24 +201,8 @@ def clear_csv(csv_path):
     def _clear_op(lst):
         return []
 
-    with csv_files_dict[csv_path]["lock"]:
-        csv_files_dict[csv_path]["queue"].put((_clear_op, []))
-
-
-
-def prepend_rows_to_csv(csv_path, rows):  
-    #print("append_rows_to_csv: %s %i" % (csv_path, len(rows)))
-
-    # lazy init
-    init_csv_from_file(csv_path)
-
-    def _append_op(lst, rows):
-        return rows+lst
-
-    #print("append_rows_to_csv - wait lock")
-    with csv_files_dict[csv_path]["lock"]:
-        #print("append_rows_to_csv - got lock")
-        csv_files_dict[csv_path]["queue"].put((_append_op, [rows]))    
+    with CSV_FILES_DICT[csv_path]["lock"]:
+        CSV_FILES_DICT[csv_path]["queue"].put((_clear_op, []))
 
 def append_rows_to_csv(csv_path, rows):  
     #print("append_rows_to_csv: %s %i" % (csv_path, len(rows)))
@@ -239,9 +214,9 @@ def append_rows_to_csv(csv_path, rows):
         return lst + rows
 
     #print("append_rows_to_csv - wait lock")
-    with csv_files_dict[csv_path]["lock"]:
+    with CSV_FILES_DICT[csv_path]["lock"]:
         #print("append_rows_to_csv - got lock")
-        csv_files_dict[csv_path]["queue"].put((_append_op, [rows]))    
+        CSV_FILES_DICT[csv_path]["queue"].put((_append_op, [rows]))    
 
 def write_rows_to_csv(csv_path, rows):
     #print("write_rows_to_csv: %s %i" % (csv_path, len(rows)))
@@ -253,17 +228,9 @@ def write_rows_to_csv(csv_path, rows):
         return rows
 
     #print("write_rows_to_csv - wait lock")
-    with csv_files_dict[csv_path]["lock"]:
+    with CSV_FILES_DICT[csv_path]["lock"]:
         #print("write_rows_to_csv - got lock")
-        csv_files_dict[csv_path]["queue"].put((_write_op, [rows]))   
-
-
-def prepend_column_to_csv(csv_path, column):
-    #print("append_column_to_csv")
-    rows = []
-    for val in column:
-        rows.append([val])
-    prepend_rows_to_csv(csv_path, rows)
+        CSV_FILES_DICT[csv_path]["queue"].put((_write_op, [rows]))           
 
 def append_column_to_csv(csv_path, column):
     #print("append_column_to_csv")
@@ -312,11 +279,7 @@ def remove_row_by_first_val(csv_path, val):
 
         return new_data
 
-    with csv_files_dict[csv_path]["lock"]:        
-        csv_files_dict[csv_path]["queue"].put((_remove_row_op, [val]))     
+    with CSV_FILES_DICT[csv_path]["lock"]:        
+        CSV_FILES_DICT[csv_path]["queue"].put((_remove_row_op, [val]))     
     
     
-
-
-
-
