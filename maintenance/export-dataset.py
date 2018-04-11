@@ -89,6 +89,10 @@ def export(target_folder, apply_filter=True, skip_audio=False):
         # remove duplicates
         parts = reduce(lambda x,y: x+[y] if not y in x else x, parts,[])
 
+
+        # filter transcripts less than 5 words
+        parts = [p for p in parts if len(str(p[2]).split()) >= 5]
+
         all_rows.extend(parts)
 
 
