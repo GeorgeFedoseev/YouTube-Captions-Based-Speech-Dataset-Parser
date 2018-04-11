@@ -32,11 +32,14 @@ def check_dependencies_installed():
 
     return True
 
-def export(target_folder, apply_filter=True, skip_audio=False):
+def export(target_folder, apply_filter=True, skip_audio=False, minimum_words_count=1):
 
     target_folder = os.path.abspath(os.path.expanduser(target_folder))
 
     print 'exporting to dir %s ' % target_folder
+    print "apply_filter: %s" % str(apply_filter)
+    print "skip_audio: %s" % str(skip_audio)
+    print "minimum_words_count: %s" % str(minimum_words_count)
 
     curr_dir_path = os.getcwd()
     videos_data_dir = os.path.join(curr_dir_path, "data/")
@@ -91,7 +94,7 @@ def export(target_folder, apply_filter=True, skip_audio=False):
 
 
         # filter transcripts less than 5 words
-        parts = [p for p in parts if len(str(p[2]).split()) >= 5]
+        parts = [p for p in parts if len(str(p[2]).split()) >= minimum_words_count]
 
         all_rows.extend(parts)
 
@@ -213,9 +216,18 @@ if __name__ == '__main__':
         raise SystemExit
 
     if len(sys.argv) < 2:
-        print('USAGE: python export-dataset.py <export_dir_path> [--skip-audio]')
+        print('USAGE: python export-dataset.py <export_dir_path> [--skip-audio] [--min-words n]')
     else:    
-        export(sys.argv[1], skip_audio=("--skip-audio" in str(sys.argv)))
+        minimum_words_count = 1
+        try:
+            minimum_words_count = int(sys.argv[sys.argv.index("--min-words")+1])
+        except:
+            pass
+
+        export(sys.argv[1],
+               skip_audio=("--skip-audio" in str(sys.argv)),
+               minimum_words_count = minimum_words_count 
+               )
 
 
 
