@@ -4,6 +4,7 @@ import csv
 import const
 
 import sys
+sys.path.insert(0,os.getcwd()) 
 
 import shutil
 
