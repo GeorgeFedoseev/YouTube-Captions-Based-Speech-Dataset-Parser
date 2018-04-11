@@ -1,8 +1,8 @@
-
+import os
 import sys
 sys.path.insert(0,os.getcwd()) 
 
-import os
+
 import csv
 
 import const
