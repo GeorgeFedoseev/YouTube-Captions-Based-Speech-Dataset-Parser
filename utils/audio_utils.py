@@ -103,8 +103,8 @@ def cut_audio_piece_to_wav(in_audio_path, out_audio_path, start_sec, end_sec):
 
 
 # WAVE CUT CORRECTION
-SPEECH_FRAME_SEC = 0.02
-CHECK_FRAMES_NUM = 3
+SPEECH_FRAME_SEC = 0.01
+CHECK_FRAMES_NUM = 5
 
 def get_speech_int_array(wave, start, end):
     vad = webrtcvad.Vad(3)
