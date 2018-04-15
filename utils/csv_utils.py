@@ -184,9 +184,8 @@ def get_column_csv(csv_path, column_index):
 def get_row_in_csv(csv_path, row_first_cell_val):
     data = read_all(csv_path)
 
-    for row in data:
-        #print 'check %s %s' % (row[0], row_first_cell_val)
-        if len(row) > 0 and row[0].strip() == row_first_cell_val.strip():
+    for row in data:        
+        if len(row) > 0 and str(row[0]).strip() == str(row_first_cell_val).strip():
             return row
     return None
 
@@ -205,18 +204,24 @@ def clear_csv(csv_path):
         CSV_FILES_DICT[csv_path]["queue"].put((_clear_op, []))
 
 def append_rows_to_csv(csv_path, rows):  
-    #print("append_rows_to_csv: %s %i" % (csv_path, len(rows)))
-
     # lazy init
     init_csv_from_file(csv_path)
 
     def _append_op(lst, rows):
         return lst + rows
-
-    #print("append_rows_to_csv - wait lock")
-    with CSV_FILES_DICT[csv_path]["lock"]:
-        #print("append_rows_to_csv - got lock")
+    
+    with CSV_FILES_DICT[csv_path]["lock"]:        
         CSV_FILES_DICT[csv_path]["queue"].put((_append_op, [rows]))    
+
+def prepend_rows_to_csv(csv_path, rows):  
+    # lazy init
+    init_csv_from_file(csv_path)
+
+    def _append_op(lst, rows):
+        return rows+lst
+
+    with CSV_FILES_DICT[csv_path]["lock"]:
+        CSV_FILES_DICT[csv_path]["queue"].put((_append_op, [rows]))
 
 def write_rows_to_csv(csv_path, rows):
     #print("write_rows_to_csv: %s %i" % (csv_path, len(rows)))
@@ -232,12 +237,17 @@ def write_rows_to_csv(csv_path, rows):
         #print("write_rows_to_csv - got lock")
         CSV_FILES_DICT[csv_path]["queue"].put((_write_op, [rows]))           
 
-def append_column_to_csv(csv_path, column):
-    #print("append_column_to_csv")
+def append_column_to_csv(csv_path, column):    
     rows = []
     for val in column:
         rows.append([val])
     append_rows_to_csv(csv_path, rows)
+
+def prepend_column_to_csv(csv_path, column):
+    rows = []
+    for val in column:
+        rows.append([val])
+    prepend_rows_to_csv(csv_path, rows)
 
 def write_column_to_csv(csv_path, column):
     #print("write_column_to_csv")

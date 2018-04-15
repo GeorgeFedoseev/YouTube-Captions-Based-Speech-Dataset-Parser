@@ -96,7 +96,7 @@ def video_parser_thread_loop():
 
         
 
-def start_parsing():
+def start_parsing(threads_num):
     
     try:        
 
@@ -108,7 +108,7 @@ def start_parsing():
         video_parser_threads = []
         # start parsing threads
 
-        for i in range(0, 20):
+        for i in range(0, threads_num):
             print 'start parsing thread ' + str(i)
             thr = Thread(target=video_parser_thread_loop)
             thr.daemon = True
@@ -123,9 +123,15 @@ def start_parsing():
 
     stats_util.show_global_stats()
 
-if __name__ == "__main__":    
+if __name__ == "__main__":
 
-    
+
+    _threads_number = 20
+    try:    
+        _threads_number = int(sys.argv[sys.argv.index("--threads-num")+1])
+    except:
+        pass
 
     if check_dependencies_installed():
-        start_parsing()
+        print("Start parsing with %i threads" % _threads_number)
+        start_parsing(threads_num=_threads_number)
