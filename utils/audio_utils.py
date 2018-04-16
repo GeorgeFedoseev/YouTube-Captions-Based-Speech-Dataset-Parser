@@ -148,7 +148,8 @@ def starts_or_ends_during_speech(wave, start, end):
     return np.sum(speech_array[-CHECK_FRAMES_NUM:]) > 0 or np.sum(speech_array[:CHECK_FRAMES_NUM]) > 0
 
 
-MAX_ALLOWED_CORRECTION_SEC = 0.3
+MAX_ALLOWED_CORRECTION_FW_SEC = 0.3
+MAX_ALLOWED_CORRECTION_BW_SEC = 0.2
 CORRECTION_WINDOW_SEC = SPEECH_FRAME_SEC*5
 def try_correct_cut(wave, start, end):
 
@@ -161,17 +162,17 @@ def try_correct_cut(wave, start, end):
 
     if need_start_correction:               
         # try go forward
-        while need_start_correction and corrected_start <= start + MAX_ALLOWED_CORRECTION_SEC:            
+        while need_start_correction and corrected_start <= start + MAX_ALLOWED_CORRECTION_FW_SEC:            
             corrected_start += CORRECTION_WINDOW_SEC
             need_start_correction = starts_with_speech(wave, corrected_start, end)
 
         # DISABLE backwards correction for start cause many bad samples with extra word on start
-        if need_start_correction:
-            # try go backwards
-            corrected_start = start
-            while need_start_correction and corrected_start >= start - MAX_ALLOWED_CORRECTION_SEC:            
-                corrected_start -= CORRECTION_WINDOW_SEC
-                need_start_correction = starts_with_speech(wave, corrected_start, end)
+        # if need_start_correction:
+        #     # try go backwards
+        #     corrected_start = start
+        #     while need_start_correction and corrected_start >= start - MAX_ALLOWED_CORRECTION_SEC:            
+        #         corrected_start -= CORRECTION_WINDOW_SEC
+        #         need_start_correction = starts_with_speech(wave, corrected_start, end)
 
     if need_start_correction:
         #print 'FAILED to correct start'
@@ -184,14 +185,14 @@ def try_correct_cut(wave, start, end):
 
     if need_end_correction:
         # try go forward
-        while need_end_correction and corrected_end <= end + MAX_ALLOWED_CORRECTION_SEC:            
+        while need_end_correction and corrected_end <= end + MAX_ALLOWED_CORRECTION_FW_SEC:            
             corrected_end += CORRECTION_WINDOW_SEC
             need_end_correction = ends_with_speech(wave, corrected_start, corrected_end)
 
         if need_end_correction:
             # try go backwards
             corrected_end = end
-            while need_end_correction and corrected_end >= end - MAX_ALLOWED_CORRECTION_SEC:            
+            while need_end_correction and corrected_end >= end - MAX_ALLOWED_CORRECTION_BW_SEC:            
                 corrected_end -= CORRECTION_WINDOW_SEC
                 need_end_correction = ends_with_speech(wave, corrected_start, corrected_end)
 
