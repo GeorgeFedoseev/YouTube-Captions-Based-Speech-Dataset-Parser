@@ -40,6 +40,8 @@ def export(target_folder, apply_filter=True, skip_audio=False, minimum_words_cou
     print "apply_filter: %s" % str(apply_filter)
     print "skip_audio: %s" % str(skip_audio)
     print "minimum_words_count: %s" % str(minimum_words_count)
+    print "num_threads: %i" % NUM_THREADS
+    print "dataset_name: %s" % DATASET_NAME
 
     curr_dir_path = os.getcwd()
     videos_data_dir = os.path.join(curr_dir_path, "data/")
@@ -130,6 +132,7 @@ def export(target_folder, apply_filter=True, skip_audio=False, minimum_words_cou
     del all_rest[:dev_count]
     test_rows = all_rest
 
+    print 'total: %i samples' % len(all_rows)
     print 'devided train:dev:test = '+str(len(train_rows))+':'+str(len(dev_rows))+':'+str(len(test_rows))
 
 
