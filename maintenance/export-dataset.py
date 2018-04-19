@@ -229,7 +229,7 @@ if __name__ == '__main__':
 
         dataset_name = "yt-subs"
         try:
-            dataset_name = int(sys.argv[sys.argv.index("--name")+1])
+            dataset_name = str(sys.argv[sys.argv.index("--name")+1])
         except:
             pass
 
