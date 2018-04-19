@@ -19,8 +19,8 @@ from utils import audio_utils
 
 import subprocess
 
-NUM_THREADS = 8
-DATASET_NAME = "yt-subs"
+
+
 
 def check_dependencies_installed():
     try:
@@ -32,7 +32,7 @@ def check_dependencies_installed():
 
     return True
 
-def export(target_folder, apply_filter=True, skip_audio=False, minimum_words_count=1):
+def export(target_folder, apply_filter=True, skip_audio=False, minimum_words_count=1, DATASET_NAME = "yt-subs", NUM_THREADS = 8):
 
     target_folder = os.path.abspath(os.path.expanduser(target_folder))
 
@@ -224,9 +224,23 @@ if __name__ == '__main__':
         except:
             pass
 
+        dataset_name = "yt-subs"
+        try:
+            dataset_name = int(sys.argv[sys.argv.index("--name")+1])
+        except:
+            pass
+
+        num_threads = 10
+        try:
+            num_threads = int(sys.argv[sys.argv.index("--num-threads")+1])
+        except:
+            pass
+
         export(sys.argv[1],
                skip_audio=("--skip-audio" in str(sys.argv)),
-               minimum_words_count = minimum_words_count 
+               minimum_words_count = minimum_words_count,
+               DATASET_NAME=dataset_name,
+               NUM_THREADS=num_threads
                )
 
 
