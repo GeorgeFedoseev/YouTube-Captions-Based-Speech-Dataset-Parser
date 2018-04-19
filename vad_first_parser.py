@@ -137,5 +137,5 @@ def process_video(yt_video_id):
                 total_speech_length_sec, 1, good_pieces_count, total_pieces_count])
 
 if __name__ == "__main__":
-    yt_video_id = "HBdK8Kac_zU"
+    yt_video_id = "1mWhDsN_yN4"
     process_video(yt_video_id)
