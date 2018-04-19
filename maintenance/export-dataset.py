@@ -20,7 +20,8 @@ from utils import audio_utils
 import subprocess
 import re
 
-
+reload(sys)
+sys.setdefaultencoding("utf-8")
 
 def check_dependencies_installed():
     try:
@@ -33,7 +34,7 @@ def check_dependencies_installed():
     return True
 
 def filter_not_in_alphabet_chars(text):
-    text = re.sub(u'[^а-я\- ]+', '', text.lower())
+    text = re.sub(u'[^а-яё\- ]+', '', text.decode("utf-8").lower())
     return text
 
 def export(target_folder, apply_filter=True, skip_audio=False, minimum_words_count=1, DATASET_NAME = "yt-subs", NUM_THREADS = 8):
