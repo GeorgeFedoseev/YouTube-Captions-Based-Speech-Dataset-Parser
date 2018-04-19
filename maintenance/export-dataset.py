@@ -18,7 +18,7 @@ from tqdm import tqdm # progressbar
 from utils import audio_utils
 
 import subprocess
-
+import re
 
 
 
@@ -31,6 +31,10 @@ def check_dependencies_installed():
         return False
 
     return True
+
+def filter_not_in_alphabet_chars(text):
+    text = re.sub(u'[^а-я\- ]+', '', text.lower())
+    return text
 
 def export(target_folder, apply_filter=True, skip_audio=False, minimum_words_count=1, DATASET_NAME = "yt-subs", NUM_THREADS = 8):
 
@@ -94,9 +98,14 @@ def export(target_folder, apply_filter=True, skip_audio=False, minimum_words_cou
         # remove duplicates
         parts = reduce(lambda x,y: x+[y] if not y in x else x, parts,[])
 
+        # filter not in alphabet symbols
+        
+        parts = [[p[0], p[1], filter_not_in_alphabet_chars(p[2])] for p in parts]
 
         # filter transcripts less than minimum_words_count words
         parts = [p for p in parts if len(str(p[2]).split()) >= minimum_words_count]
+
+
 
         all_rows.extend(parts)
 
