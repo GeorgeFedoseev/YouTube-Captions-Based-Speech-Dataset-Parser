@@ -70,7 +70,7 @@ def process_video(yt_video_id):
         try:
             shutil.rmtree(parts_folder_path)
         except:
-            print("[EXCEPT] failed to remove parts folder")
+            print("[EXCEPT] failed to remove parts/ folder")
 
     if not os.path.exists(parts_folder_path):
         os.makedirs(parts_folder_path)

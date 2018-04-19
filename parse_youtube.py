@@ -53,7 +53,11 @@ def setup():
 
     print 'main setup - end'
 
+
+displayed_no_videos_to_process = False
+
 def video_parser_thread_loop():
+    global displayed_no_videos_to_process
 
     while True:
         #try_remove_to_delete_dir()
@@ -75,9 +79,13 @@ def video_parser_thread_loop():
             print("VIDEO %s is already processed" % video_id)
 
         if not video_id:
-            print 'no videos to parse - wait 5 seconds...'
+            if not displayed_no_videos_to_process:
+                print 'no videos to parse - wait 5 seconds...'
+                displayed_no_videos_to_process = True
             time.sleep(5)
             continue
+
+        displayed_no_videos_to_process = False
 
         # start video processing
         queue_utils.put_video_to_processing(video_id)
@@ -109,7 +117,7 @@ def start_parsing(threads_num):
         # start parsing threads
 
         for i in range(0, threads_num):
-            print 'start parsing thread ' + str(i)
+            #print 'start parsing thread ' + str(i)
             thr = Thread(target=video_parser_thread_loop)
             thr.daemon = True
             thr.start()

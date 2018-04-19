@@ -8,6 +8,11 @@ import threading
 from Queue import *
 
 
+import sys
+sys.path.insert(0,os.getcwd()) 
+
+import const
+
 
 
 # CSV MEM ABSTRACTION with syncing with filesystem every n seconds
@@ -58,19 +63,21 @@ def init_csv_from_file(csv_path):
 
 
 def update_from_file(csv_path):
+    #print "start update from file %s" % csv_path
     # in case if first time
     init_csv_from_file(csv_path)
 
     f = open(csv_path, "r+")
     csv_reader = csv.reader(f)
 
-    #print("init_csv_from_file - 1")
+    #print("update_from_file - 1")
     rows = list(csv_reader)
     rows = [r for r in rows if len(r) > 0 and r[0].strip() != ""]
+    #print("update_from_file - 2")
     with CSV_FILES_DICT[csv_path]["lock"]:
         CSV_FILES_DICT[csv_path]["rows"] = rows
 
-
+    #print "end update from file %s" % csv_path
 
 
 def sync_csv_to_file(csv_path):
@@ -98,17 +105,29 @@ def sync_csv_to_file(csv_path):
 def csv_queue_worker():
     while 1:
 
+       # print 1
+       # update_from_file(const.VID_TO_PROCESS_CSV_FILE)
+        #print 2
+
         #print("perform queue operations - wait for lock")
-        with CSV_FILES_DICT_rlock:            
+        with CSV_FILES_DICT_rlock:    
 
             #print("perform queue operations")
             for csv_path, item in CSV_FILES_DICT.iteritems():
 
+                
+
                 performed_count = 0
+
+                q = item["queue"]
+
+                if csv_path == const.VID_TO_PROCESS_CSV_FILE and q.empty():
+                    update_from_file(const.VID_TO_PROCESS_CSV_FILE)
+
 
                 # perform all operaions in queue
                 while 1:
-                    q = item["queue"]
+                    
                     if q.empty():
                         break
 
@@ -118,9 +137,12 @@ def csv_queue_worker():
                     performed_count += 1
                     q.task_done()   
 
+
                 # sync changes to file
                 if performed_count > 0:
                     sync_csv_to_file(csv_path)
+
+                
 
             # finished queue
             # check if main thread is still alive
@@ -160,7 +182,7 @@ def read_all(csv_path):
     # lazy init
     init_csv_from_file(csv_path)
 
-    #print("read_all2")
+    #print("read_all2 %s" % csv_path)
 
     # wait untill all queued operations will finish
     with CSV_FILES_DICT[csv_path]["lock"]:

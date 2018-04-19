@@ -46,23 +46,33 @@ def start_searcher_thread():
 
     return thr
 
+displayed_waiting_for_keywords_to_search = False    
+
 def searcher_thread_loop():
     global is_searching
+    global displayed_waiting_for_keywords_to_search
 
     while True:
 
         is_searching = False
 
         
-        stats_pending_videos_count = len(csv_utils.read_all(const.VID_TO_PROCESS_CSV_FILE))
-        
+        #stats_pending_videos_count = len(csv_utils.read_all(const.VID_TO_PROCESS_CSV_FILE))
+        stats_pending_videos_count = 0
             
         if stats_pending_videos_count < 100:
             # if have kwds to serach - search
-            print("check if have KWDS_TO_SEARCH")
+            
             stats_pending_keywords_count = len(csv_utils.read_all(const.KWDS_TO_SEARCH))
             if stats_pending_keywords_count > 0:
                 is_searching = True
+                displayed_waiting_for_keywords_to_search = False
+            else:
+                if not displayed_waiting_for_keywords_to_search:
+                    print("Waiting for keywords to search....")
+                    displayed_waiting_for_keywords_to_search = True
+
+
                 
 
         if not is_searching:
