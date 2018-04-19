@@ -93,7 +93,7 @@ def export(target_folder, apply_filter=True, skip_audio=False, minimum_words_cou
         parts = reduce(lambda x,y: x+[y] if not y in x else x, parts,[])
 
 
-        # filter transcripts less than 5 words
+        # filter transcripts less than minimum_words_count words
         parts = [p for p in parts if len(str(p[2]).split()) >= minimum_words_count]
 
         all_rows.extend(parts)

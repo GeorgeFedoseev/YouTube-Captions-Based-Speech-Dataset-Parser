@@ -34,6 +34,9 @@ def process_video(yt_video_id):
 
     print '[%s][STARTED_PARSING]' % yt_video_id
 
+    
+
+
     total_speech_length_sec = 0
     total_pieces_count = 0
     good_pieces_count = 0
