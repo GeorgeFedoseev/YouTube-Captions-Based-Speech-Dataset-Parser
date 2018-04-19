@@ -143,7 +143,7 @@ def maybe_start_csv_queue_worker_thread():
     global CSV_UPDATE_WORKER_THREAD
 
     if CSV_UPDATE_WORKER_THREAD == None:
-        print '[csv_utils] start_csv_queue_worker_thread'
+        #print '[csv_utils] start_csv_queue_worker_thread'
         CSV_UPDATE_WORKER_THREAD = threading.Thread(target=csv_queue_worker)
         CSV_UPDATE_WORKER_THREAD.daemon = False
         CSV_UPDATE_WORKER_THREAD.start()

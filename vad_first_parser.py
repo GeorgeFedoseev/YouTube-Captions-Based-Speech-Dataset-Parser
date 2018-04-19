@@ -27,11 +27,12 @@ from utils.stats_util import write_stats
 import sys
 import const
 
+import datetime
 
 
 def process_video(yt_video_id):   
 
-    print 'Processing video '+yt_video_id
+    print '[%s][STARTED_PARSING]' % yt_video_id
 
     total_speech_length_sec = 0
     total_pieces_count = 0
@@ -61,10 +62,16 @@ def process_video(yt_video_id):
     sliced_pieces, avg_len_sec = slice_audio_by_silence(wave_obj, vad_silence_volume_param=0)
     total_pieces_count = len(sliced_pieces)
 
-    print("sliced into %i pieces with average length of %f seconds" % (total_pieces_count, avg_len_sec))
+    #print("sliced into %i pieces with average length of %f seconds" % (total_pieces_count, avg_len_sec))
 
 
     parts_folder_path = os.path.join(video_dir_path, "parts/");
+    if os.path.exists(parts_folder_path):
+        try:
+            shutil.rmtree(parts_folder_path)
+        except:
+            print("[EXCEPT] failed to remove parts folder")
+
     if not os.path.exists(parts_folder_path):
         os.makedirs(parts_folder_path)
 
@@ -118,7 +125,7 @@ def process_video(yt_video_id):
 
         audio_per_symbol_density = audio_length/len(words_str)
         if  audio_per_symbol_density > 0.07:
-            print("skip too high audio per symbol density: %f" % (audio_per_symbol_density))
+            #print("skip too high audio per symbol density: %f" % (audio_per_symbol_density))
             continue
         
         good_pieces_count += 1
@@ -126,7 +133,7 @@ def process_video(yt_video_id):
         csv_rows.append([part_wav_path, wav_filesize, words_str])
 
 
-    print("added %i pieces" % len(csv_rows))
+    print("[%s][FINISHED_PARSING] added %i pieces wit total duration: %s" % (yt_video_id, len(csv_rows), str(datetime.timedelta(seconds=total_speech_length_sec))))
 
     csv_path = os.path.join(video_dir_path, "parts.csv")
 

@@ -62,13 +62,13 @@ def slice_audio_by_silence(wave_obj, min_audio_length=5, max_audio_length=20, va
         try:
             is_speech = vad.is_speech(wav_samples, samples_per_second)
         except Exception as ex:
-            print("VAD Exception: %s" % str(ex))
+            #print("VAD Exception: %s" % str(ex))
             continue
 
         if searching_for_piece:
             current_piece_start_sec += current_frame_length_sec
             if is_speech:
-                print("WARNING: skipped %f seconds searching for speech start" % (current_piece_start_sec - searching_for_piece_start_begin_sec))
+                #print("WARNING: skipped %f seconds searching for speech start" % (current_piece_start_sec - searching_for_piece_start_begin_sec))
                 searching_for_piece = False
             else:
                 continue
@@ -93,7 +93,7 @@ def slice_audio_by_silence(wave_obj, min_audio_length=5, max_audio_length=20, va
                 current_piece_length_sec = 0
             else:
                 if current_piece_length_sec > max_audio_length:
-                    print("WARNING: cannot find end of piece, skip fragment and start searching for silence...")                    
+                    #print("WARNING: cannot find end of piece, skip fragment and start searching for silence...")                    
                     searching_for_piece_start_begin_sec = current_piece_start_sec
                     current_piece_samples = ""
                     current_piece_start_sec += current_piece_length_sec

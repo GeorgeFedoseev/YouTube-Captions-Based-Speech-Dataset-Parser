@@ -3,7 +3,6 @@ import os
 
 import time
 
-import video_parser
 
 
 
@@ -18,6 +17,7 @@ from threading import Thread
 import traceback
 
 import youtube_video_searcher
+from vad_first_parser import process_video
 
 import const
 import shutil
@@ -83,7 +83,7 @@ def video_parser_thread_loop():
         queue_utils.put_video_to_processing(video_id)
 
         try:
-            video_parser.process_video(video_id)
+            process_video(video_id)
 
             queue_utils.put_video_to_processed(video_id)
         except Exception as e:
