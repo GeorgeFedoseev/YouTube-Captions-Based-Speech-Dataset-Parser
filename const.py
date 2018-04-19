@@ -13,3 +13,7 @@ VID_FAILED_CSV_FILE = os.path.join(csv_data_path, "videos_failed_to_process.csv"
 
 KWDS_TO_SEARCH = os.path.join(csv_data_path, "keywords_to_search.csv")
 KWDS_SEARCHED = os.path.join(csv_data_path, "keywords_done.csv")
+
+# audio related
+SAMPLE_RATE = 16000
+BYTE_WIDTH = 2

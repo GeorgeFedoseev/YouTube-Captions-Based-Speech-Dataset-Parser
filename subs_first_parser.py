@@ -22,60 +22,16 @@ from utils import audio_utils
 from utils import yt_subs_utils
 from utils.yt_utils import download_yt_audio
 
+from utils.stats_util import write_stats
+from utils.slicing_utils import is_bad_piece, is_bad_subs
 
-
-import sys 
-
+import sys
 import const
 
 reload(sys)
-sys.setdefaultencoding('utf8')
+sys.setdefaultencoding("utf-8")
 
 
-
-
-
-
-
-# CHECK audio piece
-
-def is_bad_piece(wav_filesize, transcript):
-    SAMPLE_RATE = 16000
-    BYTE_WIDTH = 2
-
-    MAX_SECS = 20
-    MIN_SECS = 3
-
-    audio_duration = wav_filesize/SAMPLE_RATE/BYTE_WIDTH
-    
-    MIN_SEC_PER_SYMBOL = 0.04375
-
-    # remove audios that are shorter than 0.5s and longer than 20s.
-    # remove audios that are too short for transcript.
-    if audio_duration > MIN_SECS and audio_duration < MAX_SECS and transcript!="" and audio_duration/len(transcript) > MIN_SEC_PER_SYMBOL:
-        return True
-    return False
-
-def is_bad_subs(subs_text):
-    bad = False
-
-    if subs_text.strip() == "":
-        bad = True
-
-    if len(re.findall(r'[0-9]+', subs_text)) > 0:
-        bad = True
-    if len(re.findall(r'[A-Za-z]+', subs_text)) > 0:
-        bad = True
-
-    return bad
-
-def write_stats(video_folder, stats_header, stats):
-    stats_path = os.path.join(video_folder, "stats.csv")
-    f = open(stats_path, "w")
-    csv_writer = csv.writer(f)
-    csv_writer.writerow(stats_header)
-    csv_writer.writerow(stats)
-    f.close()
 
 def process_video(yt_video_id):
     
@@ -139,30 +95,22 @@ def process_video(yt_video_id):
             transcript = words_str.replace("\n", " ")
             transcript = re.sub(u'[^а-яё ]', '', transcript.strip().lower()).strip()
             #print transcript
+            
             piece_time = yt_subs_utils.find_string_timing(timed_words, transcript, s.start.ordinal, 15000)
+            
+
             if not piece_time:
                 continue
 
-            found_timing_count+=1
-
-            #print "process sub %i" % i
-
-            
+            found_timing_count+=1           
 
             cut_global_time_start = float(piece_time['start'])/1000
             cut_global_time_end = float(piece_time['end'])/1000+0.3
-
-
-
-            # cut_global_time_start = float(s.start.ordinal)/1000
-            # cut_global_time_end = float(s.end.ordinal)/1000 + 0.3
-
           
             # CHECK CUT (if starts or ends on speech) and try to correct
             good_cut = False
             corrected_cut = False
             #print_speech_frames(wave_obj, cut_global_time_start, cut_global_time_end)
-
 
             
             if not audio_utils.starts_or_ends_during_speech(wave_obj, cut_global_time_start, cut_global_time_end):                        
@@ -181,15 +129,9 @@ def process_video(yt_video_id):
                     parts_dir_path, yt_video_id + "-" + str(int(cut_global_time_start*1000)) 
                     + "-" + str(int(cut_global_time_end*1000)) + ("_corr" if corrected_cut else "") + ".wav")
 
-            # good_cut = True
-
-
             
-
             if cut_global_time_start < current_video_time:
                 continue
-
-
 
             if good_cut:               
          
@@ -207,12 +149,13 @@ def process_video(yt_video_id):
                     os.remove(audio_piece_path)
                 continue
             
+            wav_filesize = os.path.getsize(audio_piece_path)
 
             
-            file_size = os.path.getsize(audio_piece_path)
+            audio_length = float(wav_filesize)/const.SAMPLE_RATE/const.BYTE_WIDTH
 
             # if not bad piece - write to csv
-            if is_bad_piece(file_size, transcript):
+            if is_bad_piece(audio_length, transcript):
                 # remove file
                 if os.path.exists(audio_piece_path):
                     os.remove(audio_piece_path)
@@ -229,7 +172,7 @@ def process_video(yt_video_id):
 
             # write to csv
             csv_f.write(audio_piece_path + ", " +
-                        str(file_size) + ", " + transcript + "\n")
+                        str(wav_filesize) + ", " + transcript + "\n")
     except Exception as ex:
         raise ex
     finally:
@@ -246,5 +189,15 @@ def process_video(yt_video_id):
     write_stats(video_data_path, ["speech_duration", "subs_quality", "good_samples", "total_samples"], [
                 total_speech_duration, float(found_timing_count)/processed_subs_count, good_pieces_count, processed_subs_count])
 
-#yt_video_id = "cMtaWP3KtTU"
-#process_video(yt_video_id)
+
+if __name__ == "__main__":
+    yt_video_id = "cMtaWP3KtTU"
+    process_video(yt_video_id)
+
+
+
+
+
+
+
+

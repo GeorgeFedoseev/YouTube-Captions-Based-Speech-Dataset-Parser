@@ -9,6 +9,14 @@ import const
 
 import csv_utils
 
+def write_stats(video_folder, stats_header, stats):
+    stats_path = os.path.join(video_folder, "stats.csv")
+    f = open(stats_path, "w")
+    csv_writer = csv.writer(f)
+    csv_writer.writerow(stats_header)
+    csv_writer.writerow(stats)
+    f.close()
+
 def show_global_stats():
 
 
