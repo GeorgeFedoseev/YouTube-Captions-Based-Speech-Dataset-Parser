@@ -224,6 +224,14 @@ def export(target_folder, apply_filter=True, skip_audio=False, minimum_words_cou
 
         pbar.close()
 
+        # check if all jobs has been copied
+        not_founds = 0
+        for job in copy_jobs:
+            if not os.path.exists(job[1]):
+                not_founds += 1
+        if not_founds > 0:
+            print("ERROR: not all (%i) files were copied to destination!" % not_founds)
+
     
 
 
