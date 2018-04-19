@@ -23,8 +23,8 @@ def setup():
     not_fully_processed_last_time = get_column_csv(const.VID_PROCESSING_CSV_FILE, 0)
 
     # remove folders
-    for yt_id in not_fully_processed_last_time:
-        maybe_remove_video_dir(yt_id)
+    #for yt_id in not_fully_processed_last_time:
+    #    maybe_remove_video_dir(yt_id)
 
     #print("restore not fully processed: %i" % len(not_fully_processed_last_time))    
     clear_csv(const.VID_PROCESSING_CSV_FILE)

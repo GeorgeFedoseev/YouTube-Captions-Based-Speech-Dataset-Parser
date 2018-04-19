@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import pafy
+
 import subprocess
 
 
@@ -20,6 +20,7 @@ import time
 
 from utils import audio_utils
 from utils import yt_subs_utils
+from utils.yt_utils import download_yt_audio
 
 
 
@@ -32,56 +33,28 @@ sys.setdefaultencoding('utf8')
 
 
 
-def download_yt_audio(yt_video_id):
 
-    curr_dir_path = os.path.dirname(os.path.realpath(__file__))
-    video_data_path = os.path.join(curr_dir_path, "data/" + yt_video_id + "/")
-
-    if not os.path.exists(video_data_path):
-        os.makedirs(video_data_path)
-
-
-    video = pafy.new(yt_video_id)
-    # download audio
-    audio_lowest_size = sorted(
-        video.audiostreams, key=lambda x: x.get_filesize())[0]
-    #print 'audio lowest download size: ' + str(audio_lowest_size.get_filesize())
-    if audio_lowest_size.get_filesize() > 500000000:
-        raise Exception("audio_file_is_too_big")
-
-    audio_path = os.path.join(
-        video_data_path, "audio." + audio_lowest_size.extension)
-
-    if not os.path.exists(audio_path):
-        print 'downloading audio ' + audio_path
-        audio_lowest_size.download(filepath=audio_path, quiet=True)
-
-    if not os.path.exists(audio_path):
-        raise Exception("audio_download_failed")
-
-    return audio_path
 
 
 
 # CHECK audio piece
 
-def is_bad_piece(wav_path, transcript):
+def is_bad_piece(wav_filesize, transcript):
     SAMPLE_RATE = 16000
-    MAX_SECS = 10
-    MIN_SECS = 1
+    BYTE_WIDTH = 2
 
-    frames = int(subprocess.check_output(['soxi', '-s', wav_path], stderr=subprocess.STDOUT))
+    MAX_SECS = 20
+    MIN_SECS = 3
+
+    audio_duration = wav_filesize/SAMPLE_RATE/BYTE_WIDTH
     
+    MIN_SEC_PER_SYMBOL = 0.04375
 
-    if int(frames/SAMPLE_RATE*1000/10/2) < len(transcript):
-        # Excluding samples that are too short to fit the transcript
+    # remove audios that are shorter than 0.5s and longer than 20s.
+    # remove audios that are too short for transcript.
+    if audio_duration > MIN_SECS and audio_duration < MAX_SECS and transcript!="" and audio_duration/len(transcript) > MIN_SEC_PER_SYMBOL:
         return True
-    elif frames/SAMPLE_RATE > MAX_SECS:
-        # Excluding very long samples to keep a reasonable batch-size
-        return True
-    elif frames/SAMPLE_RATE < MIN_SECS:
-        # Excluding too small
-        return True
+    return False
 
 def is_bad_subs(subs_text):
     bad = False
@@ -235,8 +208,11 @@ def process_video(yt_video_id):
                 continue
             
 
+            
+            file_size = os.path.getsize(audio_piece_path)
+
             # if not bad piece - write to csv
-            if is_bad_piece(audio_piece_path, transcript):
+            if is_bad_piece(file_size, transcript):
                 # remove file
                 if os.path.exists(audio_piece_path):
                     os.remove(audio_piece_path)
@@ -247,7 +223,7 @@ def process_video(yt_video_id):
 
             good_pieces_count += 1
 
-            file_size = os.path.getsize(audio_piece_path)
+            
 
             total_speech_duration += cut_global_time_end - cut_global_time_start
 

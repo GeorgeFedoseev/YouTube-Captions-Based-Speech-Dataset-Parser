@@ -5,7 +5,10 @@
 			"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
 			"name": "Anaconda Python Builder",
 			"selector": "source.python",
-			"shell_cmd": "\"./venv/bin/python\" -u \"$file\""
+			"shell_cmd": "\"./venv/bin/python\" -u \"$file\"",
+			"env": {
+				"PYTHONIOENCODING": "UTF-8"
+			}
 		}
 	],
 	"folders":

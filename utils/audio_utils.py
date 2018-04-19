@@ -53,8 +53,15 @@ def cut_wave(wave_obj, outfilename, start_ms, end_ms):
     wave_obj.setpos(anchor + start_index)
     out.writeframes(wave_obj.readframes(length))
 
+def save_wave_samples_to_file(wave_samples, n_channels, byte_width, sample_rate, file_path):
+    out = wave.open(file_path, "w")
+    length = len(wave_samples)
+    out.setparams((n_channels, byte_width, sample_rate, length, 'NONE', 'not compressed'))    
+    out.writeframes(wave_samples)
+    out.close()
+
 def convert_to_wav(in_audio_path, out_audio_path):
-    print 'converting %s to big wav' % in_audio_path
+    print 'converting %s to wav' % in_audio_path
     p = subprocess.Popen(["ffmpeg", "-y",
          "-i", in_audio_path,         
          "-ac", "1",
@@ -148,7 +155,7 @@ def starts_or_ends_during_speech(wave, start, end):
     return np.sum(speech_array[-CHECK_FRAMES_NUM:]) > 0 or np.sum(speech_array[:CHECK_FRAMES_NUM]) > 0
 
 
-MAX_ALLOWED_CORRECTION_FW_SEC = 0.3
+MAX_ALLOWED_CORRECTION_FW_SEC = 0.5
 MAX_ALLOWED_CORRECTION_BW_SEC = 0.2
 CORRECTION_WINDOW_SEC = SPEECH_FRAME_SEC*5
 def try_correct_cut(wave, start, end):
