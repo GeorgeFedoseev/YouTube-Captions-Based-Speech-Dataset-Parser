@@ -4,6 +4,186 @@
 		"selected_items":
 		[
 			[
+				"not",
+				"not_founds\tstatement"
+			],
+			[
+				"copy",
+				"copy_jobs\tstatement"
+			],
+			[
+				"filter",
+				"filter_not_in_alphabet_chars\tfunction"
+			],
+			[
+				"data",
+				"dataset_name"
+			],
+			[
+				"all",
+				"all_rows\tstatement"
+			],
+			[
+				"datase",
+				"dataset_name\tstatement"
+			],
+			[
+				"sear",
+				"search_result\tstatement"
+			],
+			[
+				"max",
+				"maxResults"
+			],
+			[
+				"you",
+				"youtube\tstatement"
+			],
+			[
+				"vide",
+				"video_ids\tstatement"
+			],
+			[
+				"video_id",
+				"video_ids\tstatement"
+			],
+			[
+				"csv",
+				"csv_path\tparam"
+			],
+			[
+				"vid",
+				"VID_TO_PROCESS_CSV_FILE\tstatement"
+			],
+			[
+				"dis",
+				"displayed_waiting_for_keywords_to_search\tstatement"
+			],
+			[
+				"tota",
+				"total_speech_length_sec\tstatement"
+			],
+			[
+				"yt",
+				"yt_video_id\tparam"
+			],
+			[
+				"proi",
+				"process_video"
+			],
+			[
+				"currepie",
+				"current_piece_start_sec\tstatement"
+			],
+			[
+				"curre",
+				"current_piece_start_sec\tstatement"
+			],
+			[
+				"aui",
+				"audio_length\tstatement"
+			],
+			[
+				"words",
+				"words_str\tstatement"
+			],
+			[
+				"goo",
+				"good_pieces_count\tstatement"
+			],
+			[
+				"total",
+				"total_speech_length_sec\tstatement"
+			],
+			[
+				"slie",
+				"slice_audio_by_silence\tfunction"
+			],
+			[
+				"sl",
+				"slicing_utils\tmodule"
+			],
+			[
+				"im",
+				"import\tkeyword"
+			],
+			[
+				"is",
+				"is_bad_subs\tfunction"
+			],
+			[
+				"write",
+				"write_stats\tfunction"
+			],
+			[
+				"stats",
+				"stats_util\tmodule"
+			],
+			[
+				"MINSE",
+				"MIN_SEC_PER_SYMBOL\tstatement"
+			],
+			[
+				"aud",
+				"audio_duration\tstatement"
+			],
+			[
+				"isba",
+				"is_bad_subs\tfunction"
+			],
+			[
+				"video",
+				"video_parser\tmodule"
+			],
+			[
+				"file",
+				"filesize\tstatement"
+			],
+			[
+				"ges",
+				"getsize\tfunction"
+			],
+			[
+				"part",
+				"part_wav_path\tstatement"
+			],
+			[
+				"parts",
+				"parts_folder_path\tstatement"
+			],
+			[
+				"make",
+				"makedirs\tfunction"
+			],
+			[
+				"wor",
+				"words_str\tstatement"
+			],
+			[
+				"ti",
+				"timed_words\tstatement"
+			],
+			[
+				"currele",
+				"current_piece_length_sec\tstatement"
+			],
+			[
+				"slice",
+				"sliced_pieces\tstatement"
+			],
+			[
+				"wave",
+				"wave_obj\tstatement"
+			],
+			[
+				"a",
+				"audio_utils\tmodule"
+			],
+			[
+				"get",
+				"get_timed_words\tfunction"
+			],
+			[
 				"threads",
 				"threads_num"
 			],
@@ -32,14 +212,6 @@
 				"autosubs"
 			],
 			[
-				"words",
-				"words\tstatement"
-			],
-			[
-				"yt",
-				"yt_video_id\tstatement"
-			],
-			[
 				"su",
 				"yt_subs_utils\tmodule"
 			],
@@ -48,24 +220,12 @@
 				"prepend_rows_to_csv\tfunction"
 			],
 			[
-				"not",
-				"not_fully_processed_last_time\tstatement"
-			],
-			[
 				"dir",
 				"dir_path\tstatement"
 			],
 			[
 				"VIDE",
 				"VIDEO_DATA_DIR\tstatement"
-			],
-			[
-				"get",
-				"getcwd\tfunction"
-			],
-			[
-				"csv",
-				"csv_utils\tmodule"
 			],
 			[
 				"audio",
@@ -94,10 +254,6 @@
 			[
 				"K",
 				"KWDS_TO_SEARCH\tstatement"
-			],
-			[
-				"a",
-				"append\tfunction"
 			],
 			[
 				"init",
@@ -148,28 +304,12 @@
 				"corrected_cut"
 			],
 			[
-				"sear",
-				"searching"
-			],
-			[
 				"putv",
 				"put_videos_to_pending\tfunction"
 			],
 			[
 				"vides",
 				"videos_put\tstatement"
-			],
-			[
-				"vide",
-				"video_id\tstatement"
-			],
-			[
-				"is",
-				"is_video_processed_or_failed\tfunction"
-			],
-			[
-				"write",
-				"write"
 			],
 			[
 				"remove_video",
@@ -200,10 +340,6 @@
 				"to_delete"
 			],
 			[
-				"tota",
-				"total_scanned\tstatement"
-			],
-			[
 				"j",
 				"join"
 			],
@@ -216,10 +352,6 @@
 				"video_data_path\tstatement"
 			],
 			[
-				"video",
-				"video_data_path\tstatement"
-			],
-			[
 				"exce",
 				"except"
 			],
@@ -228,16 +360,8 @@
 				"copy_jobs"
 			],
 			[
-				"copy",
-				"copy_audio_file"
-			],
-			[
 				"train",
 				"export_train_dir_path"
-			],
-			[
-				"make",
-				"makedirs"
 			],
 			[
 				"KW",
@@ -246,10 +370,6 @@
 			[
 				"chec",
 				"check_dependencies_installed\tfunction"
-			],
-			[
-				"you",
-				"youtube_search\tfunction"
 			],
 			[
 				"page",
@@ -266,10 +386,6 @@
 			[
 				"auto_",
 				"auto_time_codes_found\tstatement"
-			],
-			[
-				"goo",
-				"good_cut\tstatement"
 			],
 			[
 				"row",
@@ -292,16 +408,8 @@
 				"convert_to_wav"
 			],
 			[
-				"parts",
-				"parts_dir_path\tstatement"
-			],
-			[
 				"cut",
 				"cut_global_time_start\tstatement"
-			],
-			[
-				"wave",
-				"wave_obj"
 			],
 			[
 				"spee",
@@ -380,14 +488,6 @@
 				"audio_path_wav\tstatement"
 			],
 			[
-				"aud",
-				"audio_path_wav\tstatement"
-			],
-			[
-				"max",
-				"max_val\tstatement"
-			],
-			[
 				"sum",
 				"sum_val"
 			],
@@ -414,125 +514,43 @@
 			[
 				"abs",
 				"absolute\tinstance"
-			],
-			[
-				"sampl",
-				"sampl_rate\tstatement"
-			],
-			[
-				"cut_extended_global_time_",
-				"cut_extended_global_time_start\tstatement"
-			],
-			[
-				"cutglo",
-				"cut_global_time_end\tstatement"
-			],
-			[
-				"cutexte",
-				"cut_extended_global_time_start\tstatement"
-			],
-			[
-				"cu",
-				"cut_extended_global_time_start\tstatement"
-			],
-			[
-				"cut_glo",
-				"cut_global_time_end"
-			],
-			[
-				"ave",
-				"average_val\tstatement"
-			],
-			[
-				"remov",
-				"removed_count\tstatement"
-			],
-			[
-				"wri",
-				"write\tstatement"
-			],
-			[
-				"pie",
-				"piece_time"
-			],
-			[
-				"proce",
-				"processed_subs_count"
-			],
-			[
-				"subs",
-				"subs_text"
-			],
-			[
-				"go",
-				"good_pieces_count\tstatement"
-			],
-			[
-				"fo",
-				"found_timing_count"
-			],
-			[
-				"fou",
-				"found_timing_count\tstatement"
-			],
-			[
-				"pr",
-				"print\tkeyword"
-			],
-			[
-				"lo",
-				"lower"
-			],
-			[
-				"procese",
-				"processed_subs\tstatement"
-			],
-			[
-				"pro",
-				"process_video\tfunction"
-			],
-			[
-				"au",
-				"auto_subs"
-			],
-			[
-				"en",
-				"end_time"
-			],
-			[
-				"sub",
-				"subs\tstatement"
-			],
-			[
-				"pi",
-				"piece_time\tstatement"
-			],
-			[
-				"dow",
-				"download_yt_audio\tfunction"
-			],
-			[
-				"y",
-				"yt_video_id\tstatement"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "parse_youtube.py",
+			"file": "echo_msk_video_ids_parser.py",
 			"settings":
 			{
-				"buffer_size": 3279,
+				"buffer_size": 2320,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "video_parser.py",
+			"file": "vad_first_parser.py",
 			"settings":
 			{
-				"buffer_size": 8020,
+				"buffer_size": 4497,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "maintenance/export-dataset.py",
+			"settings":
+			{
+				"buffer_size": 7951,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "text_filter_text.py",
+			"settings":
+			{
+				"buffer_size": 284,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -547,38 +565,10 @@
 			}
 		},
 		{
-			"file": "youtube_video_searcher.py",
+			"file": "utils/slicing_utils.py",
 			"settings":
 			{
-				"buffer_size": 4216,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "utils/audio_utils.py",
-			"settings":
-			{
-				"buffer_size": 7167,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "utils/csv_utils.py",
-			"settings":
-			{
-				"buffer_size": 7278,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "utils/queue_utils.py",
-			"settings":
-			{
-				"buffer_size": 3513,
-				"encoding": "UTF-8",
+				"buffer_size": 4004,
 				"line_ending": "Unix"
 			}
 		}
@@ -653,31 +643,38 @@
 	],
 	"file_history":
 	[
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/echo_msk_osoboe_video_ids.txt",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/parse_youtube.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/vad_first_parser.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/utils/csv_utils.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/utils/queue_utils.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/csv_data/videos_to_process.csv",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/youtube_video_searcher.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/utils/slicing_utils.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/subs_first_parser.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/const.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/utils/yt_subs_utils.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/yt.sublime-project",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/csv_data/videos_processing.csv",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/test_cut_by_vad_plus_autosubs.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/test_autosubs.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/utils/stats_util.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/utils/audio_utils.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/utils/yt_utils.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/yt_video_parsers/__init__.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/video_parser.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/maintenance/export-dataset.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/maintenance/remove_extra_data_for_processed.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/maintenance/remove_failed_data.py",
-		"/Users/gosha/Projects/youtube-audio-captions-parsing/utils/csv_utils.py",
-		"/Users/gosha/Projects/youtube-audio-captions-parsing/utils/queue_utils.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/data/xRcTPP-a-x4/parts.csv",
-		"/Users/gosha/Projects/youtube-audio-captions-parsing/utils/audio_utils.py",
-		"/Users/gosha/Projects/youtube-audio-captions-parsing/utils/yt_subs_utils.py",
-		"/Users/gosha/Projects/youtube-audio-captions-parsing/test_autosubs.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/data/gB0s8oBCjeQ/autosubs.ru.vtt",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/current_folder_ids.txt",
-		"/Users/gosha/Projects/youtube-audio-captions-parsing/video_parser.py",
-		"/Users/gosha/Projects/youtube-audio-captions-parsing/const.py",
-		"/Users/gosha/Projects/youtube-audio-captions-parsing/youtube_video_searcher.py",
-		"/Users/gosha/Projects/youtube-audio-captions-parsing/csv_data/videos_processing.csv",
-		"/Users/gosha/Projects/youtube-audio-captions-parsing/csv_data/videos_to_process.csv",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/maintenance/folder-video-ids.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/maintenance/path_checker.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/csv_utils.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/queue_utils.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/audio_utils.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/utils/__init__.py",
-		"/Users/gosha/Projects/youtube-audio-captions-parsing/parse_youtube.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/stats_util.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/export-dataset.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/folder-video-ids.py",
@@ -784,6 +781,19 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"NUM_THREADS",
+			"makedirs",
+			"mkdirs",
+			"with CSV_FILES_DICT[csv_path][\"lock\"]",
+			"with CSV_FILES_DICT",
+			"VID_TO_PROCESS_CSV_FILE",
+			"update_from_file",
+			"start_csv_queue_worker_thread",
+			"VAD Exception: Error while processing frame",
+			"shut",
+			"process_video",
+			"csv",
+			"is_bad_piece",
 			"webrtcvad",
 			"threads",
 			"prep",
@@ -919,24 +929,24 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "parse_youtube.py",
+					"file": "echo_msk_video_ids_parser.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3279,
+						"buffer_size": 2320,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								267,
-								267
+								1778,
+								1778
 							]
 						],
 						"settings":
@@ -950,6 +960,82 @@
 								{
 									"characters": ".",
 									"selector": "source.python - string - constant.numeric"
+								}
+							],
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 487.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "vad_first_parser.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4497,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								583,
+								583
+							]
+						],
+						"settings":
+						{
+							"show_definitions": false,
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 370.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "maintenance/export-dataset.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7951,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6992,
+								6992
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": -1,
+								"modified": true,
+								"selection": true,
+								"status": -1,
+								"syntax": "python"
+							},
+							"auto_complete_triggers":
+							[
+								{
+									"characters": ".",
+									"selector": "source.python - string - comment - constant.numeric"
 								},
 								{
 									"characters": ".",
@@ -962,27 +1048,27 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2740.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "video_parser.py",
+					"buffer": 3,
+					"file": "text_filter_text.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8020,
+						"buffer_size": 284,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3748,
-								3748
+								21,
+								0
 							]
 						],
 						"settings":
@@ -998,9 +1084,7 @@
 									"selector": "source.python - string - constant.numeric"
 								}
 							],
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/Python/Python.sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1010,7 +1094,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 4,
 					"file": "utils/yt_subs_utils.py",
 					"semi_transient": false,
 					"settings":
@@ -1022,8 +1106,8 @@
 						"selection":
 						[
 							[
-								84,
-								84
+								3958,
+								3984
 							]
 						],
 						"settings":
@@ -1033,87 +1117,27 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "youtube_video_searcher.py",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 4216,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3487,
-								3500
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1632.0,
+						"translation.y": 1953.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "utils/audio_utils.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 7167,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								94,
-								1086
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 493.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
 					"buffer": 5,
-					"file": "utils/csv_utils.py",
+					"file": "utils/slicing_utils.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 7278,
+						"buffer_size": 4004,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4639,
-								4639
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1127,36 +1151,6 @@
 						"zoom_level": 1.0
 					},
 					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "utils/queue_utils.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3513,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								796,
-								796
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
 					"type": "text"
 				}
 			]
@@ -1195,7 +1189,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 270.0
+		"height": 390.0
 	},
 	"output.find_results":
 	{

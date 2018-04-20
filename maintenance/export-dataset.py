@@ -38,7 +38,7 @@ def filter_not_in_alphabet_chars(text):
     text = re.sub(u'[^а-яё\- ]+', '', text.decode("utf-8").lower())
     return text
 
-def export(target_folder, apply_filter=True, skip_audio=False, minimum_words_count=1, DATASET_NAME = "yt-subs", NUM_THREADS = 8):
+def export(target_folder, apply_filter=True, skip_audio=False, minimum_words_count=1, DATASET_NAME = "yt-subs", NUM_THREADS = 8, RANDOM_SEED=42):
 
     target_folder = os.path.abspath(os.path.expanduser(target_folder))
 
@@ -124,7 +124,7 @@ def export(target_folder, apply_filter=True, skip_audio=False, minimum_words_cou
         raise Exception('too small dataset < 20')
 
     # shuffle 
-
+    random.seed(RANDOM_SEED)
     random.shuffle(all_rows)
 
     # split in 3 groups train:dev:test 80:10:10
@@ -241,7 +241,7 @@ if __name__ == '__main__':
         raise SystemExit
 
     if len(sys.argv) < 2:
-        print('USAGE: python export-dataset.py <export_dir_path> [--skip-audio] [--min-words n]')
+        print('USAGE: python export-dataset.py <export_dir_path> [--skip-audio] [--min-words <int>] [--name <string>] [--num_threads <int>] [--random-seed <int>]')
     else:    
         minimum_words_count = 1
         try:
@@ -261,11 +261,18 @@ if __name__ == '__main__':
         except:
             pass
 
+        random_seed = 42
+        try:
+            random_seed = int(sys.argv[sys.argv.index("--random-seed")+1])
+        except:
+            pass
+
         export(sys.argv[1],
                skip_audio=("--skip-audio" in str(sys.argv)),
                minimum_words_count = minimum_words_count,
                DATASET_NAME=dataset_name,
-               NUM_THREADS=num_threads
+               NUM_THREADS=num_threads,
+               RANDOM_SEED=random_seed
                )
 
 
