@@ -82,7 +82,7 @@ def process_video(yt_video_id):
     sliced_pieces, avg_len_sec = slice_audio_by_silence(wave_obj, vad_silence_volume_param=0)
     total_pieces_count = len(sliced_pieces)
 
-    #print("sliced into %i pieces with average length of %f seconds" % (total_pieces_count, avg_len_sec))
+    print("sliced into %i pieces with average length of %f seconds" % (total_pieces_count, avg_len_sec))
 
 
     parts_folder_path = os.path.join(video_dir_path, "parts/");
@@ -135,7 +135,7 @@ def process_video(yt_video_id):
         SAMPLE_RATE = 16000
         BYTE_WIDTH = 2
         audio_length = float(wav_filesize)/SAMPLE_RATE/BYTE_WIDTH
-        total_speech_length_sec += audio_length
+        
 
         if is_bad_piece(audio_length, words_str):
             #print("skip is_bad_piece %i" % i)
@@ -144,9 +144,11 @@ def process_video(yt_video_id):
             continue
 
         audio_per_symbol_density = audio_length/len(words_str)
-        if  audio_per_symbol_density > 0.07:
+        #if  audio_per_symbol_density > 0.07:
             #print("skip too high audio per symbol density: %f" % (audio_per_symbol_density))
-            continue
+        #    continue
+
+        total_speech_length_sec += audio_length
         
         good_pieces_count += 1
 
@@ -164,5 +166,5 @@ def process_video(yt_video_id):
                 total_speech_length_sec, 1, good_pieces_count, total_pieces_count])
 
 if __name__ == "__main__":
-    yt_video_id = "Q86y1xFWD7Q"
+    yt_video_id = "iJ-6NGBC43U"
     process_video(yt_video_id)

@@ -12,8 +12,8 @@ def is_bad_piece(audio_duration, transcript):
     # remove audios that are shorter than 0.5s and longer than 20s.
     # remove audios that are too short for transcript.
     if audio_duration > MIN_SECS and audio_duration < MAX_SECS and transcript!="" and audio_duration/len(transcript) > MIN_SEC_PER_SYMBOL:
-        return True
-    return False
+        return False
+    return True
 
 def is_bad_subs(subs_text):
     bad = False
@@ -95,14 +95,14 @@ def slice_audio_by_silence(wave_obj, min_audio_length=5, max_audio_length=10, va
                     have_current_piece = False
                     searching_for_silence = False
                     searching_for_speech = True
-                    current_piece_start_sec = silence_start_sec
+                    
                     
 
             # searching for speech after silence
             elif searching_for_speech:
                 if is_speech_frame_count >= SPEECH_DETECT_FRAMES_COUNT:
                     # start piece here
-                    
+                    current_piece_start_sec = speech_start_sec
                     current_piece_length_sec = 0
                     current_piece_samples = ""
 
