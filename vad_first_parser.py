@@ -137,16 +137,16 @@ def process_video(yt_video_id):
         audio_length = float(wav_filesize)/SAMPLE_RATE/BYTE_WIDTH
         
 
-        if is_bad_piece(audio_length, words_str):
+        #if is_bad_piece(audio_length, words_str):
             #print("skip is_bad_piece %i" % i)
             # remove file
-            os.remove(part_wav_path)
-            continue
+         #   os.remove(part_wav_path)
+         #   continue
 
         audio_per_symbol_density = audio_length/len(words_str)
-        #if  audio_per_symbol_density > 0.07:
+        if  audio_per_symbol_density > 0.07:
             #print("skip too high audio per symbol density: %f" % (audio_per_symbol_density))
-        #    continue
+            continue
 
         total_speech_length_sec += audio_length
         
@@ -166,5 +166,5 @@ def process_video(yt_video_id):
                 total_speech_length_sec, 1, good_pieces_count, total_pieces_count])
 
 if __name__ == "__main__":
-    yt_video_id = "iJ-6NGBC43U"
+    yt_video_id = "Q86y1xFWD7Q"
     process_video(yt_video_id)
