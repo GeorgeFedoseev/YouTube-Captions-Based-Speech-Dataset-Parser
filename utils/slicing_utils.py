@@ -7,7 +7,8 @@ def is_bad_piece(audio_duration, transcript):
     MAX_SECS = 20
     MIN_SECS = 3    
     
-    MIN_SEC_PER_SYMBOL = 0.04375
+    MIN_SEC_PER_SYMBOL = 0.03
+    #MIN_SEC_PER_SYMBOL = 0
 
     # remove audios that are shorter than 0.5s and longer than 20s.
     # remove audios that are too short for transcript.

@@ -59,19 +59,19 @@ def process_video(yt_video_id):
     # normalize volume
     audio_wav_volume_normalized_path = os.path.join(const.VIDEO_DATA_DIR, yt_video_id+"/audio_volume_normalized.wav")
     if not os.path.exists(audio_wav_volume_normalized_path):
-        print("Normalizing volume...")
+        #print("Normalizing volume...")
         audio_utils.loud_norm(audio_wav_path, audio_wav_volume_normalized_path)
 
     # correct volume
     audio_wav_volume_corrected_path = os.path.join(const.VIDEO_DATA_DIR, yt_video_id+"/audio_volume_corrected.wav")
     if not os.path.exists(audio_wav_volume_corrected_path):
-        print("Correcting volume...")
+        #print("Correcting volume...")
         audio_utils.correct_volume(audio_wav_volume_normalized_path, audio_wav_volume_corrected_path)
 
     # apply bandpass filter
     audio_wav_filtered_path = os.path.join(const.VIDEO_DATA_DIR, yt_video_id+"/audio_filtered.wav")
     if not os.path.exists(audio_wav_filtered_path):
-        print("Applying bandpass filter...")
+        #print("Applying bandpass filter...")
         audio_utils.apply_bandpass_filter(audio_wav_volume_corrected_path, audio_wav_filtered_path)
 
 
@@ -135,17 +135,20 @@ def process_video(yt_video_id):
         SAMPLE_RATE = 16000
         BYTE_WIDTH = 2
         audio_length = float(wav_filesize)/SAMPLE_RATE/BYTE_WIDTH
+
+
         
 
-        #if is_bad_piece(audio_length, words_str):
+        if is_bad_piece(audio_length, words_str):
             #print("skip is_bad_piece %i" % i)
             # remove file
-         #   os.remove(part_wav_path)
-         #   continue
+            os.remove(part_wav_path)
+            continue
 
         audio_per_symbol_density = audio_length/len(words_str)
         if  audio_per_symbol_density > 0.07:
             #print("skip too high audio per symbol density: %f" % (audio_per_symbol_density))
+            os.remove(part_wav_path)
             continue
 
         total_speech_length_sec += audio_length
@@ -166,5 +169,5 @@ def process_video(yt_video_id):
                 total_speech_length_sec, 1, good_pieces_count, total_pieces_count])
 
 if __name__ == "__main__":
-    yt_video_id = "Q86y1xFWD7Q"
+    yt_video_id = "HBdK8Kac_zU"
     process_video(yt_video_id)
