@@ -36,7 +36,6 @@ def process_video(yt_video_id):
 
     
 
-
     total_speech_length_sec = 0
     total_pieces_count = 0
     good_pieces_count = 0
@@ -54,12 +53,30 @@ def process_video(yt_video_id):
 
     # convert to wav
     audio_wav_path = os.path.join(const.VIDEO_DATA_DIR, yt_video_id+"/audio.wav")
-
     if not os.path.exists(audio_wav_path):
         audio_utils.convert_to_wav(audio_original_path, audio_wav_path)
 
+    # normalize volume
+    audio_wav_volume_normalized_path = os.path.join(const.VIDEO_DATA_DIR, yt_video_id+"/audio_volume_normalized.wav")
+    if not os.path.exists(audio_wav_volume_normalized_path):
+        print("Normalizing volume...")
+        audio_utils.loud_norm(audio_wav_path, audio_wav_volume_normalized_path)
+
+    # correct volume
+    audio_wav_volume_corrected_path = os.path.join(const.VIDEO_DATA_DIR, yt_video_id+"/audio_volume_corrected.wav")
+    if not os.path.exists(audio_wav_volume_corrected_path):
+        print("Correcting volume...")
+        audio_utils.correct_volume(audio_wav_volume_normalized_path, audio_wav_volume_corrected_path)
+
+    # apply bandpass filter
+    audio_wav_filtered_path = os.path.join(const.VIDEO_DATA_DIR, yt_video_id+"/audio_filtered.wav")
+    if not os.path.exists(audio_wav_filtered_path):
+        print("Applying bandpass filter...")
+        audio_utils.apply_bandpass_filter(audio_wav_volume_corrected_path, audio_wav_filtered_path)
+
+
     # load wave object
-    wave_obj = wave.open(audio_wav_path, "r")
+    wave_obj = wave.open(audio_wav_filtered_path, "r")
 
     # slice by VAD silence
     sliced_pieces, avg_len_sec = slice_audio_by_silence(wave_obj, vad_silence_volume_param=0)
@@ -81,18 +98,18 @@ def process_video(yt_video_id):
     csv_rows = []
 
     for i, piece in enumerate(sliced_pieces):
-        START_PREC_SEC = 0.5
-        END_PREC_SEC = 0.2
+        START_PREC_SEC = 0.1
+        END_PREC_SEC = 0.1
 
         # for each piece find words that are inside it
-        words = [w for w in timed_words if float(w["start"])/1000 >= piece["start"]-START_PREC_SEC and float(w["end"])/1000 <= piece["end"]+END_PREC_SEC]
+        words = [w for w in timed_words if (float(w["start"]) + float(w["end"]) )/2/1000 >= piece["start"]-START_PREC_SEC and (float(w["start"]) + float(w["end"]) )/2/1000 <= piece["end"]+END_PREC_SEC]
 
         if len(words) == 0:
             continue
 
         words = sorted(words, key=lambda w: w["start"])
 
-        if abs(piece["start"] - float(words[0]["start"])/1000) > 0.5 or abs(piece["end"] - float(words[-1]["end"])/1000) > 0.5:
+        if abs(piece["start"] - float(words[0]["start"])/1000) > 0.3 or abs(piece["end"] - float(words[-1]["end"])/1000) > 0.3:
             #print("skip not precise bounds %i" % i)
             continue
 
@@ -147,5 +164,5 @@ def process_video(yt_video_id):
                 total_speech_length_sec, 1, good_pieces_count, total_pieces_count])
 
 if __name__ == "__main__":
-    yt_video_id = "1mWhDsN_yN4"
+    yt_video_id = "Q86y1xFWD7Q"
     process_video(yt_video_id)
