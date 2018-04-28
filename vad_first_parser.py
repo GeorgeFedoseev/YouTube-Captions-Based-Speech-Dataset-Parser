@@ -98,20 +98,31 @@ def process_video(yt_video_id):
     csv_rows = []
 
     for i, piece in enumerate(sliced_pieces):
-        START_PREC_SEC = 0.1
-        END_PREC_SEC = 0.1
+        START_PREC_SEC = 0
+        END_PREC_SEC = 0
+
+        WORD_INCL_PERC = 0.2
 
         # for each piece find words that are inside it
-        words = [w for w in timed_words if (float(w["start"]) + float(w["end"]) )/2/1000 >= piece["start"]-START_PREC_SEC and (float(w["start"]) + float(w["end"]) )/2/1000 <= piece["end"]+END_PREC_SEC]
+        words = []
+
+        for w in timed_words:
+            w_start = float(w["start"])/1000
+            w_end = float(w["end"])/1000
+            w_duration = w_end - w_start
+
+            if w_end - piece["start"] > w_duration*WORD_INCL_PERC and piece["end"] - w_start > w_duration*WORD_INCL_PERC:
+                words.append(w)
+
 
         if len(words) == 0:
             continue
 
         words = sorted(words, key=lambda w: w["start"])
 
-        if abs(piece["start"] - float(words[0]["start"])/1000) > 0.3 or abs(piece["end"] - float(words[-1]["end"])/1000) > 0.3:
+        #if abs(piece["start"] - float(words[0]["start"])/1000) > 0.3 or abs(piece["end"] - float(words[-1]["end"])/1000) > 0.3:
             #print("skip not precise bounds %i" % i)
-            continue
+            #continue
 
         words_str = " ".join([w["word"] for w in words])
         words_str = words_str.encode("utf-8")

@@ -104,7 +104,7 @@ def slice_audio_by_silence(wave_obj, min_audio_length=5, max_audio_length=10, va
                     
                     lost_on_searching_for_silence = float(wave_obj.tell())/samples_per_second - started_searching_for_silence_at
                     total_lost_on_searching_for_silence += lost_on_searching_for_silence
-                    print("Lost on searching for silence: %f" % (lost_on_searching_for_silence))
+                    #print("Lost on searching for silence: %f" % (lost_on_searching_for_silence))
                     
 
             # searching for speech after silence
@@ -153,7 +153,7 @@ def slice_audio_by_silence(wave_obj, min_audio_length=5, max_audio_length=10, va
 
                 # reached max length - reset searching
                 else:
-                    print("WARNING: reached max length of piece - reset searching for piece start from %f to %f" % (current_piece_start_sec+current_piece_length_sec, current_piece_start_sec+1))
+                    #print("WARNING: reached max length of piece - reset searching for piece start from %f to %f" % (current_piece_start_sec+current_piece_length_sec, current_piece_start_sec+1))
 
                     # reset to time of current piece start + 1 sec and start searching for piece beginning
                     wave_obj.setpos(int((current_piece_start_sec+1)*samples_per_second))
