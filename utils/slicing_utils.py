@@ -2,6 +2,8 @@ import re
 import wave
 import webrtcvad
 
+import datetime
+
 def is_bad_piece(audio_duration, transcript):   
 
     MAX_SECS = 20
@@ -63,6 +65,9 @@ def slice_audio_by_silence(wave_obj, min_audio_length=5, max_audio_length=10, va
     silence_start_sec = 0
     speech_start_sec = 0
 
+
+    started_searching_for_silence_at = 0
+    total_lost_on_searching_for_silence = 0
     
     while wave_obj.tell() < total_samples:        
         wav_samples = wave_obj.readframes(samples_per_frame)
@@ -97,6 +102,9 @@ def slice_audio_by_silence(wave_obj, min_audio_length=5, max_audio_length=10, va
                     searching_for_silence = False
                     searching_for_speech = True
                     
+                    lost_on_searching_for_silence = float(wave_obj.tell())/samples_per_second - started_searching_for_silence_at
+                    total_lost_on_searching_for_silence += lost_on_searching_for_silence
+                    print("Lost on searching for silence: %f" % (lost_on_searching_for_silence))
                     
 
             # searching for speech after silence
@@ -141,9 +149,11 @@ def slice_audio_by_silence(wave_obj, min_audio_length=5, max_audio_length=10, va
                         searching_for_speech = False
                         searching_for_silence = True
 
+                        started_searching_for_silence_at = float(wave_obj.tell())/samples_per_second
+
                 # reached max length - reset searching
                 else:
-                    #print("WARNING: reached max length of piece - reset searching for piece start from %f" % (current_piece_start_sec+1))
+                    print("WARNING: reached max length of piece - reset searching for piece start from %f to %f" % (current_piece_start_sec+current_piece_length_sec, current_piece_start_sec+1))
 
                     # reset to time of current piece start + 1 sec and start searching for piece beginning
                     wave_obj.setpos(int((current_piece_start_sec+1)*samples_per_second))
@@ -151,6 +161,9 @@ def slice_audio_by_silence(wave_obj, min_audio_length=5, max_audio_length=10, va
                     searching_for_speech = False
                     searching_for_silence = True
 
+                    started_searching_for_silence_at = float(wave_obj.tell())/samples_per_second
 
+    
+    print("Total lost on searching for silence: %s" % (str(datetime.timedelta(seconds=total_lost_on_searching_for_silence))))
 
     return out_pieces, total_length/len(out_pieces)
