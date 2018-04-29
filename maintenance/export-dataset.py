@@ -216,8 +216,17 @@ def export(target_folder, skip_audio=False, minimum_words_count=1, DATASET_NAME 
                 #audio_utils.correct_volume(from_path, tmp_path)
                 #audio_utils.apply_bandpass_filter(tmp_path, to_path)
                 # remove tmp
-                #os.remove(tmp_path)
+                #os.remove(tmp_path)                
+                
+
                 shutil.copyfile(from_path, to_path)
+            else:
+                filesize = os.path.getsize(to_path)
+                if filesize < 100:                    
+                    print("Warining filesize < 100b: %s - copying again" % (to_path))
+                    shutil.copyfile(from_path, to_path)   
+
+
             pbar.update(1)
 
 
@@ -233,6 +242,8 @@ def export(target_folder, skip_audio=False, minimum_words_count=1, DATASET_NAME 
                 not_founds += 1
         if not_founds > 0:
             print("ERROR: not all (%i) files were copied to destination!" % not_founds)
+        else:
+            print("All files copied")
 
     
 
