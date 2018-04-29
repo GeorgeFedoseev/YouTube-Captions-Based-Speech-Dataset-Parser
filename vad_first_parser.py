@@ -32,6 +32,9 @@ import datetime
 
 def process_video(yt_video_id):   
 
+    SAMPLE_RATE = 16000
+    BYTE_WIDTH = 2
+
     print '[%s][STARTED_PARSING]' % yt_video_id
 
     
@@ -101,7 +104,7 @@ def process_video(yt_video_id):
         START_PREC_SEC = 0
         END_PREC_SEC = 0
 
-        WORD_INCL_PERC = 0.2
+        WORD_INCL_PERC = 0.4
 
         # for each piece find words that are inside it
         words = []
@@ -143,8 +146,7 @@ def process_video(yt_video_id):
         wav_filesize = os.path.getsize(part_wav_path)
 
 
-        SAMPLE_RATE = 16000
-        BYTE_WIDTH = 2
+        
         audio_length = float(wav_filesize)/SAMPLE_RATE/BYTE_WIDTH
 
 
@@ -169,7 +171,17 @@ def process_video(yt_video_id):
         csv_rows.append([part_wav_path, wav_filesize, words_str])
 
 
-    print("[%s][FINISHED_PARSING] added %i pieces wit total duration: %s" % (yt_video_id, len(csv_rows), str(datetime.timedelta(seconds=total_speech_length_sec))))
+
+    total_audio_duration = float(os.path.getsize(audio_wav_filtered_path))/SAMPLE_RATE/BYTE_WIDTH
+
+    utilization_rate = 0
+    if total_audio_duration > 0:
+        utilization_rate = total_speech_length_sec / total_audio_duration
+
+
+    print("[%s][FINISHED_PARSING] added %i pieces with total duration: %s (%.2f)" % (yt_video_id, len(csv_rows), str(datetime.timedelta(seconds=total_speech_length_sec)), utilization_rate))
+
+
 
     csv_path = os.path.join(video_dir_path, "parts.csv")
 
@@ -180,5 +192,5 @@ def process_video(yt_video_id):
                 total_speech_length_sec, 1, good_pieces_count, total_pieces_count])
 
 if __name__ == "__main__":
-    yt_video_id = "HBdK8Kac_zU"
+    yt_video_id = "WDukDAs-Ijo"
     process_video(yt_video_id)

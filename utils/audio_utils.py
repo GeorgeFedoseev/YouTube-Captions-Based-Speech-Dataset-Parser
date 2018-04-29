@@ -9,13 +9,17 @@ import webrtcvad
 
 def loud_norm(in_path, out_path):
     # ffmpeg-normalize audio.wav -o out.wav
-    p = subprocess.Popen("venv/bin/ffmpeg-normalize %s -o %s -f" % (in_path, out_path),
-     shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    # ffmpeg -i audio.wav -filter:a loudnorm loudnorm.wav
+    p = subprocess.Popen(["ffmpeg", "-y",
+        "-i", in_path,
+        "-filter:a", "loudnorm",
+        out_path
+    ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
     out, err = p.communicate()
 
     if p.returncode != 0:
-        raise Exception("Failed to ffmpeg-normalize: %s" % str(err))
+        raise Exception("Failed to loudnorm: %s" % str(err))
 
 
 def apply_bandpass_filter(in_path, out_path, lowpass=8000, highpass=50):
