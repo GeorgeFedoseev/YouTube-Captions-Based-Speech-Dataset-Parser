@@ -62,7 +62,7 @@ def process_video(yt_video_id):
     # normalize volume
     audio_wav_volume_normalized_path = os.path.join(const.VIDEO_DATA_DIR, yt_video_id+"/audio_volume_normalized.wav")
     if not os.path.exists(audio_wav_volume_normalized_path):
-        print("Normalizing volume... %s" % (audio_wav_path))
+        #print("Normalizing volume... %s" % (audio_wav_path))
         audio_utils.loud_norm(audio_wav_path, audio_wav_volume_normalized_path)
 
     # correct volume
