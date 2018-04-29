@@ -12,7 +12,7 @@ def loud_norm(in_path, out_path):
     # ffmpeg -i audio.wav -filter:a loudnorm loudnorm.wav
     p = subprocess.Popen(["ffmpeg", "-y",
         "-i", in_path,
-        "-filter:a", "loudnorm",
+        "-af", "loudnorm",
         out_path
     ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
