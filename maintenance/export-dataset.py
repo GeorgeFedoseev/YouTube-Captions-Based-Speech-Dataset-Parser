@@ -38,12 +38,12 @@ def filter_not_in_alphabet_chars(text):
     text = re.sub(u'[^а-яё\- ]+', '', text.decode("utf-8").lower())
     return text
 
-def export(target_folder, apply_filter=True, skip_audio=False, minimum_words_count=1, DATASET_NAME = "yt-subs", NUM_THREADS = 8, RANDOM_SEED=42):
+def export(target_folder, skip_audio=False, minimum_words_count=1, DATASET_NAME = "yt-subs", NUM_THREADS = 8, RANDOM_SEED=42):
 
     target_folder = os.path.abspath(os.path.expanduser(target_folder))
 
     print 'exporting to dir %s ' % target_folder
-    print "apply_filter: %s" % str(apply_filter)
+       
     print "skip_audio: %s" % str(skip_audio)
     print "minimum_words_count: %s" % str(minimum_words_count)
     print "num_threads: %i" % NUM_THREADS
