@@ -232,14 +232,18 @@ def export(target_folder, skip_audio=False, minimum_words_count=1, DATASET_NAME 
         pbar.close()
 
         # check if all jobs has been copied
-        not_founds = 0
+        check_errors = 0
         for job in copy_jobs:
             if not os.path.exists(job[1]):
-                not_founds += 1
-        if not_founds > 0:
-            print("ERROR: not all (%i) files were copied to destination!" % not_founds)
+                check_errors += 1
+                print("Bad copy, file wasnt copied: %s -> %s " % (job[0], job[1]))
+            if os.path.getsize(job[0]) != os.path.getsize(job[1]):
+                check_errors += 1
+                print("Bad copy, filesize doesnt match: %s -> %s " % (job[0], job[1]))
+        if check_errors > 0:
+            print("ERROR: not all (%i) files were copied to destination correctly!" % check_errors)
         else:
-            print("All files copied")
+            print("All files copied correctly")
 
     
 
