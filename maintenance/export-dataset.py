@@ -159,7 +159,7 @@ def export(target_folder, skip_audio=False, minimum_words_count=1, DATASET_NAME 
         #print old_path
         filename = os.path.basename(old_path)
         new_path =  os.path.join(export_train_dir_path, filename)       
-        if not os.path.exists(new_path):
+        if (not os.path.exists(new_path)) or os.path.getsize(new_path) != row[1]:
             copy_jobs.append((old_path, new_path))
 
         row[0] = new_path
@@ -169,7 +169,7 @@ def export(target_folder, skip_audio=False, minimum_words_count=1, DATASET_NAME 
         old_path = get_audio_rel_path(row[0])
         filename = os.path.basename(old_path)
         new_path =  os.path.join(export_dev_dir_path, filename)       
-        if not os.path.exists(new_path):
+        if (not os.path.exists(new_path)) or os.path.getsize(new_path) != row[1]:
             copy_jobs.append((old_path, new_path))
 
         row[0] =  os.path.join(export_dev_dir_path, filename)        
@@ -178,7 +178,7 @@ def export(target_folder, skip_audio=False, minimum_words_count=1, DATASET_NAME 
         old_path = get_audio_rel_path(row[0])
         filename = os.path.basename(old_path)
         new_path =  os.path.join(export_test_dir_path, filename)       
-        if not os.path.exists(new_path):
+        if (not os.path.exists(new_path)) or os.path.getsize(new_path) != row[1]:
             copy_jobs.append((old_path, new_path))
 
         row[0] =  os.path.join(export_test_dir_path, filename)        
@@ -211,7 +211,7 @@ def export(target_folder, skip_audio=False, minimum_words_count=1, DATASET_NAME 
             to_path = job[1]
             #print 'copy %s -> %s' % job
             #shutil.copyfile(from_path, to_path)  
-            if not os.path.exists(to_path):      
+            
                 #tmp_path = "%s.tmp.wav" % to_path
                 #audio_utils.correct_volume(from_path, tmp_path)
                 #audio_utils.apply_bandpass_filter(tmp_path, to_path)
@@ -219,13 +219,8 @@ def export(target_folder, skip_audio=False, minimum_words_count=1, DATASET_NAME 
                 #os.remove(tmp_path)                
                 
 
-                shutil.copyfile(from_path, to_path)
-            else:
-                filesize_from = os.path.getsize(from_path)
-                filesize_to = os.path.getsize(to_path)
-                if filesize_to != filesize_from:                    
-                    print("Warining filesize_to != filesize_from: %s - copying again" % (to_path))
-                    shutil.copyfile(from_path, to_path)   
+            shutil.copyfile(from_path, to_path)
+            
 
 
             pbar.update(1)
