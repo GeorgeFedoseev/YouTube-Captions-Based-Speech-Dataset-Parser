@@ -221,9 +221,10 @@ def export(target_folder, skip_audio=False, minimum_words_count=1, DATASET_NAME 
 
                 shutil.copyfile(from_path, to_path)
             else:
-                filesize = os.path.getsize(to_path)
-                if filesize < 100:                    
-                    print("Warining filesize < 100b: %s - copying again" % (to_path))
+                filesize_from = os.path.getsize(from_path)
+                filesize_to = os.path.getsize(to_path)
+                if filesize_to != filesize_from:                    
+                    print("Warining filesize_to != filesize_from: %s - copying again" % (to_path))
                     shutil.copyfile(from_path, to_path)   
 
 
