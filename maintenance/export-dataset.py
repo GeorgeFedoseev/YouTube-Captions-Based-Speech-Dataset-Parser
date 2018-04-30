@@ -159,7 +159,7 @@ def export(target_folder, skip_audio=False, minimum_words_count=1, DATASET_NAME 
         #print old_path
         filename = os.path.basename(old_path)
         new_path =  os.path.join(export_train_dir_path, filename)       
-        if (not os.path.exists(new_path)) or os.path.getsize(new_path) != row[1]:
+        if (not os.path.exists(new_path)) or os.path.getsize(new_path) != int(row[1]):
             copy_jobs.append((old_path, new_path))
 
         row[0] = new_path
@@ -169,7 +169,7 @@ def export(target_folder, skip_audio=False, minimum_words_count=1, DATASET_NAME 
         old_path = get_audio_rel_path(row[0])
         filename = os.path.basename(old_path)
         new_path =  os.path.join(export_dev_dir_path, filename)       
-        if (not os.path.exists(new_path)) or os.path.getsize(new_path) != row[1]:
+        if (not os.path.exists(new_path)) or os.path.getsize(new_path) != int(row[1]):
             copy_jobs.append((old_path, new_path))
 
         row[0] =  os.path.join(export_dev_dir_path, filename)        
@@ -178,7 +178,7 @@ def export(target_folder, skip_audio=False, minimum_words_count=1, DATASET_NAME 
         old_path = get_audio_rel_path(row[0])
         filename = os.path.basename(old_path)
         new_path =  os.path.join(export_test_dir_path, filename)       
-        if (not os.path.exists(new_path)) or os.path.getsize(new_path) != row[1]:
+        if (not os.path.exists(new_path)) or os.path.getsize(new_path) != int(row[1]):
             copy_jobs.append((old_path, new_path))
 
         row[0] =  os.path.join(export_test_dir_path, filename)        
