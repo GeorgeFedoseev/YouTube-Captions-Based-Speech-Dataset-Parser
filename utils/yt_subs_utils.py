@@ -155,9 +155,9 @@ def get_timed_words(yt_video_id):
 
     
 def find_string_timing(timed_words, target_str, seq_start_time, offset):
-    target_str = target_str.decode('utf-8').lower()
+    target_str = target_str.decode('utf-8').lower()    
     #print target_str 
-    target_str = re.sub(u'[^a-zа-я ]+', '', target_str)
+    target_str = re.sub(u'[^a-zа-яё ]+', '', target_str)
     #print target_str 
     regex = re.compile(r'[\s]+')
     words = regex.split(target_str)
