@@ -71,7 +71,13 @@ def get_videos(playlistId, pageToken=None, page=0):
     return videos
 
 
-videos = get_videos("PLSfXKSO5IqoSDOqBFwKB3AkU55xUWyJPm")
-for v in videos:
-    print '"%s", "%s"' % (v[0], v[1]) 
+if __name__ == "__main__":
+    if len(sys.argv) > 1:        
+        videos = get_videos(sys.argv[1])
+        for v in videos:
+            print '"%s", "%s"' % (v[0], v[1]) 
+    else:
+        print "Usage: yt_playlist_videos_parser.py <playlistId>"
+
+
 
