@@ -58,7 +58,7 @@ def get_videos(playlistId, pageToken=None, page=0):
         videos.append((search_result["contentDetails"]["videoId"], search_result["snippet"]["title"]))
                 
 
-    print "found %i videos on page %i" % (len(videos), page)
+    #print "found %i videos on page %i" % (len(videos), page)
     
 
     #print "Videos:\n", "\n".join(videos), "\n"
