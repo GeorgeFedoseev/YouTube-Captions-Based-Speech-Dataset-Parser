@@ -22,6 +22,30 @@ def is_bad_piece(audio_duration, transcript):
         return False
     return True
 
+### CONVERTING ###
+
+def convert_to_wav(in_audio_path, out_audio_path):
+    print 'converting %s to wav' % in_audio_path
+    p = subprocess.Popen(["ffmpeg", "-y",
+         "-i", in_audio_path,         
+         "-ac", "1",
+         "-ab", "16",
+         "-ar", "16000",         
+         out_audio_path
+         ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+    out, err = p.communicate()
+
+    try:
+        p.kill()
+    except:
+        pass
+
+    if p.returncode != 0:
+        print("failed_ffmpeg_conversion "+str(err))
+        return False
+    return True
+
 
 ### FILTERS ###
 
@@ -30,6 +54,9 @@ def loud_norm(in_path, out_path):
     # ffmpeg -i audio.wav -filter:a loudnorm loudnorm.wav
     p = subprocess.Popen(["ffmpeg", "-y",
         "-i", in_path,
+        "-acodec", "pcm_s16le",
+         "-ac", "1",
+         "-ar", "16000", 
         "-af", "loudnorm",
         out_path
     ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -38,6 +65,22 @@ def loud_norm(in_path, out_path):
 
     if p.returncode != 0:
         raise Exception("Failed to loudnorm: %s" % str(err))
+
+def correct_volume(in_path, out_path, db=-2):
+    # ffmpeg -i audio.wav -filter:a "volume=-2dB" loudnorm_vol_set.wav
+    p = subprocess.Popen(["ffmpeg", "-y",        
+         "-i", in_path,
+         "-acodec", "pcm_s16le",
+         "-ac", "1",
+         "-ar", "16000", 
+         "-filter:a", "volume=%idB" % (db),
+         out_path
+         ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+    out, err = p.communicate()
+
+    if p.returncode != 0:
+        raise Exception("Failed to correct volume: %s" % str(err))
 
 
 def apply_bandpass_filter(in_path, out_path, lowpass=8000, highpass=50):
@@ -57,18 +100,7 @@ def apply_bandpass_filter(in_path, out_path, lowpass=8000, highpass=50):
     if p.returncode != 0:
         raise Exception("Failed to apply bandpass filter: %s" % str(err))
 
-def correct_volume(in_path, out_path, db=-2):
-    # ffmpeg -i audio.wav -filter:a "volume=-2dB" loudnorm_vol_set.wav
-    p = subprocess.Popen(["ffmpeg", "-y",        
-         "-i", in_path,
-         "-filter:a", "volume=%idB" % (db),
-         out_path
-         ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
-    out, err = p.communicate()
-
-    if p.returncode != 0:
-        raise Exception("Failed to correct volume: %s" % str(err))
 
 # def correct_volume(in_path, out_path, db=-8):
 #     # sox input.wav output.wav gain -n -10
@@ -83,6 +115,9 @@ def correct_volume(in_path, out_path, db=-2):
 
 #     if p.returncode != 0:
 #         raise Exception("Failed to correct volume: %s" % str(err))
+
+
+### CUTTING ###
 
 def cut_wave(wave_obj, outfilename, start_ms, end_ms):
     width = wave_obj.getsampwidth()
@@ -106,27 +141,7 @@ def save_wave_samples_to_file(wave_samples, n_channels, byte_width, sample_rate,
     out.writeframes(wave_samples)
     out.close()
 
-def convert_to_wav(in_audio_path, out_audio_path):
-    print 'converting %s to wav' % in_audio_path
-    p = subprocess.Popen(["ffmpeg", "-y",
-         "-i", in_audio_path,         
-         "-ac", "1",
-         "-ab", "16",
-         "-ar", "16000",         
-         out_audio_path
-         ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
-    out, err = p.communicate()
-
-    try:
-        p.kill()
-    except:
-        pass
-
-    if p.returncode != 0:
-        print("failed_ffmpeg_conversion "+str(err))
-        return False
-    return True
 
 def cut_audio_piece_to_wav(in_audio_path, out_audio_path, start_sec, end_sec):
     p = subprocess.Popen(["ffmpeg", "-y",
