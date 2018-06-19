@@ -121,8 +121,8 @@ def csv_queue_worker():
 
                 q = item["queue"]
 
-                if csv_path == const.VID_TO_PROCESS_CSV_FILE and q.empty():
-                    update_from_file(const.VID_TO_PROCESS_CSV_FILE)
+                # if csv_path == const.VID_TO_PROCESS_CSV_FILE and q.empty():
+                #     update_from_file(const.VID_TO_PROCESS_CSV_FILE)
 
 
                 # perform all operaions in queue

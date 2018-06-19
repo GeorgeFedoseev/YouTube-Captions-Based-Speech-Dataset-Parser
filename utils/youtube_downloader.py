@@ -10,14 +10,14 @@ import pafy  # yt audio downloading
 import pyvtt  # VTT subtitles parsing
 
 from cli_dependency_check import is_ytdownloader_installed
+from utils import ensure_dir
 
 def maybe_download_audio_track(yt_video_id):
+    is_ytdownloader_installed()
+    
+    video_data_path = os.path.join(const.VIDEO_DATA_DIR, yt_video_id)
 
-    curr_dir_path = const.curr_dir_path
-    video_data_path = os.path.join(curr_dir_path, "data/" + yt_video_id + "/")
-
-    if not os.path.exists(video_data_path):
-        os.makedirs(video_data_path)
+    ensure_dir(video_data_path)
 
 
     video = pafy.new(yt_video_id)
@@ -44,8 +44,7 @@ def maybe_download_audio_track(yt_video_id):
 
 
 def maybe_download_subtitiles(yt_video_id, auto_subs=False):
-    if not is_ytdownloader_installed():
-        return
+    is_ytdownloader_installed()
 
     subs_name = "autosubs" if auto_subs else "subs"
 

@@ -4,33 +4,6 @@ import webrtcvad
 
 import datetime
 
-def is_bad_piece(audio_duration, transcript):   
-
-    MAX_SECS = 20
-    MIN_SECS = 3    
-    
-    MIN_SEC_PER_SYMBOL = 0.03
-    #MIN_SEC_PER_SYMBOL = 0
-
-    # remove audios that are shorter than 0.5s and longer than 20s.
-    # remove audios that are too short for transcript.
-    if audio_duration > MIN_SECS and audio_duration < MAX_SECS and transcript!="" and audio_duration/len(transcript) > MIN_SEC_PER_SYMBOL:
-        return False
-    return True
-
-def is_bad_subs(subs_text):
-    bad = False
-
-    if subs_text.strip() == "":
-        bad = True
-
-    if len(re.findall(r'[0-9]+', subs_text)) > 0:
-        bad = True
-    if len(re.findall(r'[A-Za-z]+', subs_text)) > 0:
-        bad = True
-
-    return bad
-
 
 def slice_audio_by_silence(wave_obj, min_audio_length=5, max_audio_length=10, vad_silence_volume_param=1):
     SPEECH_FRAME_SEC = 0.01
