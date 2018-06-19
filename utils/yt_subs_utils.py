@@ -6,6 +6,11 @@ import re
 
 import pyvtt
 
+import sys
+curr_dir_path = os.path.dirname(os.path.realpath(__file__))
+sys.path.insert(0,os.path.join(curr_dir_path, os.path.pardir))
+
+import const
 
 
 def get_subs(yt_video_id, auto_subs=False):
@@ -13,8 +18,7 @@ def get_subs(yt_video_id, auto_subs=False):
     subs_name = "autosubs" if auto_subs else "subs"
 
     # download subtitles
-    curr_dir_path = os.getcwd()
-    video_data_path = os.path.join(curr_dir_path, "data/" + yt_video_id + "/")
+    video_data_path = os.path.join(const.VIDEO_DATA_DIR, yt_video_id)
 
  
 

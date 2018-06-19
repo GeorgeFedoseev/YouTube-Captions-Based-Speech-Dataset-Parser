@@ -122,39 +122,21 @@ def process_video(yt_video_id):
             continue
 
         words = sorted(words, key=lambda w: w["start"])
-
-        #if abs(piece["start"] - float(words[0]["start"])/1000) > 0.3 or abs(piece["end"] - float(words[-1]["end"])/1000) > 0.3:
-            #print("skip not precise bounds %i" % i)
-            #continue
-
+        
         words_str = " ".join([w["word"] for w in words])
         words_str = words_str.encode("utf-8")
 
-        # print("%s-%s %s" % (
-        #     str(datetime.timedelta(seconds=piece["start"])),
-        #     str(datetime.timedelta(seconds=piece["end"])),
-        #     words_str
-        #                     )
-        # )
-
-        if is_bad_subs(words_str):
-            #print("skip bad subs %i: %s" % (i, words_str))
+        if is_bad_subs(words_str):            
             continue
 
         part_wav_path = os.path.join(parts_folder_path, "%s_%i.wav" % (yt_video_id, i))
         audio_utils.save_wave_samples_to_file(piece["samples"], 1, 2, 16000, part_wav_path)
         wav_filesize = os.path.getsize(part_wav_path)
 
-
         
-        audio_length = float(wav_filesize)/SAMPLE_RATE/BYTE_WIDTH
+        audio_length = float(wav_filesize)/SAMPLE_RATE/BYTE_WIDTH        
 
-
-        
-
-        if is_bad_piece(audio_length, words_str):
-            #print("skip is_bad_piece %i" % i)
-            # remove file
+        if is_bad_piece(audio_length, words_str):            
             os.remove(part_wav_path)
             continue
 

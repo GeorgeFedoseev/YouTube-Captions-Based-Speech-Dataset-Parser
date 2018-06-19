@@ -3,9 +3,15 @@
 	[
 		{
 			"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+			"name": "venv Build System Mac",
+			"selector": "source.python",
+			"shell_cmd": "\"/Users/gosha/Projects/youtube-audio-captions-parsing/venv/bin/python\" -u \"$file\""
+		},
+		{
+			"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
 			"name": "Anaconda Python Builder",
 			"selector": "source.python",
-			"shell_cmd": "\"./venv/bin/python\" -u \"$file\""
+			"shell_cmd": "\"C:\\Python27\\python.exe\" -u \"$file\""
 		}
 	],
 	"folders":
