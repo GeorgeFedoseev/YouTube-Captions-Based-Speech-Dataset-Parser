@@ -10,7 +10,7 @@ import pafy  # yt audio downloading
 import pyvtt  # VTT subtitles parsing
 
 from cli_dependency_check import is_ytdownloader_installed
-from utils import ensure_dir
+from utils.file_utils import ensure_dir
 
 def maybe_download_audio_track(yt_video_id):
     is_ytdownloader_installed()

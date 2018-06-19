@@ -19,7 +19,9 @@ from utils import yt_subs_utils
 from utils.yt_utils import download_yt_audio
 
 from utils.stats_util import write_stats
-from utils.slicing_utils import is_bad_piece, is_bad_subs, slice_audio_by_silence
+from utils.slicing_utils import slice_audio_by_silence
+from utils.audio_utils import is_bad_piece
+from utils.text_utils import is_bad_subs
 
 from utils import csv_utils
 from utils.stats_util import write_stats
