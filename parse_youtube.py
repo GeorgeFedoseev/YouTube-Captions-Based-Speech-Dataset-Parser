@@ -88,7 +88,7 @@ if __name__ == "__main__":
 
     _threads_number = 20
     try:    
-        _threads_number = int(sys.argv[sys.argv.index("--threads-num")+1])
+        _threads_number = int(sys.argv[sys.argv.index("--num-threads")+1])
     except:
         pass
 
