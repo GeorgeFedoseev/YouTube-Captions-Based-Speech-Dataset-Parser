@@ -12,12 +12,13 @@ from vad_first_parser import process_video
 import const
 
 from utils.file_utils import ensure_dir
+from utils import cli_dependency_check
 
 
-displayed_no_videos_to_process = False
+#displayed_no_videos_to_process = False
 
 def video_parser_thread_loop():
-    global displayed_no_videos_to_process
+    #global displayed_no_videos_to_process
 
     while True:       
 
@@ -29,13 +30,14 @@ def video_parser_thread_loop():
             print("VIDEO %s is already processed" % video_id)
 
         if not video_id:
-            if not displayed_no_videos_to_process:
-                print 'no videos to parse - wait 5 seconds...'
-                displayed_no_videos_to_process = True
-            time.sleep(5)
-            continue
+            #if not displayed_no_videos_to_process:
+                #print 'no videos to parse - wait 5 seconds...'
+                #displayed_no_videos_to_process = True
+            #time.sleep(5)
+            #continue
+            return
 
-        displayed_no_videos_to_process = False
+        #displayed_no_videos_to_process = False
 
         # start video processing
         queue_utils.put_video_to_processing(video_id)
@@ -69,10 +71,15 @@ def start_parsing(threads_num):
             video_parser_threads.append(thr)
 
         # wait for threads
-        while True: time.sleep(100)
+        while True: 
+            if not any([thr.isAlive() for thr in video_parser_threads]):
+                break
+            time.sleep(5)
 
     except (KeyboardInterrupt, SystemExit):
         print '\n! Received keyboard interrupt, quitting threads.\n'
+
+    print "DONE"
 
     stats_util.show_global_stats()
 
@@ -85,6 +92,9 @@ if __name__ == "__main__":
     except:
         pass
 
-    if check_dependencies_installed():
-        print("Start parsing with %i threads" % _threads_number)
-        start_parsing(threads_num=_threads_number)
+    
+    cli_dependency_check.is_ffmpeg_installed()
+    cli_dependency_check.is_ytdownloader_installed()
+
+    print("Start parsing with %i threads" % _threads_number)
+    start_parsing(threads_num=_threads_number)
