@@ -18,9 +18,19 @@ def is_bad_piece(audio_duration, transcript):
 
     # remove audios that are shorter than 0.5s and longer than 20s.
     # remove audios that are too short for transcript.
-    if audio_duration > MIN_SECS and audio_duration < MAX_SECS and transcript!="" and audio_duration/len(transcript) > MIN_SEC_PER_SYMBOL:
-        return False
-    return True
+    if audio_duration < MIN_SECS or audio_duration > MAX_SECS:
+        print "BAD PIECE: timing"
+        return True
+
+    if transcript.strip() == "":
+        print "BAD PIECE: empty str"
+        return True
+
+    if audio_duration/len(transcript) < MIN_SEC_PER_SYMBOL:
+        print "BAD PIECE: audio_duration/len(transcript) < MIN_SEC_PER_SYMBOL"
+        return True
+
+    return False
 
 ### CONVERTING ###
 

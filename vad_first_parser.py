@@ -21,7 +21,7 @@ from utils.yt_utils import download_yt_audio
 from utils.stats_util import write_stats
 from utils.slicing_utils import slice_audio_by_silence
 from utils.audio_utils import is_bad_piece
-from utils.text_utils import is_bad_subs
+from utils.text_utils import is_bad_subs, clean_transcript_text
 
 from utils import csv_utils
 from utils.stats_util import write_stats
@@ -128,7 +128,16 @@ def process_video(yt_video_id):
         words_str = " ".join([w["word"] for w in words])
         words_str = words_str.encode("utf-8")
 
+        print "before: "+words_str
+
+        # clean
+        words_str = clean_transcript_text(words_str)
+
+        print "after: "+words_str
+
+
         if is_bad_subs(words_str):            
+            print "BAD SUBS"
             continue
 
         part_wav_path = os.path.join(parts_folder_path, "%s_%i.wav" % (yt_video_id, i))
@@ -142,11 +151,12 @@ def process_video(yt_video_id):
             os.remove(part_wav_path)
             continue
 
-        audio_per_symbol_density = audio_length/len(words_str)
-        if  audio_per_symbol_density > 0.07:
-            #print("skip too high audio per symbol density: %f" % (audio_per_symbol_density))
-            os.remove(part_wav_path)
-            continue
+        # audio_per_symbol_density = audio_length/len(words_str)
+        # if  audio_per_symbol_density > 0.07:
+        #     #print("skip too high audio per symbol density: %f" % (audio_per_symbol_density))
+        #     os.remove(part_wav_path)
+        #     print "BAD PIECE"
+        #     continue
 
         total_speech_length_sec += audio_length
         

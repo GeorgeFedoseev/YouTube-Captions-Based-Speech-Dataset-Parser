@@ -30,8 +30,9 @@ def clean_transcript_text(transcript):
 
     if const.LANGUAGE == "ru":
         transcript = re.sub(r'<[^>]*>', '', transcript)
+        transcript = re.sub(r'\[[^\]]*\]', '', transcript)
         transcript = transcript.replace("\n", " ")
-        transcript = re.sub(u'[^а-яё\- ]', '',
+        transcript = re.sub(u'[^0-9a-zа-яё\- ]', '',
                             transcript.strip().lower()).strip()
         # transcript = transcript.replace("ё", "е")
     else:

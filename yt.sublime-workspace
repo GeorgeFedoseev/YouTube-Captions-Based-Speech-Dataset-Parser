@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"is",
+				"isAlive\tfunction"
+			],
+			[
 				"playlist",
 				"playlistId"
 			],
@@ -218,10 +222,6 @@
 			[
 				"im",
 				"import\tkeyword"
-			],
-			[
-				"is",
-				"is_bad_subs\tfunction"
 			],
 			[
 				"write",
@@ -520,11 +520,19 @@
 	"buffers":
 	[
 		{
-			"file": "yt_playlist_videos_parser.py",
+			"file": "parse_youtube.py",
 			"settings":
 			{
-				"buffer_size": 2061,
+				"buffer_size": 2603,
 				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "csv_data/videos_processing.csv",
+			"settings":
+			{
+				"buffer_size": 1,
 				"line_ending": "Unix"
 			}
 		},
@@ -532,25 +540,32 @@
 			"file": "vad_first_parser.py",
 			"settings":
 			{
-				"buffer_size": 6035,
+				"buffer_size": 5558,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "parse_youtube.py",
+			"file": "csv_data/videos_to_process.csv",
 			"settings":
 			{
-				"buffer_size": 3530,
+				"buffer_size": 1,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "utils/yt_subs_utils.py",
+			"file": "csv_data/videos_processed.csv",
 			"settings":
 			{
-				"buffer_size": 4982,
-				"encoding": "UTF-8",
+				"buffer_size": 36,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "csv_data/videos_failed_to_process.csv",
+			"settings":
+			{
+				"buffer_size": 315,
 				"line_ending": "Unix"
 			}
 		},
@@ -558,7 +573,7 @@
 			"file": "utils/audio_utils.py",
 			"settings":
 			{
-				"buffer_size": 8398,
+				"buffer_size": 4734,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -576,7 +591,7 @@
 			"file": "utils/slicing_utils.py",
 			"settings":
 			{
-				"buffer_size": 6199,
+				"buffer_size": 5491,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -647,16 +662,20 @@
 	"expanded_folders":
 	[
 		"/Users/gosha/Projects/youtube-audio-captions-parsing",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/csv_data",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/data",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/maintenance",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/utils"
 	],
 	"file_history":
 	[
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/youtube-rus-videos-with-subs-18Jun2018.txt",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/yt_playlist_videos_parser.py",
+		"/Users/gosha/Projects/youtube-audio-captions-parsing/utils/yt_subs_utils.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/yt.sublime-project",
 		"/Users/gosha/Library/Application Support/Sublime Text 3/Packages/Jedi - Python autocompletion/Default.sublime-keymap",
 		"/Users/gosha/Library/Application Support/Sublime Text 3/Packages/Jedi - Python autocompletion/sublime_jedi.sublime-settings",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/utils/slicing_utils.py",
-		"/Users/gosha/Projects/youtube-audio-captions-parsing/utils/yt_subs_utils.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/text_filter_text.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/test_random_seed.py",
 		"/Users/gosha/Projects/youtube-audio-captions-parsing/maintenance/export-dataset.py",
@@ -794,6 +813,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"cli_dependency_check",
 			"apply_fi",
 			"appl\nappl",
 			"started_searching_for_silence_at",
@@ -948,28 +968,36 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "yt_playlist_videos_parser.py",
+					"file": "parse_youtube.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2061,
+						"buffer_size": 2603,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1452,
-								1452
+								2003,
+								2003
 							]
 						],
 						"settings":
 						{
+							"WordCount":
+							{
+								"changes": -1,
+								"modified": true,
+								"selection": true,
+								"status": -1,
+								"syntax": "python"
+							},
 							"auto_complete_triggers":
 							[
 								{
@@ -986,31 +1014,76 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 549.0,
+						"translation.y": 840.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "vad_first_parser.py",
+					"file": "csv_data/videos_processing.csv",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6035,
+						"buffer_size": 1,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4536,
-								4593
+								0,
+								0
 							]
 						],
 						"settings":
 						{
+							"WordCount":
+							{
+								"changes": 2,
+								"count": 0,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "vad_first_parser.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5558,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": -1,
+								"modified": true,
+								"selection": true,
+								"status": -1,
+								"syntax": "python"
+							},
 							"auto_complete_triggers":
 							[
 								{
@@ -1035,73 +1108,38 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "parse_youtube.py",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 3530,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								116,
-								116
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 104.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "utils/yt_subs_utils.py",
+					"file": "csv_data/videos_to_process.csv",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4982,
+						"buffer_size": 1,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3980,
-								3980
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": ".",
-									"selector": "source.python - string - comment - constant.numeric"
-								},
-								{
-									"characters": ".",
-									"selector": "source.python - string - constant.numeric"
-								}
-							],
-							"show_definitions": false,
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"WordCount":
+							{
+								"changes": 3,
+								"count": 0,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1112,19 +1150,93 @@
 				},
 				{
 					"buffer": 4,
-					"file": "utils/audio_utils.py",
+					"file": "csv_data/videos_processed.csv",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8398,
+						"buffer_size": 36,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3404,
-								2918
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": 2,
+								"count": 0,
+								"modified": true,
+								"selection": true,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "csv_data/videos_failed_to_process.csv",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 315,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": 1,
+								"count": 0,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "utils/audio_utils.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4734,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2557,
+								2557
 							]
 						],
 						"settings":
@@ -1156,11 +1268,11 @@
 						"translation.y": 1036.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 7,
 					"file": "maintenance/export-dataset.py",
 					"semi_transient": false,
 					"settings":
@@ -1206,24 +1318,24 @@
 						"translation.y": 427.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 8,
 					"file": "utils/slicing_utils.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6199,
+						"buffer_size": 5491,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								936,
-								936
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1248,7 +1360,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 8,
 					"type": "text"
 				}
 			]
