@@ -2,8 +2,8 @@ import os
 import csv
 
 import sys
-
-sys.path.insert(0,os.getcwd()) 
+curr_dir_path = os.path.dirname(os.path.realpath(__file__))
+sys.path.insert(0, os.path.join(curr_dir_path, os.path.pardir))
 
 import const
 

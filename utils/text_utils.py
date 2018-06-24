@@ -25,7 +25,7 @@ def is_bad_subs(subs_text):
     return bad
 
 
-def clean_transcript_text(transcript):
+def clean_transcript_text(transcript, full=False):
     transcript = transcript.decode("utf-8")
 
     if const.LANGUAGE == "ru":
@@ -34,7 +34,10 @@ def clean_transcript_text(transcript):
         transcript = transcript.replace("\n", " ")
         transcript = re.sub(u'[^0-9a-zа-яё\- ]', '',
                             transcript.strip().lower()).strip()
-        # transcript = transcript.replace("ё", "е")
+        if full:
+            transcript = re.sub(u'[^а-яё\- ]', '',
+                            transcript.strip().lower()).strip()
+        
     else:
         raise Exception(
             "clean_transcript_text is not implemented for language %s" % (const.LANGUAGE))

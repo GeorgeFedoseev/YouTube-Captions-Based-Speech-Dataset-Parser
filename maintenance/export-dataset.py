@@ -3,44 +3,35 @@ import os
 import csv
 
 import sys
-sys.path.insert(0,os.getcwd()) 
-
-from utils import csv_utils
-
-import random
-
-import shutil
-
-from multiprocessing.pool import ThreadPool
-
-
-from tqdm import tqdm # progressbar
-
-from utils import audio_utils
-
-import subprocess
-import re
+curr_dir_path = os.path.dirname(os.path.realpath(__file__))
+sys.path.insert(0, os.path.join(curr_dir_path, os.path.pardir))
 
 reload(sys)
 sys.setdefaultencoding("utf-8")
 
-def check_dependencies_installed():
-    try:
-        subprocess.check_output(['soxi'], stderr=subprocess.STDOUT)        
-        subprocess.check_output(['ffmpeg', '--help'], stderr=subprocess.STDOUT)
-    except Exception as ex:
-        print 'ERROR: some of dependencies are not installed: youtube-dl, ffmpeg or sox: '+str(ex)
-        return False
+from utils import csv_utils
+import random
+import shutil
+from multiprocessing.pool import ThreadPool, Pool
 
-    return True
 
-def filter_not_in_alphabet_chars(text):
-    text = re.sub(u'[^а-яё\- ]+', '', text.decode("utf-8").lower())
-    return text
+from utils.text_utils import clean_transcript_text
+from utils.cli_dependency_check import is_ffmpeg_installed
+
+# progressbar
+import progressbar
+
+import time
+import signal
+
+
+pbar = None
+
 
 def export(target_folder, skip_audio=False, minimum_words_count=1, DATASET_NAME = "yt-subs", NUM_THREADS = 8, RANDOM_SEED=42):
+    global pbar
 
-    target_folder = os.path.abspath(os.path.expanduser(target_folder))
+    is_ffmpeg_installed()
 
     print 'exporting to dir %s ' % target_folder
        
@@ -101,9 +92,8 @@ def export(target_folder, skip_audio=False, minimum_words_count=1, DATASET_NAME 
         # remove duplicates
         parts = reduce(lambda x,y: x+[y] if not y in x else x, parts,[])
 
-        # filter not in alphabet symbols
-        
-        parts = [[p[0], p[1], filter_not_in_alphabet_chars(p[2])] for p in parts]
+        # filter not in alphabet symbols        
+        parts = [[p[0], p[1], clean_transcript_text(p[2], full=True)] for p in parts]
 
         # filter transcripts less than minimum_words_count words
         parts = [p for p in parts if len(str(p[2]).split()) >= minimum_words_count]
@@ -204,32 +194,13 @@ def export(target_folder, skip_audio=False, minimum_words_count=1, DATASET_NAME 
 
     if not skip_audio:
         # write audio files
-        pbar = tqdm(total=len(copy_jobs))
+        pbar = progressbar.ProgressBar(max_value=len(copy_jobs))
+        pbar.done_jobs = 0       
 
-        def process_audio_file(job):
-            from_path = job[0]
-            to_path = job[1]
-            #print 'copy %s -> %s' % job
-            #shutil.copyfile(from_path, to_path)  
-            
-                #tmp_path = "%s.tmp.wav" % to_path
-                #audio_utils.correct_volume(from_path, tmp_path)
-                #audio_utils.apply_bandpass_filter(tmp_path, to_path)
-                # remove tmp
-                #os.remove(tmp_path)                
-                
-
-            shutil.copyfile(from_path, to_path)
-            
-
-
-            pbar.update(1)
-
-
-        pool = ThreadPool(NUM_THREADS)
-        pool.map(process_audio_file, copy_jobs)
-
-        pbar.close()
+        
+        pool = Pool(NUM_THREADS)
+        pool.map_async(process_audio_file, copy_jobs).get(99999999999999999999999999)
+        
 
         # check if all jobs has been copied
         check_errors = 0
@@ -247,34 +218,39 @@ def export(target_folder, skip_audio=False, minimum_words_count=1, DATASET_NAME 
 
     
 
+def process_audio_file(job):
+    global pbar
 
+    from_path = job[0]
+    to_path = job[1]
+    shutil.copyfile(from_path, to_path)
+    pbar.done_jobs+=1
+    pbar.update(pbar.done_jobs)
+    time.sleep(0.05)
 
 if __name__ == '__main__':
-    if not check_dependencies_installed():
-        raise SystemExit
+    # defaults
+    minimum_words_count = 1
+    dataset_name = "yt-subs"
+    num_threads = 10
+    random_seed = 42
 
     if len(sys.argv) < 2:
-        print('USAGE: python export-dataset.py <export_dir_path> [--skip-audio] [--min-words <int>] [--name <string>] [--num_threads <int>] [--random-seed <int>]')
-    else:    
-        minimum_words_count = 1
+        print('USAGE: python export-dataset.py <export_dir_path> [--skip-audio] [--min-words <int:%i>] \
+[--name <string:%s>] [--num_threads <int:%i>] [--random-seed <int:%i>]' % (minimum_words_count, dataset_name, num_threads, random_seed))
+    else:            
         try:
             minimum_words_count = int(sys.argv[sys.argv.index("--min-words")+1])
         except:
-            pass
-
-        dataset_name = "yt-subs"
+            pass        
         try:
             dataset_name = str(sys.argv[sys.argv.index("--name")+1])
         except:
-            pass
-
-        num_threads = 10
+            pass        
         try:
             num_threads = int(sys.argv[sys.argv.index("--num-threads")+1])
         except:
-            pass
-
-        random_seed = 42
+            pass        
         try:
             random_seed = int(sys.argv[sys.argv.index("--random-seed")+1])
         except:

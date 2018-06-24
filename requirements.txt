@@ -23,12 +23,14 @@ oauth2client==4.1.2
 oauthlib==2.0.6
 pafy==0.5.4
 post==0.0.26
+progressbar2==3.38.0
 public==0.0.65
 pyasn1==0.4.2
 pyasn1-modules==0.2.1
 pyparsing==2.2.0
 python-dateutil==2.6.1
 python-speech-features==0.6
+python-utils==2.3.0
 pytz==2018.3
 pyvtt==0.0.1
 query-string==0.0.28
