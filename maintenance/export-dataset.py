@@ -12,7 +12,7 @@ sys.setdefaultencoding("utf-8")
 from utils import csv_utils
 import random
 import shutil
-from multiprocessing.pool import ThreadPool, Pool
+from multiprocessing.pool import ThreadPool
 
 
 from utils.text_utils import clean_transcript_text
@@ -198,8 +198,8 @@ def export(target_folder, skip_audio=False, minimum_words_count=1, DATASET_NAME 
         
 
         
-        pool = Pool(NUM_THREADS)
-        pool.map_async(process_audio_file, copy_jobs).get(99999999999999999999999999)
+        pool = ThreadPool(NUM_THREADS)
+        pool.map(process_audio_file, copy_jobs)
         
 
         # check if all jobs has been copied
@@ -231,7 +231,7 @@ if __name__ == '__main__':
     # defaults
     minimum_words_count = 1
     dataset_name = "yt-subs"
-    num_threads = 10
+    num_threads = 20
     random_seed = 42
 
     if len(sys.argv) < 2:
