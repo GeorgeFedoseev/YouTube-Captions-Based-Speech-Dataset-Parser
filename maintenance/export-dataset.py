@@ -19,7 +19,7 @@ from utils.text_utils import clean_transcript_text
 from utils.cli_dependency_check import is_ffmpeg_installed
 
 # progressbar
-import progressbar
+from tqdm import tqdm
 
 import time
 import signal
@@ -194,8 +194,8 @@ def export(target_folder, skip_audio=False, minimum_words_count=1, DATASET_NAME 
 
     if not skip_audio:
         # write audio files
-        pbar = progressbar.ProgressBar(max_value=len(copy_jobs))
-        pbar.done_jobs = 0       
+        pbar = tqdm(total=len(copy_jobs))
+        
 
         
         pool = Pool(NUM_THREADS)
@@ -223,9 +223,8 @@ def process_audio_file(job):
 
     from_path = job[0]
     to_path = job[1]
-    shutil.copyfile(from_path, to_path)
-    pbar.done_jobs+=1
-    pbar.update(pbar.done_jobs)
+    shutil.copyfile(from_path, to_path)    
+    pbar.update(1)
     time.sleep(0.05)
 
 if __name__ == '__main__':
