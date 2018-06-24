@@ -128,16 +128,16 @@ def process_video(yt_video_id):
         words_str = " ".join([w["word"] for w in words])
         words_str = words_str.encode("utf-8")
 
-        print "before: "+words_str
+        #print "before: "+words_str
 
         # clean
         words_str = clean_transcript_text(words_str)
 
-        print "after: "+words_str
+        #print "after: "+words_str
 
 
         if is_bad_subs(words_str):            
-            print "BAD SUBS"
+            #print "BAD SUBS"
             continue
 
         part_wav_path = os.path.join(parts_folder_path, "%s_%i.wav" % (yt_video_id, i))
