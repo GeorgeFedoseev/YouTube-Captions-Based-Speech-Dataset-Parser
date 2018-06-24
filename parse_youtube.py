@@ -47,8 +47,8 @@ def video_parser_thread_loop():
             queue_utils.put_video_to_processed(video_id)
         except Exception as e:
             print('failed to process video ' + video_id + ': ' + str(e))
-            error_type = str(e)
-            queue_utils.put_video_to_failed(video_id, error_type)
+            error_desc = str(e).replace("\n", " >> ")
+            queue_utils.put_video_to_failed(video_id, error_desc)
 
         time.sleep(0.2)
 
